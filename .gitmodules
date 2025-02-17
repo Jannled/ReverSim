@@ -1,0 +1,3 @@
+[submodule "ReverSim Level Library"]
+	path = examples/conf/assets/levels/differentComplexityLevels
+	url = git@github.com:emsec/reversim-circuits.git
