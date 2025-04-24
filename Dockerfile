@@ -11,11 +11,14 @@ ENV GAME_GIT_HASH=$GAME_GIT_HASH
 ARG GAME_GIT_HASH_SHORT
 ENV GAME_GIT_HASH_SHORT=$GAME_GIT_HASH_SHORT
 
-# Labels (I know MAINTAINER is deprecated, but there is no standardized replacement???)
+# Labels as per:
+# https://github.com/opencontainers/image-spec/blob/main/annotations.md#pre-defined-annotation-keys
 MAINTAINER Max Planck Institute for Security and Privacy
-LABEL maintainer="Max Planck Institute for Security and Privacy"
-LABEL version="2.0.3"
-LABEL description="Ready to deploy Docker container to use ReverSim for research."
+LABEL org.opencontainers.image.authors="Max Planck Institute for Security and Privacy"
+LABEL org.opencontainers.image.version="2.0.3"
+LABEL org.opencontainers.image.licenses="AGPL-3.0-only"
+LABEL org.opencontainers.image.description="Ready to deploy Docker container to use ReverSim for research. ReverSim is an open-source environment for the browser, originally developed at the Max Planck Institute for Security and Privacy (MPI-SP) to study human aspects in hardware reverse engineering."
+LABEL org.opencontainers.image.source="https://github.com/emsec/ReverSim"
 
 # When using the slim variant, a toolchain is needed to compile uWSGI
 # Yeet the apt-cache afterwards, since it is no longer needed
