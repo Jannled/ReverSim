@@ -1,0 +1,17 @@
+
+
+@font-face {
+    font-family: hre_text_font;
+    src: url('../../res/fonts/text_font.ttf');
+}
+
+
+@font-face {
+    font-family: hre_title_font;
+    src: url('../../res/fonts/title_font.ttf');
+}
+
+
+body {
+    background-color: #555555;
+  }

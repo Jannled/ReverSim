@@ -1,0 +1,30 @@
+§Label:goalTitle
+§SIZE:100
+§COLOR:#f8b170
+§ALIGNMENT:center
+§X-POSITION:640
+§Y-POSITION:50
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:Submitting your Solution
+§DE:Einreichen ihrer Lösung
+
+
+§Label:goalText
+§SIZE:30
+§COLOR:#f8b170
+§X-POSITION:640
+§Y-POSITION:250
+§ALIGNMENT:left
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:
+When you think you have solved the level correctly, press the "Confirm" button.
+
+When your solution was wrong, a simulation of the circuit's state is displayed.
+You can end the simulation after a short delay, and try again.
+§DE:
+Wenn Sie glauben, das Level richtig gelöst zu haben, drücken Sie auf den "Überprüfen" Knopf.
+
+Sollte ihre Lösung falsch sein, wird eine Simulation des Schaltkreises angezeigt.
+Sie können die Simulation nach einer kurzen Verzögerung deaktivieren und einen neuen Versuch starten.

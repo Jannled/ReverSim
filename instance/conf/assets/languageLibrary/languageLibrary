@@ -1,0 +1,953 @@
+§Label:LANGUAGE_LIBRARY_DESCRIPTION
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:
+-------------------------------------------------------------------------------
+Information about the LanguageLibrary aka LanguageDict.
+Have a look at doc/Translating.md for further information!
+-------------------------------------------------------------------------------
+
+§DE:Infos über die LanguageLibrary aka LanguageDict
+-------------------------------------------------------------------------------
+
+
+§Label:gameTitle
+§SIZE:60
+§COLOR:#ff0000
+§ALIGNMENT:center
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:
+Hardware Reverse Engineering Simulation
+§DE:
+Hardware-Reverse-Engineering-Simulation
+
+§Label:welcome
+§SIZE:25
+§COLOR:#ffffff
+§ALIGNMENT:center
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:
+Welcome! Please press the play button to start the game.
+§DE:
+Willkommen! Bitte drücken Sie auf den Play-Button um das Spiel zu starten.
+
+§Label:chooseLanguage
+§SIZE:40
+§COLOR:#ffffff
+§ALIGNMENT:center
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:Please choose a language:
+§DE:Bitte wählen Sie eine Sprache:
+
+§Label:chooseLang
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:Language:
+§DE:Sprache:
+
+§Label:DE
+§SIZE:20
+§COLOR:#ffffff
+§ALIGNMENT:center
+§DE:DE
+§EN:DE
+
+
+§Label:EN
+§SIZE:20
+§COLOR:#ffffff
+§ALIGNMENT:center
+§DE:EN
+§EN:EN
+
+
+§Label:researchInfo
+§SIZE:15
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Research Info
+§DE:Informationen zur Forschung
+
+
+§Label:imprint
+§SIZE:15
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Imprint
+§DE:Impressum
+
+
+§Label:privacyProtection
+§SIZE:15
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Privacy Protection
+§DE:Datenschutz
+
+§Label:documentation
+§SIZE:15
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Documentation
+§DE:Dokumentation
+
+§Label:gameOver
+§SIZE:60
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Thank you for your participation, you have solved all levels.
+§DE:Vielen Dank für Ihre Teilnahme, Sie haben alle Level gelöst.
+
+§Label:postSurvey
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Please take another 10 minutes to complete our survey.
+
+It is very important that you complete the survey so that we can use your data for our research:
+
+§DE:Bitte nehmen Sie sich noch 10 Minuten Zeit für unsere Umfrage.
+
+Es ist sehr wichtig, dass Sie die Umfrage ausfüllen damit wir Ihre Daten für unsere Forschung verwenden können:
+
+§Label:backToIndex
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Please click the "Continue to survey" button to get back to the group selection page:
+§DE:Bitte klicke auf den "Weiter zur Umfrage" Button, um zurück zum Gruppenauswahlbildschirm zu gelangen:
+
+§Label:postSurveyDemo
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:PostSurvey Testpage – In your study you can insert your own survey here.
+
+This demo instance has no post survey. Clicking the button below will instead take you back to the ReverSim start page.
+
+§DE:PostSurvey Testseite – In Ihrer Studie können Sie hier eine eigene Umfrage einfügen.
+
+Diese Demo-Instanz hat keine PostSurvey. Der Button unten bringt Sie zurück zur ReverSim-Startseite.
+
+§Label:popupNotice
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:If the button does not work, please check if your browser has blocked a popup.
+§DE:Sollte der Button nicht funktionieren, überprüfen Sie bitte, ob Ihr Browser ein Popup blockiert hat.
+
+§Label:postSurveyFeedback
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:We want your input! Any ideas for improvements? Found some bugs?
+You'll make some researchers really happy if you take 5mins to fill out our feedback survey.
+§DE:Wenn Sie Feedback für uns haben, können Sie uns das gerne über den Link unten mitteilen.
+
+§Label:dataDeletionNotice
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:The pseudonym is the only way to assign the data collected here to you. If you want to delete your data afterwards, you have to save your pseudonym (via copy and paste).
+§DE:Das Pseudonym ist die einzige Möglichkeit, Ihnen die hier erhobenen Daten zuzuordnen. Wenn Sie ihre Daten im Nachhinein löschen lassen wollen, müssen Sie sich ihr Pseudonym abspeichern (via Copy and Paste).
+
+§Label:thinkAloud
+§SIZE:50
+§COLOR:#f8b170
+§ALIGNMENT:center
+§EN: Think Aloud
+§DE: Think-Aloud
+
+§Label:concurrentThinkaloud
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN: Please remember to explain all your actions.
+§DE: Bitte denk dran, alles was du machst zu erklären.
+
+§Label:retrospectiveThinkaloud
+§SIZE:20
+§COLOR:#f8b170
+§ALIGNMENT:center
+§EN: Please explain to the study supervisor how you went about solving the level.
+§DE: Bitte erkläre der Studienaufsicht, wie du beim lösen des Levels vorgegangen bist.
+
+§Label:tryReconnect
+§SIZE:90
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Trying to reconnect ...
+§DE:Versuche, wieder eine Verbindung herzustellen ...
+
+
+§Label:reconnectWarning1
+§SIZE:40
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Please do not close the window.
+§DE:Bitte das Fenster nicht schließen.
+
+
+§Label:reconnectWarning2
+§SIZE:40
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Please do not reload the page
+§DE:Bitte das Fenster nicht aktualisieren.
+
+
+§Label:noConnection
+§SIZE:90
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Connection lost!
+§DE:Verbindung verloren!
+
+
+§Label:switchClicks
+§SIZE:20
+§COLOR:#ffff00
+§ALIGNMENT:left
+§EN:Switch Clicks:
+§DE:Anzahl Schalterklicks:
+
+
+§Label:confirmClicks
+§SIZE:20
+§COLOR:#ffff00
+§ALIGNMENT:left
+§EN:Confirm Clicks:
+§DE:Anzahl Versuche:
+
+§Label:score
+§SIZE:20
+§COLOR:#ffff00
+§ALIGNMENT:left
+§EN:Score: 
+§DE:Score:
+
+§Label:levelProgress
+§SIZE:20
+§COLOR:#ffff00
+§ALIGNMENT:left
+§EN:Level %d / %d
+§DE:Level %d / %d
+
+§Label:confirm
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:center
+§EN:Confirm
+§DE:Überprüfen
+
+§Label:feedbackClicks
+§SIZE:30
+§COLOR:#ffff00
+§ALIGNMENT:left
+§EN:
+§DE:
+
+
+§Label:invalidateSessionPopup
+§SIZE:30
+§COLOR:#ffff00
+§ALIGNMENT:left
+§EN:
+The game was already started in another window. Press Ok to continue here. 
+
+(Your progress will be transferred to the current session, and the old one will be closed)
+§DE:
+Das Spiel wurde bereits in einem anderen Fenster gestartet. Drücke Ok, um hier fortzufahren.
+
+(Dein Fortschritt wird in die aktuelle Sitzung übertragen und die alte Sitzung wird beendet)
+
+
+§Label:sessionClosed
+§SIZE:30
+§COLOR:#f8b170
+§ALIGNMENT:center
+§EN:
+This session was closed, because the game was opened in another window. 
+Your game progress was saved!
+
+Reload the page if you want to continue in this window.
+§DE:
+Diese Sitzung wurde geschlossen, weil das Spiel in einem anderen Fenster geöffnet wurde. 
+Dein Spielfortschritt wurde natürlich gespeichert!
+
+Wenn du in diesem Fenster weiter spielen möchtest, lade die Seite neu.
+
+
+§Label:timeRemaining
+§SIZE:20
+§COLOR:#ff9933
+§ALIGNMENT:right
+§EN:Time remaining: %d
+§DE:Verbleibende Zeit: %d
+
+
+§Label:popupLevelTimerEnd
+§SIZE:30
+§COLOR:#ffff00
+§ALIGNMENT:left
+§EN:
+You have reached the allotted solving time for this level. If you wish, you can continue with the next level.
+§DE:
+Die vorgesehene Bearbeitungszeit für dieses Level wurde erreicht. Wenn Sie möchten, können Sie mit dem nächsten Level fortfahren.
+
+
+§Label:introduceConfirmButton
+§SIZE:30
+§COLOR:#ffff00
+§ALIGNMENT:left
+§EN:
+Click the Confirm button only if you are sure that your solution is correct.
+§DE:
+Klicken Sie nur auf den Überprüfen-Button, wenn Sie sich sicher sind, dass Ihre Lösung richtig ist.
+
+§Label:yourSwitchClicks
+§EN:
+Your switch clicks: 
+§DE:
+Ihre Schalterklicks: 
+
+§Label:yourConfirmClicks
+§EN:
+Your attempts:
+§DE:
+Ihre Versuche:
+
+§Label:yourScore
+§EN:
+Your score:
+§DE:
+Ihr Score:
+
+§Label:bestScorePossible
+§EN:
+Best possible score:
+§DE:
+Bestmögliche Punktzahl:
+
+§Label:continue
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:center
+§EN:Continue
+§DE:Weiter
+
+§Label:next
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:center
+§EN:Next
+§DE:Weiter
+
+§Label:nextLevel
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:center
+§EN:Next level
+§DE:Nächstes Level
+
+§Label:startSimulatingLevel
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:center
+§EN:Simulate circuit
+§DE:Schaltkreis simulieren
+
+§Label:stopSimulatingLevel
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:center
+§EN:End simulation
+§DE:Simulation beenden
+
+§Label:repeatTutorial
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:center
+§EN:Repeat Tutorial
+§DE:Einführung wiederholen
+
+
+§Label:optimumSwitchClicks
+§EN:Minimum switch clicks necessary:
+§DE:Mindestanzahl notwendiger Schalterklicks:
+
+
+§Label:qualified
+§EN:
+Congratulations, you have qualified for the game levels!
+§DE:
+Herzlichen Glückwunsch, Sie haben sich für die Spiellevel qualifiziert!
+
+
+§Label:notQualified
+§EN:
+Unfortunately, that were too many attempts.
+
+Please repeat the training phase to learn the game mechanics.
+§DE:
+Leider waren das zu viele Versuche.
+
+Bitte wiederholen Sie die Trainingsphase, um die Spielmechaniken zu erlernen.
+
+
+§Label:correctSolution
+§SIZE:30
+§COLOR:#00ff00
+§ALIGNMENT:left
+§EN:Correct solution!
+§DE:Richtige Lösung!
+
+
+§Label:solveMe
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:center
+§EN:Solve us!
+§DE:Lösen Sie uns!
+
+
+§Label:startedGame
+§SIZE: 40
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:
+You already started the game!
+§DE:
+Sie haben das Spiel bereits gestartet!
+
+
+§Label:preSurveyDemand
+§SIZE: 40
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:
+Please do the pre-survey first!
+§DE:
+Bitte machen Sie zuerst die Vorabumfrage!
+
+
+
+§Label:battery
+§EN:The Battery
+§DE:Die Batterie
+
+
+§Label:wire
+§EN:The Wire
+§DE:Das Kabel
+
+
+§Label:switch
+§EN:The Switch
+§DE:Der Schalter
+
+
+§Label:bulb
+§EN:The Bulb
+§DE:Die Glühbirne
+
+
+§Label:dangerSign
+§EN:The Danger Sign
+§DE:Das Warnsymbol
+
+
+§Label:inverter
+§EN:The Inverter
+§DE:Der Inverter
+
+§Label:andGate
+§EN:The AND Gate
+§DE:Das UND-Gatter
+
+
+§Label:orGate
+§EN:The OR Gate
+§DE:Das ODER-Gatter
+
+§Label:splitter
+§EN:The Splitter
+§DE:Der Knotenpunkt
+
+
+
+§Label:learnGameTitle
+§SIZE:80
+§COLOR:#ffffff
+§ALIGNMENT:center
+§EN:Learning to play!
+§DE:Spielen lernen!
+
+§Label:gotIt
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:I got it!
+§DE:Hab ich verstanden!
+
+
+§Label:onWeGo
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Lets move on!
+§DE:Weiter gehts!
+
+
+§Label:alright
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Alright!
+§DE:Nagut!
+
+
+§Label:clear
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Clear!
+§DE:Alles klar!
+
+§Label:ok
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Ok
+§DE:Ok
+
+§Label:hereWeGo
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Go for it!
+§DE:Los gehts!
+
+
+§Label:play
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Play
+§DE:Spielen
+
+§Label:open
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Open
+§DE:Öffnen
+
+§Label:save
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Save
+§DE:Speichern
+
+§Label:newLevel
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Delete all
+§DE:Alles löschen
+
+§Label:unsavedChanges
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Your level might contain unsaved changes, press Okay if you really want to discard them.
+§DE:Das Level könnte ungespeicherte änderungen enthalten, drücke OK wenn du wirklich alles löschen willst.
+
+§Label:learnGameIntro
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:
+First, you will learn about the game elements:
+
+- Behind each lock there is new information
+
+- Click the arrow buttons to navigate back and forth
+
+- Take your time to get to know each individual element at your leisure
+
+§DE:
+Zunächst lernen Sie die Spielelemente kennen:
+
+- Hinter jedem Schloss verbergen sich neue Informationen
+
+- Benutzen Sie die Pfeile um vor und zurück zu navigieren
+
+- Nehmen Sie sich Zeit, um jedes einzelne Element in Ruhe kennenzulernen
+
+
+
+
+§Label:batteryDesc
+§EN:
+This element provides current.
+Current is represented by the color yellow in this game.
+§DE:
+Dieses Element liefert Strom.
+Strom wird in diesem Spiel mit der Farbe Gelb dargestellt.
+
+
+§Label:wireDesc
+§EN:
+The wire can transport current.
+
+If the wire is shown in yellow, it is transporting current.
+If the wire is displayed in gray, it is not transporting current.
+§DE:
+Das Kabel kann Strom transportieren.
+
+Wird das Kabel gelb dargestellt, so transportiert es gerade Strom.
+Wird das Kabel grau dargestellt, so transportiert es keinen Strom.
+
+
+§Label:switchDesc
+§EN:
+If the switch is closed, current can flow from one side to the other.
+If the switch is open, the current cannot flow.
+
+You can click the switch to open or close it.
+§DE:
+Ist der Schalter geschlossen, kann Strom von der einen auf die andere Seite fließen.
+Ist der Schalter offen, kann der Strom nicht fließen.
+
+Sie können den Schalter anklicken, um ihn zu öffnen oder zu schließen.
+
+§Label:bulbDesc
+§EN:
+The bulb lights up when it is supplied with current.
+
+The goal of the game is to set the switches so that all the bulbs light up.
+§DE:
+Die Glühbirne leuchtet, wenn Strom anliegt.
+
+Ziel des Spiels ist es, die Schalter so einzustellen, dass alle Glühbirnen leuchten.
+
+
+
+§Label:dangerSignDesc
+§EN:
+The danger symbol triggers when there is current.
+
+The goal of the game is to set the switches so that the danger symbol is inactive.
+§DE:
+Das Warnsymbol löst aus, wenn Strom anliegt.
+
+Ziel des Spiels ist es, die Schalter so einzustellen, dass das Warnsymbol inaktiv ist.
+
+
+§Label:inverterDesc
+§EN:
+The inverter supplies a negation of the current applied to its input: 
+If a wire with current is connected to its input, the wire at the output does not transport any current.
+If a wire without current is connected to its input, the output wire transports current.
+§DE:
+Der Inverter liefert eine Negation des am Eingang anliegenden Stroms: 
+Liegt an seinem Eingang ein Kabel mit Strom an, so transportiert das Kabel am Ausgang keinen Strom.
+Liegt an seinem Eingang ein Kabel ohne Strom an, so transportiert das Kabel am Ausgang Strom.
+
+
+
+
+§Label:andGateDesc
+§EN:
+The AND gate always has two inputs and one output.
+
+Current is only present at the output if current is present at both inputs.
+§DE:
+Das UND-Gatter hat immer zwei Eingänge und einen Ausgang.
+
+Am Ausgang liegt nur Strom an, wenn an beiden Eingängen Strom anliegt.
+
+
+
+
+§Label:orGateDesc
+§EN:
+The OR gate always has two inputs and one output.
+
+Current is always present at the output if current is present at at least one input.
+§DE:
+Das ODER-Gatter hat immer zwei Eingänge und einen Ausgang.
+
+Am Ausgang liegt immer Strom an, wenn mindestens an einem Eingang Strom anliegt.
+
+
+
+
+§Label:splitterDesc
+§EN:
+At a splitter, the wire splits into two wires:
+If the wire was carrying current before, then both wires are now carrying current. If the wire did not transport any current, then the two wires will continue to transport no current.
+§DE:
+An einem Knotenpunkt teilt sich das Kabel in zwei Kabel auf:
+Hat das Kabel vorher Strom transportiert, dann transportieren jetzt beide Kabel Strom.
+
+Hat das Kabel keinen Strom transportiert, dann transportieren die beiden Kabel weiterhin keinen Strom.
+
+
+
+§Label:instruction
+§EN:Try it out:
+§DE:Probieren Sie es aus:
+
+§Label:instructionBulbChallenge
+§EN:
+Make the bulb light up by pressing the switch.
+§DE:
+Bringen Sie die Glühbirne zum Leuchten, indem Sie den Schalter betätigen.
+
+§Label:instructionDangerSignChallenge
+§EN:
+Make sure that the danger symbol is inactive.
+§DE:
+Sorgen Sie dafür, das das Warnsymbol inaktiv ist.
+
+§Label:instructionInverterChallenge
+§EN:
+Observe how the inverter changes the current flow when you operate the switch.
+§DE:
+Beobachten Sie, wie der Inverter den Stromfluss verändert, wenn Sie den Schalter betätigen.
+
+§Label:instructionAndGateChallenge
+§EN:
+Observe how the AND gate behaves when you operate the switches.
+§DE:
+Beobachten Sie, wie sich das UND-Gatter verhält, wenn Sie die Schalter betätigen.
+
+
+§Label:instructionOrGateChallenge
+§EN:
+Observe how the OR gate behaves when you operate the switches.
+§DE:
+Beobachten Sie, wie sich das ODER-Gatter verhält, wenn Sie die Schalter betätigen.
+
+§Label:instructionSplitterChallenge
+§EN:
+Observe how the splitter behaves when you press the switch.
+§DE:
+Beobachten Sie, wie sich der Knotenpunkt verhält, wenn Sie den Schalter betätigen.
+
+§Label:endElementIntroTitle
+§EN:End of training phase
+§DE:Ende der Trainingsphase 
+
+§Label:endElementIntroText
+§EN:
+You have now learned all the game elements that are necessary to master the game.
+By clicking on the arrow, you can go back and look at the game elements again.
+With a click on "Continue" you leave the training phase and start the game.
+§DE:
+Sie haben jetzt alle Spielelemente kennengelernt, die notwendig sind, um das Spiel zu meistern.
+Mit einem Klick auf den Pfeil können Sie noch einmal zurückgehen und sich die Spielelemente erneut ansehen.
+Mit einem Klick auf „Weiter“ verlassen Sie die Trainingsphase und starten das Spiel.
+
+
+§Label:skipLevel
+§SIZE:30
+§COLOR:#ffff00
+§ALIGNMENT:left
+§EN:
+Remember that your goal is always to light up the light bulbs and disable the warning symbols with as few switch clicks as possible. 
+If you can not solve the level, you can also press the "Skip Level" button.
+§DE:
+Denken Sie daran, dass Ihr Ziel immer darin besteht mit so wenigen Schalterklicks wie möglich die Glühbirnen zum Leuchten zu bringen und die Warnsymbole zu deaktivieren. 
+Wenn Sie das Level nicht lösen können, können Sie auch auf den „Level überspringen“-Schalter drücken.
+
+
+
+§Label:skipLevelTXT
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Skip Level
+§DE:Level überspringen
+
+
+§Label:skipTutorial
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Skip Tutorial
+§DE:Tutorial überspringen
+
+
+§Label:drawingToolsTXT
+§SIZE:80
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Painting Tools
+§DE:Malwerkzeuge
+
+
+§Label:camouflage_option_1_Title
+§SIZE:80
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Hidden Gates
+§DE:Versteckte Gatter
+
+§Label:camouflage_option_3_Title
+§SIZE:80
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Gates with dummy input
+§DE:Gatter mit Dummy-Eingang
+
+§Label:camouflage_option_2_Title
+§SIZE:80
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Camouflaged Gate
+§DE:Camouflaged Gate
+
+§Label:camouflage_option_1_Desc
+§SIZE:20
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:
+Some AND or OR gates are hidden behind a color blob. 
+§DE:
+Einige UND- oder ODER-Gatter verstecken sich hinter einem Farbklecks. 
+
+§Label:camouflage_option_3_Desc
+§SIZE:20
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:
+Some AND or OR gates ignore one input and either pass or invert the other input.
+§DE:
+Einige UND- oder ODER-Gatter ignorieren einen Eingang und schalten den anderen Eingang entweder durch oder invertieren ihn.
+
+
+§Label:camouflage_option_1_Task
+§SIZE:20
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:
+Can you find out if there is an AND gate or an OR gate behind the color? 
+Make the bulb light up and turn off the danger sign.
+§DE: 
+Können Sie herausfinden, ob sich hinter der Farbe ein UND-Gatter oder ein ODER-Gatter befindet? 
+Bringe die Glühbirne zum Leuchten und schalte das Warnzeichen aus.
+
+
+
+§Label:camouflage_option_3_Task
+§SIZE:20
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:
+Can you figure out something wrong with the OR and AND gates? Make the bulb light up and turn off the danger sign.
+§DE: 
+Können Sie herausfinden, ob die ODER- und UND-Gatter betrügen? Bringen Sie die Glühbirne zum Leuchten und schalten Sie das Gefahrensymbol aus.
+
+
+§Label:?
+§SIZE:80
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:?
+§DE:?
+
+
+§Label:infoBoxTitle
+§SIZE:50
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN: 
+§DE:
+
+
+§Label: continueToSurvey
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:center
+§EN: Continue to the survey
+§DE: Weiter zur Umfrage
+
+
+§Label:infoBoxText
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:
+§DE:
+
+
+§Label:tryDrawingTools
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Please try the painting tools once!
+§DE:Probieren Sie die Malwerkzeuge bitte einmal aus!
+
+
+§Label:alrightTXT
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:Alright!
+§DE:Nagut!
+
+
+§Label:whatYouSee
+§SIZE:20
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:What you see:
+§DE:Was Sie sehen:
+
+
+§Label:whatItCanBe
+§SIZE:20
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:What it can be:
+§DE:Was es sein kann:
+
+
+
+§Label:drawingToolsDesc
+§SIZE:35
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:
+You can use the painting tools on the left to draw something into the game if needed.
+
+
+§DE:
+Mit den Malwerkzeugen auf der linken Seiten können Sie bei Bedarf etwas in das Spiel hineinzeichnen.
+
+
+§Label:timerWarning
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:The game will end in %d seconds. Please remember to enter your solution.
+§DE:Das Spiel geht noch %d Sekunden. Bitte denke daran, deine Lösung einzugeben.
+
+
+§Label:timerEnd
+§SIZE:30
+§COLOR:#ffffff
+§ALIGNMENT:left
+§EN:The time has run out
+§DE:Die Zeit ist abgelaufen

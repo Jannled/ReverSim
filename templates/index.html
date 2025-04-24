@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="description" content="A game to study the human factors in hardware reverse engineering.">
+	<meta name="keywords" content="HRE, hardware, reverse, engineering, study, game, ReverSim, {% if author|length %}{{author}}, {% endif %}security, privacy">
+	{% if author|length %}
+	<meta name="author" content="{{author}}">
+	{% endif %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hardware Reverse Engineering game</title>
+	<link rel="icon" href="/res/elements/bulb_on.png" type="png" sizes="16x16">
+	<link rel="stylesheet" type="text/css" href="/src/CSS/index.css">
+	<link rel="stylesheet" type="text/css" href="/assets/customIndex.css">
+</head>
+<body>
+<div id="content">
+	<header>
+		<h1>Hardware Reverse Engineering Game <small>[Group Switcher]</small></h1>
+	</header>
+	<main>
+		<div class="mobile-warning">
+			<b>Woah there!</b>
+			<p>This browser game is optimized for a desktop experience. While there is nothing we can really do to stop you from using your phone, we can promise you'll enjoy it more on a device with a larger screen.</p>
+			<p>Visit <strong>beta.hrestudy.com/index</strong> on your desktop device.</p>
+		</div>
+		<h2>Available Game Modes</h2>
+		<p>The following list shows all game modes that are currently available. Pick one and start reverse engineering!</p> 
+		<div class="buttonset">
+			{% for groupName, data in groups.items() %}
+				<a class="button button-narrow" href="/welcome?group={{groupName}}">
+					{{data['displayName']}}
+				</a>
+
+				{% if showDebug %}
+				<a class="button button-narrow" href="/welcome?group=debug{{groupName}}&onsite=1">
+					{{data['displayName']}} <small>(Debug)</small>
+				</a>
+				{% endif %}
+			{% endfor %}
+		</div>
+
+		{% if editorGroups|length > 0 %}
+		<h2>Level Editor</h2>
+		<p>Create and edit levels for the game. You can download your level creations, or open level files you received from others.</p>
+		<div class="buttonset" id="editor">
+		{% for groupName, data in editorGroups.items() %}
+			<a class="button button-narrow" href="/pre_survey?group={{groupName}}&onsite=1">
+				{{data['displayName']}}
+			</a>
+		{% endfor %}
+		</div>
+		{% endif %}
+	</main>
+	<footer>
+		<p>
+			{{footer}} 
+			{% for f, link in ingameFooter.items() %}
+			| <a href="{{link}}" target="_blank" rel="noopener noreferrer">{{f | title}}</a>
+			{% endfor %} 
+			<span title="Game Version" style="float: right">build {{game_hash}}</span>
+		</p>
+	</footer>
+</div>
+</body>
+</html>

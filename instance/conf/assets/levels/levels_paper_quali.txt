@@ -1,0 +1,8 @@
+text: goal.txt
+text: submitting.txt
+text: qualificationPhase_Start.txt
+level: qualification/alow_00000001
+level: qualification/blow_00001000_v2
+level: qualification/clow_11111101_random
+level: qualification/quali4_random
+special: retut/voluntaryTutorial.txt

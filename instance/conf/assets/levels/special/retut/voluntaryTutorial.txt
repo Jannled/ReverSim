@@ -1,0 +1,29 @@
+§Label:goalTitle
+§SIZE:100
+§COLOR:#f8b170
+§ALIGNMENT:center
+§X-POSITION:640
+§Y-POSITION:50
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:Voluntary Tutorial
+§DE:Freiwilliges Tutorial
+
+
+§Label:goalText
+§SIZE:30
+§COLOR:#f8b170
+§X-POSITION:640
+§Y-POSITION:175
+§ALIGNMENT:left
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:
+Congratulations, you have successfully passed the qualification phase and may continue with the game. 
+
+However if you feel insecure, you can voluntarily repeat the tutorial:
+
+§DE:
+Herzlichen Glückwunsch, Sie haben die Qualifikationsphase erfolgreich gemeistert und können nun mit dem Spiel fortfahren.
+
+Falls Sie sich noch unsicher fühlen, können Sie gerne das Tutorial freiwillig wiederholen:

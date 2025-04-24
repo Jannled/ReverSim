@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Documentation: Database</title>
+  <style>
+    html {
+      line-height: 1.4;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      background-color: #e6eceb;
+      padding: .2em .4em;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      background-color: #e6eceb;
+      padding: 1em;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  a:hover {
+  	color: #00445f;
+  }
+
+  code, pre {
+  	border-radius: 5px;
+  }
+  </style>
+</head>
+<body>
+<blockquote>
+<p>[!NOTE]<br />
+This document is splitted into a <a href="#database-user-guide">User
+Guide</a> and a <a href="#database-developer-guide">Developer
+Guide</a>.<br />
+If this documentation does not explain everything you need to know, feel
+free to <a href="GettingStarted.md#your-feedback">contact us</a>.</p>
+</blockquote>
+<h1 id="database-user-guide">Database User Guide</h1>
+<p>To store the state of every player on disk and to create logs for
+statistical analysis, a database is used to persist this information
+between server restarts. We decided to use SQLite for this purpose, as
+there are no complicated setup steps for this database. The entire
+database is stored inside a single file inside the instance folder: <a
+href="#">{instance}/statistics/reversim.db</a>.</p>
+<p>A (relational) database is structured a bit like an Excel Document.
+You have multiple tables, which correlate to separate Excel sheets. The
+tables are then structured like you would expect: the table head
+describes what content is stored in which column, and every database
+entry correlates to a single row. During runtime new rows can be
+created, read, updated or deleted (CRUD), but the layout of the tables
+will usually stay the same (schema). Every row must have an unique
+identifier (a column which usually contains an ascending number) called
+a primary key. This key can be used to link between entries in different
+tables.</p>
+<h2 id="database-upgrades">Database upgrades</h2>
+<p>When you update the ReverSim application (e.g. with
+<code>git pull</code> or <code>docker pull</code>), the source code will
+be updated, but sometimes the database will no longer be compatible with
+the source code, e.g. when a new column was introduced which would be
+missing in the database.</p>
+<p>But fear not, you can keep all your data and migrate it to the newest
+version. When you use our <a
+href="/docker-compose.yml">docker-compose.yml</a> file, you do not need
+to do anything, since the Container will check for new updates and
+upgrades your database automatically.</p>
+<p>But in all other cases you will need to perform this update yourself.
+Just run the following command from the root of the ReverSim repository
+(please make sure that your server is stopped before running the
+command):</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> flask <span class="at">--app</span> gameServer db upgrade</span></code></pre></div>
+<p>The startup will look similar to a regular start, but there should be
+some messages from Alembic telling you what upgrade steps have been
+performed. The application should then exit without any errors. You can
+restart your server normally afterwards.</p>
+<blockquote>
+<p>[!WARNING]<br />
+There is also a <code>downgrade</code> command. But this operation is
+destructive and will cause <strong>data loss</strong>, so please refrain
+from using it! The <code>upgrade</code> command is safe however, as we
+will design the upgrade tasks to be non destructive.</p>
+</blockquote>
+<h2 id="database-location">Database Location</h2>
+<p>The instance folder will be at the the following location:</p>
+<ul>
+<li>When using our Docker-Compose file: The <a href="#">statistics/</a>
+folder is stored in the volume <code>reversim_playerdata</code>, which
+you can mount in a different container to inspect/copy to a different
+machine</li>
+<li>When launching from VS Code: <a
+href="../instance/statistics/reversim.db">{YOUR_WORKSPACE}/instance/statistics/reversim.db</a></li>
+<li>If none of the above: Check the beginning of your server log or the
+contents of the <code>REVERSIM_INSTANCE</code> environment
+variable.</li>
+</ul>
+<h2 id="access-your-data">Access your data</h2>
+<blockquote>
+<p>[!NOTE]<br />
+If you need a high level overview over the participant data, we also
+provide our statistics tool, which will read the database and produces a
+csv file with one row per participant containing e.g. the time a player
+took to solve the level or the number of switch clicks. You can find the
+relevant documentation under <a
+href="StatisticsTool.md">doc/StatisticsTool.md</a>.</p>
+<p>The following section is only relevant, when:</p>
+<ul>
+<li>You have a research questions that can not be answered with our
+statistics tool</li>
+<li>You are troubleshooting</li>
+<li>Or when you are curious how the internal structure looks like</li>
+</ul>
+</blockquote>
+<p>There are many tools out there to inspect the content of an SQLite
+database. We can recommend <a href="https://sqlitebrowser.org/">DB
+Browser for SQLite</a>, as the user interface is quite intuitive even
+for non technical users, but it also offers features for advanced users
+like running SQL statements.</p>
+<p><img src="static/doc/res/SQLite-Explorer.png"
+alt="Screenshot of the SQLite explorer, showing the table rows for phase" /></p>
+<p>But if you are a technical user you might also like the <a
+href="https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools">SQLTools</a>
+extension for VS Code.</p>
+<h3 id="sample-queries">Sample Queries</h3>
+<p>Here are some sample queries you can perform on the database:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Get the statistics, how many players started/finished each group</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> group_stats</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select Timer Events</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> event <span class="kw">JOIN</span> event_chronograph <span class="kw">ON</span> event.<span class="kw">id</span> <span class="op">==</span> event_chronograph.<span class="kw">id</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select click events</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> event <span class="kw">JOIN</span> event_click <span class="kw">ON</span> event.<span class="kw">id</span> <span class="op">==</span> event_click.<span class="kw">id</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select all level states</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> event <span class="kw">JOIN</span> level_state <span class="kw">ON</span> event.<span class="kw">id</span> <span class="op">==</span> level_state.levelEvent_id</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select all PopUps and filter out the close event</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> event <span class="kw">JOIN</span> event_popup <span class="kw">ON</span> event.<span class="kw">id</span> <span class="op">==</span> event_popup.<span class="kw">id</span> <span class="kw">WHERE</span> action<span class="op">==</span><span class="dv">1</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select all Draw Tool select events</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> event <span class="kw">JOIN</span> event_select_draw <span class="kw">ON</span> event.<span class="kw">id</span> <span class="op">==</span> event_select_draw.<span class="kw">id</span> <span class="kw">JOIN</span> event_click <span class="kw">ON</span> event.<span class="kw">id</span> <span class="op">==</span> event_click.<span class="kw">id</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select a certain time range (the format matters, e.g. there shall be no &quot;T&quot; between the date &amp; time)</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> event <span class="kw">WHERE</span> timeServer <span class="kw">BETWEEN</span> <span class="st">&#39;2025-04-16 13:05:40&#39;</span> <span class="kw">AND</span> <span class="st">&#39;2025-04-16 13:05:43&#39;</span></span></code></pre></div>
+<h1 id="database-developer-guide">Database Developer Guide</h1>
+<blockquote>
+<p>[!NOTE]<br />
+If you are an end user, you can most likely ignore this section, as
+database upgrades are probably provided to you. However if you are a
+developer and made changes to the schema of the ORM/database, go
+ahead:</p>
+</blockquote>
+<p>We have decided to use SQLite as our database, which is a rather
+uncommon choice for a web application that might need to scale. However
+in our usecase we do not expect hundreds of players at the same time,
+therefore we can get away with a database that fully locks during a
+write transaction and therefore only allows a single writer at the same
+time. A single writes however doesn't mean, that only a single player
+can play the game, as the write-locks only occur during a transaction
+which are designed to be as short as possible. If two players would
+manage to click lets say the confirm button at exactly the same time,
+the second player will be processed after the transaction of the first
+player ends, which usually only takes a couple of milliseconds.</p>
+<p>The following reasons influenced our decision towards SQlite: You do
+not need to setup a separate database server, as the database is only a
+single file which gets directly accessed by the Python database server.
+Since our primary objective is to do research with the game, this file
+can easily be shared with all researchers for offline analysis and you
+do not need to administrate separate database user accounts for your
+researchers.</p>
+<p>We have decided against enabling <a
+href="https://www.sqlite.org/wal.html">Write Ahead Logging (WAL
+mode)</a>, as this introduces two additional files. We would also not
+benefit from the performance improvements that much, since we start all
+<a href="https://www.sqlite.org/lang_transaction.html">transactions</a>
+with <code>BEGIN EXCLUSIVE</code>, which is SQLites way of implementing
+a <a
+href="https://en.wikipedia.org/wiki/Isolation_(database_systems)#Serializable">serializable
+isolation level</a>. The EXCLUSIVE mode prevents ongoing read
+transactions from getting kicked with an SQLITE_BUSY error by a write
+transaction and minimizes the chances for a race condition bug.</p>
+<p>If you wish to use a different Database technology like e.g.
+Postgres, you will probably only need to exchange the database URI for
+your server and disable the <a
+href="#pysqlite-driver-issues">SQLITE_HACKS in database.py</a>, as most
+implementation details of different database drivers are abstracted away
+by SQLAlchemy. However you will enter unchartered territory as we have
+never tested a different database driver with our game.</p>
+<ul>
+<li>All datetime strings and timestamps are in UTC</li>
+<li>NullPool is more robust against wsgi server implementations, that
+use multiprocessing / os.fork <a
+href="https://docs.sqlalchemy.org/en/20/core/pooling.html#using-connection-pools-with-multiprocessing-or-os-fork">https://docs.sqlalchemy.org/en/20/core/pooling.html#using-connection-pools-with-multiprocessing-or-os-fork</a></li>
+<li>But it comes with a performance penalty, therefore we use the static
+pool and have to make sure, that a connection is not forked to the child
+process.</li>
+</ul>
+<h2 id="creating-database-upgrade-files">Creating database upgrade
+files</h2>
+<blockquote>
+<p>Alembic can view the status of the database (pointed to by
+<code>SQLALCHEMY_DATABASE_URI</code> in your <code>Flask.config</code>
+using the current schema) and compare against the table metadata in the
+application (your ORM which defines the proposed schema), generating the
+“obvious” migrations based on a comparison. This is achieved using the
+--autogenerate option to the alembic revision command, which places
+so-called candidate migrations into our new migrations file. We review
+and modify these by hand as needed, then proceed normally.</p>
+</blockquote>
+<p><a
+href="https://alembic.sqlalchemy.org/en/latest/autogenerate.html">https://alembic.sqlalchemy.org/en/latest/autogenerate.html</a></p>
+<p>To create a new database revision, you just have to call the
+following command:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flask</span> <span class="at">--app</span> gameServer db revision <span class="st">&quot;YOUR SHORT CHANGELOG&quot;</span></span></code></pre></div>
+<p>Afterwards you always have to manually inspect the generated Python
+script inside the <a href="../migrations/">migrations/</a> folder.
+Because the autogenerate feature is unable to <a
+href="https://alembic.sqlalchemy.org/en/latest/autogenerate.html#what-does-autogenerate-detect-and-what-does-it-not-detect">detect
+all changes</a> and might make mistakes (e.g. for SQLite you have to add
+the <code>server_default="..."</code> parameter to columns which are not
+nullable). Afterwards check that your script works by running the
+upgrade at least once and test that no exceptions occur while playing
+the game (like missing columns etc.). You should also <a
+href="#access-your-data">inspect the database</a> with the tool of your
+choice.</p>
+<p>It is a good idea, to backup your database before you do the upgrade,
+in case you made a mistake!</p>
+<hr />
+<p><a href="https://alembic.sqlalchemy.org/en/latest/batch.html">Alembic
+upgrade problematic due to SQLite design</a>. However you do not have to
+worry as this inconvenience is abstracted away by Alembic.</p>
+<ul>
+<li><a
+href="https://alembic.sqlalchemy.org/en/latest/tutorial.html#running-our-second-migration">https://alembic.sqlalchemy.org/en/latest/tutorial.html#running-our-second-migration</a></li>
+<li><a
+href="https://flask-alembic.readthedocs.io/en/latest/use/">https://flask-alembic.readthedocs.io/en/latest/use/</a></li>
+</ul>
+<h2 id="change-version-tag-of-database">Change Version Tag of
+Database</h2>
+<p>If you want to change the version number of the database without
+running any up or downgrades, you can use the <code>stamp</code>
+command. The current version of the database is usually stored in the
+table <code>alembic_version</code>. In case it is missing, this command
+can be used to fix this. Keep in mind, that Alembic has no way of
+telling, if the Database schema actually matches the revision you
+specified.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flask</span> <span class="at">--app</span> gameServer db stamp XXXXXXX</span></code></pre></div>
+<!-- NOTE Not true for Flask-Alembic as the id is a timestamp...: You don't have to type out the whole id of the revision, only enough so that Alembic can uniquely identify the revision. If the id is not unique, Alembic will complain. You can also use `base` to remove all revisions from the table or `heads` to mark the table as being at the most recent version. -->
+
+<h2 id="downgrade">Downgrade</h2>
+<p>To downgrade to an older version, you can use the following command,
+however depending on the use case if you just need to change the current
+version of the database, it is probably better to just change the
+version with the <a href="#change-version-tag-of-database">stamp
+command</a>, as downgrades will most likely <code>DROP</code> (delete)
+columns, which can not be undone!</p>
+<blockquote>
+<p>[!WARNING]<br />
+The downgrade is destructive and will cause <strong>data
+loss</strong>!</p>
+</blockquote>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> flask <span class="at">--app</span> gameServer db downgrade</span></code></pre></div>
+<h2 id="pysqlite-driver-issues">Pysqlite driver issues</h2>
+<blockquote>
+<p>The pysqlite DBAPI driver has several long-standing bugs which impact
+the correctness of its transactional behavior. In its default mode of
+operation, SQLite features such as SERIALIZABLE isolation, transactional
+DDL, and SAVEPOINT support are non-functional, and in order to use these
+features, workarounds must be taken.</p>
+<p>The issue is essentially that the driver attempts to second-guess the
+user’s intent, failing to start transactions and sometimes ending them
+prematurely, in an effort to minimize the SQLite databases’s file
+locking behavior, even though SQLite itself uses “shared” locks for
+read-only activities.</p>
+</blockquote>
+<p><a
+href="https://docs.sqlalchemy.org/en/20/dialects/sqlite.html#serializable-isolation-savepoints-transactional-ddl">https://docs.sqlalchemy.org/en/20/dialects/sqlite.html#serializable-isolation-savepoints-transactional-ddl</a></p>
+<p>In theory, this issues was fixed with Python 3.12 by implementing the
+PEP 249 standard. However the <a
+href="https://docs.sqlalchemy.org/en/20/dialects/sqlite.html#serializable-isolation-savepoints-transactional-ddl">SQLAlchemy
+documentation</a> has not fully caught up yet, they still mention it as
+unresolved and recommend the old fix (as of 2025-06-04). And there is a
+second reason we stuck to the old workaround: We need the SQLite
+transactions to be in <code>BEGIN EXCLUSIVE</code> mode and we haven't
+found a way yet to achieve this with the PEP 249 compliant
+implementation. Because in theory you should be able to set
+<code>connection.autocommit = False</code> and
+<code>connection.isolation_level = "EXCLUSIVE"</code>. But the
+<code>isolation_level</code> gets ignored if <code>autocommit</code> is
+not set to <code>sqlite3.LEGACY_TRANSACTION_CONTROL</code>, which would
+be the old broken behavior.</p>
+<!-- TODO: Open a discussion in the pysqlite bugtracker -->
+
+<p>If you wish to disable the workarounds we implemented to cope with
+the default behavior of pysqlite, you can set
+<code>SQLITE_HACKS = False</code> in <a
+href="../app/storage/database.py">database.py</a>.</p>
+<h3 id="further-reading">Further reading</h3>
+<table>
+<thead>
+<tr>
+<th>Python Bugtracker (Deprecated)</th>
+<th>GitHub Bugtracker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a
+href="https://bugs.python.org/issue9924">https://bugs.python.org/issue9924</a></td>
+<td><a
+href="https://github.com/python/cpython/issues/54133">https://github.com/python/cpython/issues/54133</a></td>
+</tr>
+<tr>
+<td><a
+href="https://bugs.python.org/issue10740">https://bugs.python.org/issue10740</a></td>
+<td><a
+href="https://github.com/python/cpython/issues/54949">https://github.com/python/cpython/issues/54949</a></td>
+</tr>
+<tr>
+<td><a
+href="https://bugs.python.org/issue39457">https://bugs.python.org/issue39457</a></td>
+<td><a
+href="https://github.com/python/cpython/issues/83638">https://github.com/python/cpython/issues/83638</a></td>
+</tr>
+</tbody>
+</table>
+<p>TLDR:</p>
+<blockquote>
+<ul>
+<li><a href="https://github.com/python/cpython/pull/93823">gh-83638: Add
+sqlite3.Connection.autocommit for PEP 249 compliant behaviour #93823</a>
+introduces <code>autocommit</code> as a parameter to
+<code>connect()</code> and as an attribute to
+<code>Connection</code></li>
+<li>the current (3.11) behaviour is still the default behaviour</li>
+<li><code>isolation_level</code> is <em>not</em> deprecated</li>
+</ul>
+</blockquote>
+<p><a
+href="https://docs.python.org/3.12/library/sqlite3.html#transaction-control">https://docs.python.org/3.12/library/sqlite3.html#transaction-control</a></p>
+</body>
+</html>

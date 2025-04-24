@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Documentation: Game Config</title>
+  <style>
+    html {
+      line-height: 1.4;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      background-color: #e6eceb;
+      padding: .2em .4em;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      background-color: #e6eceb;
+      padding: 1em;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  a:hover {
+  	color: #00445f;
+  }
+
+  code, pre {
+  	border-radius: 5px;
+  }
+  </style>
+</head>
+<body>
+<h1 id="documentation-for-the-gameconfigjson-file">Documentation for the
+gameConfig.json file</h1>
+<p>This file allows you to configure the game itself, you can set up
+groups and their corresponding rules. This however is only the game
+part. To configure the underlying web server, please refer to
+<code>reversim_uwsgi.ini</code> instead. You can see <a
+href="GameConfig.md">instance/conf/gameConfig.json</a> and <a
+href="/examples/conf/reversim_uwsgi.ini">examples/conf/reversim_uwsgi.ini</a>
+as example files (these are the default config files for the Docker
+container).</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#groups">group</a></td>
+<td>You can divide your participant into different groups, to let them
+play them different levels or even phases. Players can be automatically
+assigned to a group, or you can give them a custom link to a specific
+group. See the <a href="#groups">chapter groups</a> for more
+details.</td>
+</tr>
+<tr>
+<td><a href="#gamerules">gamerule</a></td>
+<td>Customize survey links, the score for errors, etc. Gamerules can be
+shared between groups.</td>
+</tr>
+<tr>
+<td><a href="#game-options">game option</a></td>
+<td>These are global config variables, that apply to the entire game, no
+matter what group is active.</td>
+</tr>
+</tbody>
+</table>
+<p>The general file structure for the <code>gameConfig.json</code> file
+looks as follows:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode jsonc"><code class="sourceCode jsonl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// See chapter Game Options</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;crashReportLevel&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;languages&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;en&quot;</span><span class="ot">,</span> <span class="st">&quot;de&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;Your Institution&quot;</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;footer&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;impressum&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;research&quot;</span><span class="fu">:</span> <span class="st">&quot;assets/researchInfo/researchInfo.html&quot;</span><span class="fu">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;privacy&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;groupIndex&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;showDebug&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;footer&quot;</span><span class="fu">:</span> <span class="st">&quot;© {author} | {year}&quot;</span><span class="fu">,</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;gamerules&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// See chapter Gamerules</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;groups&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="co">// See chapter Groups</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>Most config keys are optional and have reasonable default values. The
+default value is given in the code snippet for each key. The keys that
+have no default values are marked with <code>// Required</code>.</p>
+<h2 id="game-options">Game Options</h2>
+<h3 id="assetpath">assetPath</h3>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;assetPath&quot;</span><span class="fu">:</span> <span class="st">&quot;conf/assets&quot;</span></span></code></pre></div>
+<p>The folder where all customizable files like levels, info screens,
+the languageLibrary, etc. lives. The game is delivered with a default
+languageLibrary in german and english and some example levels. The <a
+href="conf/assets/Readme.md">folder structure</a> inside assets is not
+customizable (for the most part), however you can use subfolders to
+organize your files.</p>
+<p>The file path is relative to the base directory of ReverSim (the
+folder gameServer.py resides in).</p>
+<h3 id="languages">languages</h3>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;languages&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;en&quot;</span><span class="ot">,</span> <span class="st">&quot;de&quot;</span><span class="ot">]</span> <span class="co">// Required</span></span></code></pre></div>
+<p>A list of languages this game supports. Please make sure that you
+have translated the entire game (languageDict, etc), see the <a
+href="./Translating.md">Translation Guide</a> for further
+information.</p>
+<p>If no language is manually set with the request parameter (e.g. <a
+href="/welcome?lang=de">/welcome?lang=de</a>) and the automatic guess
+fails, the game will fall back to the first value in this list.</p>
+<h3 id="author">author</h3>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span></span></code></pre></div>
+<p>The name of <strong>your</strong> institution. Will be set in the
+<code>&lt;head&gt;</code> of the game as
+<code>&lt;meta name="author" content="{author}"&gt;</code> and if
+configured in the <a href="#footer-groupindex">footer</a> of the group
+index as well.</p>
+<h3 id="crashreportlevel">crashReportLevel</h3>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;crashReportLevel&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span> <span class="co">// Required</span></span></code></pre></div>
+<p>Server side errors are logged as you would expect, but errors on the
+player/client side are not and therefore hard to understand and
+reproduce. Therefore you can enable the client to POST error messages to
+<a href=".">/crashReport</a>. For exceptions the full stack trace will
+be included. Only the scripts that are needed for the current log level
+are transmitted to the player. See <a
+href="#crashreportblacklist">crashReportBlacklist</a> if you wan't to
+disable error logging only for certain groups (Log-level
+<code>0</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Error Level</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Client side errors are not send to the server, the crash_report.txt
+file is not open</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>Only log unhandled exceptions (exceptions that escaped into the
+browser)</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Additionally tap into <code>console.error()</code> calls and write
+them to log</td>
+</tr>
+</tbody>
+</table>
+<h3 id="crashreportblacklist">crashReportBlacklist</h3>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;crashReportBlacklist&quot;</span><span class="fu">:</span> <span class="ot">[]</span></span></code></pre></div>
+<p>All groups on this list will be excluded from the error logger. If
+you leave the list empty or omit this key entirely, all groups with <a
+href="#enablelogging">enableLogging</a>=false in their gamerules will be
+added to this list.</p>
+<h3 id="footer">footer</h3>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;footer&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;researchInfo&quot;</span><span class="fu">:</span> <span class="st">&quot;assets/researchInfo/researchInfo.html&quot;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">},</span></span></code></pre></div>
+<p>The footer will be displayed ingame <a href="/index">/game</a> or on
+the welcome screen <a href="/welcome">/welcome</a> and contain clickable
+links to external information, like your research info or privacy
+protection.</p>
+<p>The keys (e.g. <code>researchInfo</code>, <code>imprint</code>,
+<code>privacyProtection</code>) must be present in the <a
+href="Translating.md">languageDict</a>, as the actual text that will be
+displayed is taken from there.</p>
+<p>The values can be relative or absolute urls.</p>
+<p>If you don't want any footer links, you can simply leave the brackets
+empty.</p>
+<h3 id="groupindex">groupIndex</h3>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;groupIndex&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="co">// Required</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;footer&quot;</span><span class="fu">:</span> <span class="st">&quot;© {author} | {year}&quot;</span><span class="fu">,</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;showDebug&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">},</span></span></code></pre></div>
+<h4 id="footer-groupindex">footer (groupIndex)</h4>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;footer&quot;</span><span class="fu">:</span> <span class="st">&quot;© {author} | {year}&quot;</span> <span class="co">// Required</span></span></code></pre></div>
+<p>The footer displayed on the group index page. You can not use HTML
+tags, since the value is html escaped, but some predefined variables are
+available to make the footer more powerful. These are replaced with the
+described value before the page is delivered to the player.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Explanation for replacement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{author}</code></td>
+<td>Replaced with the value from <a href="#author">author</a></td>
+</tr>
+<tr>
+<td><code>{year}</code></td>
+<td>The current year (server time)</td>
+</tr>
+</tbody>
+</table>
+<!-- /app/router/routerStatic.py@groupIndex() -->
+
+<h2 id="gamerules">Gamerules</h2>
+<!--  Default values can be found inside:
+    - `app/config.py`
+    - `static/src/typings/globals.d.ts`
+-->
+
+<p>Gamerules allow you to customize the difficulty, disclaimer etc. of
+multiple groups at once, but you can also create a gamerule per
+group.</p>
+<h3 id="enablelogging">enableLogging</h3>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;enableLogging&quot;</span><span class="fu">:</span> <span class="kw">true</span></span></code></pre></div>
+<p>True if a log file shall be created for players in a group with this
+gamerule.</p>
+<h3 id="showhelp">showHelp</h3>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;showHelp&quot;</span><span class="fu">:</span> <span class="kw">true</span></span></code></pre></div>
+<p>Not implemented right now. This feature is planned to enable
+explanations for the gate types while ingame.</p>
+<h3 id="inserttutorials">insertTutorials</h3>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;insertTutorials&quot;</span><span class="fu">:</span> <span class="kw">true</span></span></code></pre></div>
+<p>Automatically insert Covert/Camouflage Gate Intro slides before the
+first level containing one of these gate types. If both gates are
+present, the covert intro is shown before the camouflage intro. You can
+also disable this feature to insert them manually in the level list to
+show them at a different time, or to hide them completely.</p>
+<h3 id="scorevalues">scoreValues</h3>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;scoreValues&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;startValue&quot;</span><span class="fu">:</span> <span class="dv">100</span><span class="fu">,</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;minimumScore&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;switchClick&quot;</span><span class="fu">:</span> <span class="dv">-0</span><span class="fu">,</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;simulate&quot;</span><span class="fu">:</span> <span class="dv">-10</span><span class="fu">,</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;wrongSolution&quot;</span><span class="fu">:</span> <span class="dv">-10</span><span class="fu">,</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;correctSolution&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;penaltyMultiplier&quot;</span><span class="fu">:</span> <span class="dv">1</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>The score is used to incentivize the player to use as few clicks as
+possible. When setting <code>scoreValues</code> you need to provide
+values for all keys (except for <code>penaltyMultiplier</code> which
+will default to 1).</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"startValue"</code></td>
+<td>The initial score value to which the other values are
+added/subtracted</td>
+</tr>
+<tr>
+<td><code>"minimumScore"</code></td>
+<td>The score will never go below this value. Set to a high negative
+number, if you need negative scores</td>
+</tr>
+<tr>
+<td><code>"switchClick"</code></td>
+<td>Will be added every time a player clicks a switch</td>
+</tr>
+<tr>
+<td><code>"simulate"</code></td>
+<td>Will be added every time the player clicks the simulate button to
+start simulating (ending a simulation does not count)</td>
+</tr>
+<tr>
+<td><code>"wrongSolution"</code></td>
+<td>If <code>"penaltyMultiplier"</code> = 0, this value will be added
+whenever the player clicks confirm while the level is not solved. See
+the equation below to learn how the value is calculated, that will be
+added to the score if <code>"penaltyMultiplier"</code> ≠ 0,</td>
+</tr>
+<tr>
+<td><code>"correctSolution"</code></td>
+<td>Will be added when the player clicks confirm and the solution is
+correct (all light bulbs on and all danger signs of)</td>
+</tr>
+<tr>
+<td><code>"penaltyMultiplier"</code></td>
+<td>Set this value to 1 if you want to increase the value added on every
+wrong confirm click. See the following equation &amp; table to learn for
+further information</td>
+</tr>
+</tbody>
+</table>
+<p>The calculation of the value that is added to the score whenever the
+player confirms an unsolved level is a bit more involved, to allow for
+higher punishments of multiple wrong confirm click uses. The result of
+the following equation will be added the score: <span
+class="math display">wrongSolution ⋅ (1 + penaltyMultiplier ⋅ (wrongConfirmClicks − 1))</span></p>
+<p>As an example, the following table calculates the resulting scores if
+<code>"penaltyMultiplier"</code> is 0 or 1.</p>
+<table>
+<thead>
+<tr>
+<th>wrongConfirmClicks</th>
+<th>Addition</th>
+<th>Player Score</th>
+<th>Addition</th>
+<th>Player Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><code>"penaltyMultiplier"</code> = 0</td>
+<td></td>
+<td><code>"penaltyMultiplier"</code> = 1</td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td></td>
+<td>100</td>
+<td></td>
+<td>100</td>
+</tr>
+<tr>
+<td>1</td>
+<td>-10</td>
+<td>90</td>
+<td>-10</td>
+<td>90</td>
+</tr>
+<tr>
+<td>2</td>
+<td>-10</td>
+<td>80</td>
+<td>-20</td>
+<td>70</td>
+</tr>
+<tr>
+<td>3</td>
+<td>-10</td>
+<td>70</td>
+<td>-30</td>
+<td>40</td>
+</tr>
+<tr>
+<td>4</td>
+<td>-10</td>
+<td>60</td>
+<td>-40</td>
+<td>0</td>
+</tr>
+<tr>
+<td>5</td>
+<td>-10</td>
+<td>50</td>
+<td>-50</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>If the score is ≤ 0, the game shows a skip button if enabled in the
+config of the <a href="#competitionshowskipbutton">Competition</a> or <a
+href="#skillshowskipbutton">Skill</a> Phase.</p>
+<h3 id="phasedifficulty">phaseDifficulty</h3>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;phaseDifficulty&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Quali&quot;</span><span class="fu">:</span> <span class="st">&quot;MEDIUM&quot;</span><span class="fu">,</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Competition&quot;</span><span class="fu">:</span> <span class="st">&quot;MEDIUM&quot;</span><span class="fu">,</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Skill&quot;</span><span class="fu">:</span> <span class="st">&quot;MEDIUM&quot;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>The difficulty can be modified for each phase and affects the visual
+feedback of current logic states.</p>
+<table>
+<thead>
+<tr>
+<th>Difficulty</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"EASY"</code></td>
+<td>The logic state of every wire and output is visible all the
+time</td>
+</tr>
+<tr>
+<td><code>"MEDIUM"</code></td>
+<td>The logic state is visible only when clicking confirm or when using
+the simulate button</td>
+</tr>
+<tr>
+<td><code>"ADVANCED"</code></td>
+<td>Same as <code>"MEDIUM"</code> but the state is only shown on output
+gates not on wires &amp; splitters</td>
+</tr>
+<tr>
+<td><code>"HARD"</code></td>
+<td>The logic state is never shown</td>
+</tr>
+</tbody>
+</table>
+<h3 id="remindertime">reminderTime</h3>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;reminderTime&quot;</span><span class="fu">:</span> <span class="dv">10</span></span></code></pre></div>
+<p>If a time limit is set for this phase, a "reminder" pop up will be
+shown before the timer ends. This variable controls the duration in
+seconds before the pop up is shown and the timer runs out. You can't
+disable the "reminder" popup at the moment, but when you set this to
+zero the "time has run out" popup will be shown in front of the
+"reminder" popup.</p>
+<h3 id="mediumshowsimulatebutton">mediumShowSimulateButton</h3>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;mediumShowSimulateButton&quot;</span><span class="fu">:</span> <span class="kw">false</span></span></code></pre></div>
+<p>Show the simulate button on <code>"MEDIUM"</code> or
+<code>"ADVANCED"</code> difficulty. The simulate button will allow you
+to see the current logic states of every wire and output gate, until you
+click the simulate button again. You cant modify the circuit while the
+power is shown and you will receive a <a href="#scorevalues">small
+penalty</a> for using this feature.</p>
+<h3 id="skillshowskipbutton">skillShowSkipButton</h3>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;skillShowSkipButton&quot;</span><span class="fu">:</span> <span class="st">&quot;never&quot;</span></span></code></pre></div>
+<p>Control the visibility of the skip level button during the Skill
+phase.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"never"</code></td>
+<td>Never show the skip button.</td>
+</tr>
+<tr>
+<td><code>"struggling"</code></td>
+<td>Show the skip button after the score reaches 0.</td>
+</tr>
+<tr>
+<td><code>"always"</code></td>
+<td>Show the skip level button at the start of each level for the entire
+duration.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="competitionshowskipbutton">competitionShowSkipButton</h3>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;competitionShowSkipButton&quot;</span><span class="fu">:</span> <span class="st">&quot;never&quot;</span></span></code></pre></div>
+<p>Control the visibility of the skip level button during the Skill
+phase.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"never"</code></td>
+<td>Never show the skip button.</td>
+</tr>
+<tr>
+<td><code>"struggling"</code></td>
+<td>Show the skip button after the score reaches 0.</td>
+</tr>
+<tr>
+<td><code>"always"</code></td>
+<td>Show the skip level button at the start of each level for the entire
+duration.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="wrongsolutioncooldown">wrongSolutionCooldown</h3>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;wrongSolutionCooldown&quot;</span><span class="fu">:</span> <span class="dv">3</span></span></code></pre></div>
+<p>Time in seconds after the simulation can be disabled, when confirming
+a wrong solution (only relevant on MEDIUM <a
+href="#phasedifficulty">difficulty</a>).</p>
+<h3 id="wrongsolutioncooldown-1">wrongSolutionCooldown</h3>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;wrongSolutionCooldownLimit&quot;</span><span class="fu">:</span> <span class="dv">30</span></span></code></pre></div>
+<p>Maximum time in seconds to which the cooldown is clamped after
+applying the <code>wrongSolutionMultiplier</code>, when confirming a
+wrong solution (only relevant on MEDIUM <a
+href="#phasedifficulty">difficulty</a>). Set to 0 to disable.</p>
+<h3 id="wrongsolutionmultiplier">wrongSolutionMultiplier</h3>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;wrongSolutionMultiplier&quot;</span><span class="fu">:</span> <span class="dv">2</span></span></code></pre></div>
+<p>Scaling factor for the <code>wrongSolutionCooldown</code> with the
+number of confirm clicks (only relevant on MEDIUM <a
+href="#phasedifficulty">difficulty</a>). Set to 1 to disable.</p>
+<h3 id="tutorialallowskip">tutorialAllowSkip</h3>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;tutorialAllowSkip&quot;</span><span class="fu">:</span> <span class="st">&quot;yes&quot;</span></span></code></pre></div>
+<p>Control if and when a skip button shall be shown in the top right
+corner of <code>IntroduceElements</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"yes"</code></td>
+<td>Show the skip button if all slides have been unlocked (in a previous
+run).</td>
+</tr>
+<tr>
+<td><code>"no"</code></td>
+<td>Never show the skip button</td>
+</tr>
+<tr>
+<td><code>"always"</code></td>
+<td>Always show the skip button, even if not all slides are
+unlocked.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="simulationallowannotate">simulationAllowAnnotate</h3>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;simulationAllowAnnotate&quot;</span><span class="fu">:</span> <span class="kw">false</span></span></code></pre></div>
+<p>Whether players will be able to use the drawing tools while the
+simulation of the current circuit state is shown (only relevant on
+MEDIUM <a href="#phasedifficulty">difficulty</a>)</p>
+<h3 id="textpostsurveynotice">textPostSurveyNotice</h3>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;textPostSurveyNotice&quot;</span><span class="fu">:</span> <span class="st">&quot;postSurvey&quot;</span></span></code></pre></div>
+<p>A languageDict key that will be shown on the FinalScene. Some
+examples are given in the language library
+(<code>postSurveyLottery</code>, <code>postSurvey</code> and
+<code>noPostSurveyMsg</code>). See <a
+href="./Translating.md">Translating.md</a> to find out how to modify the
+language library.</p>
+<h3 id="pause">pause</h3>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;pause&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;after&quot;</span><span class="fu">:</span> <span class="dv">120</span><span class="fu">,</span> <span class="co">// Required</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;duration&quot;</span><span class="fu">:</span> <span class="dv">30</span><span class="fu">,</span> <span class="co">// Required</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;startEvent&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span> <span class="co">// Required</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;fileName&quot;</span><span class="fu">:</span> <span class="st">&quot;pause.txt&quot;</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>Force the player to take a break after the duration specified with
+<code>"after"</code>. This feature will not interrupt a currently
+running level. The player has to wait before the continue button can be
+clicked in order to proceed to the next level/phase. You can also
+manually add a pause in the <a href="./LevelList.md">levelList.txt</a>.
+Remove the <code>"pause"</code> entry from the config, if you don't need
+the functionality.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"after"</code></td>
+<td>The time in seconds after the pause screen will be inserted (after
+<code>"startEvent"</code> was shown)</td>
+</tr>
+<tr>
+<td><code>"duration"</code></td>
+<td>The duration in seconds after which the pause slide can be
+skipped</td>
+</tr>
+<tr>
+<td><code>"startEvent"</code></td>
+<td>Start the timer after a phase with this name was shown. Set to
+<code>null</code> to use the first phase</td>
+</tr>
+<tr>
+<td><code>"fileName"</code></td>
+<td>A file placed under <a
+href=".">${assetPath}/levels/special/pause</a> to show as the pause
+screen.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!NOTE]<br />
+The pause screen is implemented as an info screen and therefore can only
+be shown in a phase with levels. Also keep in mind that the path to
+fileName <a href="GameConfig.md#assetpath">can be changed</a>.</p>
+</blockquote>
+<h3 id="timelimit">timeLimit</h3>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;timeLimit&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;after&quot;</span><span class="fu">:</span> <span class="dv">120</span><span class="fu">,</span> <span class="co">// Required</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;startEvent&quot;</span><span class="fu">:</span> <span class="kw">null</span> <span class="co">// Required</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>If the <code>"timeLimit"</code> section exists in the config, the
+time the player can play this game will be limited. The global timer
+will be activated after the first occurrence of
+<code>"startEvent"</code> and the game will end when a player switches
+levels/phases after the timer has run out. If <code>"startEvent"</code>
+is <code>null</code>, the timer will start at the beginning of the first
+phase.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"after"</code></td>
+<td>The time in seconds after the game will end (after
+<code>"startEvent"</code> was shown)</td>
+</tr>
+<tr>
+<td><code>"startEvent"</code></td>
+<td>Start the timer after a phase with this name was shown. Set to
+<code>null</code> to use the first phase</td>
+</tr>
+</tbody>
+</table>
+<h3 id="footer-1">footer</h3>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;footer&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;impressum&quot;</span><span class="fu">:</span> <span class="st">&quot;{impressum}&quot;</span><span class="fu">,</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;research&quot;</span><span class="fu">:</span> <span class="st">&quot;{research}&quot;</span><span class="fu">,</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;privacy&quot;</span><span class="fu">:</span> <span class="st">&quot;{privacy}&quot;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>Overrides values specified in the <a href="#game-options">game
+options</a>. If a value is set to an empty string (<code>""</code>), the
+link will disappear from the footer.</p>
+<h3 id="allowrepetition">allowRepetition</h3>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;allowRepetition&quot;</span><span class="fu">:</span> <span class="kw">false</span></span></code></pre></div>
+<p>Allow the player to participate multiple times in this group</p>
+<h3 id="urlpresurvey">urlPreSurvey</h3>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;urlPreSurvey&quot;</span><span class="fu">:</span> <span class="kw">null</span></span></code></pre></div>
+<p>Redirect the player to this page, before the actual game starts. Can
+be used to let the player fill out a demographic survey etc.</p>
+<p>Set this to <code>null</code> to redirect the player directly to the
+game.</p>
+<p>You need to pass the pseudonym and can pass some additional
+information to your survey/website by using placeholders which get
+replaced by the server.<br />
+Example:
+<code>"limesurvey/index.php/xyz?ui={ui}&amp;lang={lang}"</code></p>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{ui}</code> *</td>
+<td>The pseudonym that was generated by the game for the
+player/participant</td>
+</tr>
+<tr>
+<td><code>{lang}</code> *</td>
+<td>The language that was selected by the player or auto detected by the
+game</td>
+</tr>
+<tr>
+<td><code>{group}</code></td>
+<td>The group this player was assigned to</td>
+</tr>
+<tr>
+<td><code>{timeStamp}</code></td>
+<td>The current server time in milliseconds</td>
+</tr>
+</tbody>
+</table>
+<p>Your survey or website needs to store the pseudonym that was passed
+with the request params, because afterwards you need to redirect the
+player back to the game. The url is <a
+href="">/game?ui={ui}&amp;lang={lang}</a> and you need to replace
+<code>{ui}</code> and should replace <code>{lang}</code> with the values
+you stored earlier. The other placeholders from the table above have no
+effect in the game link.</p>
+<h3 id="urlpostsurvey">urlPostSurvey</h3>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;urlPostSurvey&quot;</span><span class="fu">:</span> <span class="kw">null</span></span></code></pre></div>
+<p>If this parameter is not <code>null</code>, a button will be
+displayed on the FinalScene which will redirect to the link specified in
+<code>urlPostSurvey</code>. You can use the following placeholders,
+which get replaced by the server, all of them are optional:</p>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{ui}</code></td>
+<td>The pseudonym that was generated by the game for the
+player/participant</td>
+</tr>
+<tr>
+<td><code>{lang}</code></td>
+<td>The language that was selected by the player or auto detected by the
+game</td>
+</tr>
+<tr>
+<td><code>{group}</code></td>
+<td>The group this player was assigned to</td>
+</tr>
+<tr>
+<td><code>{timeStamp}</code></td>
+<td>The current server time in milliseconds</td>
+</tr>
+</tbody>
+</table>
+<p>Example:
+<code>"limesurvey/index.php/xyz?ui={ui}&amp;lang={lang}"</code></p>
+<h3 id="disclaimer">disclaimer</h3>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;disclaimer&quot;</span><span class="fu">:</span> <span class="st">&quot;/assets/researchInfo/disclaimer_{lang}.html&quot;</span></span></code></pre></div>
+<p>Show a popup/disclaimer that the player needs to accept before
+getting redirected to the <a href="#urlpresurvey">presurvey</a> or the
+game itself. The site where the <code>disclaimer</code> link is pointing
+to will be displayed inside the popup.</p>
+<p>You can use the <code>{lang}</code> placeholder to supply different
+languages. The html file must contain a <code>&lt;button&gt;</code> that
+will be used as the continue/accept button. One of the few exceptions
+not translated inside the <a
+href="./Translating.md">languageLibrary</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Placeholder</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{lang}</code></td>
+<td>The language that was selected by the player or auto detected by the
+game</td>
+</tr>
+</tbody>
+</table>
+<p>Set to <code>null</code> to disable/skip the disclaimer popup.</p>
+<h2 id="groups">Groups</h2>
+<blockquote>
+<p>[!NOTE]<br />
+Never start your group name with <code>debug</code>, because this prefix
+is used internally!</p>
+</blockquote>
+<p>You can use <strong>group</strong>s to show different levels or even
+phases to different player pools. When the player reaches out to <a
+href="/">/</a> or <a href="/welcome">/welcome</a>, the server will
+automatically assign the player to the group with the smallest number of
+participants. The number of participants per group is not stored between
+reboots, but you can set the participant counter to an arbitrary number,
+for e.g. you can set a high number to prevent a player getting
+automatically assigned to that group.</p>
+<p>To manually assign a player to a group, give them a link that
+contains the <code>group</code> param like so: <a
+href="/?group=easy">/?group={YOUR_GROUP}</a> or <a
+href="/welcome?group=easy">/welcome?group={YOUR_GROUP}</a>.</p>
+<p>The contents of a group might look like this:</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode jsonc"><code class="sourceCode jsonl"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;easy&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;ctr&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;config&quot;</span><span class="fu">:</span> <span class="st">&quot;configStudy&quot;</span><span class="fu">,</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;phases&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;IntroduceElements&quot;</span><span class="ot">,</span> <span class="st">&quot;IntroduceDrawingTools&quot;</span><span class="ot">,</span> <span class="st">&quot;Quali&quot;</span><span class="ot">,</span> <span class="st">&quot;Competition&quot;</span><span class="ot">,</span> <span class="st">&quot;FinalScene&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Quali&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;shuffle&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;levels&quot;</span><span class="fu">:</span> <span class="st">&quot;levels_quali.txt&quot;</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Competition&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;shuffle&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;levels&quot;</span><span class="fu">:</span> <span class="st">&quot;levels_study2_low.txt&quot;</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h3 id="ctr">ctr</h3>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;ctr&quot;</span><span class="fu">:</span> <span class="dv">0</span> <span class="co">// Required</span></span></code></pre></div>
+<p>Every group has a counter how many player already participated in
+this group. It gets incremented after the player reaches the
+FinalScene/postSurvey. This variable influences the start value of this
+internal counter. Set this to a high value (e.g. 9000) to prevent a
+player getting automatically assigned to this group, or set it to a
+negative value if you wan't to fill this group first with participants.
+Leave it at zero otherwise.</p>
+<h3 id="config">config</h3>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;config&quot;</span><span class="fu">:</span> <span class="st">&quot;gameruleName&quot;</span> <span class="co">// Required</span></span></code></pre></div>
+<p>Select the gamerules for this group, must be one of the rules defined
+in <a href="#gamerules">chapter gamerules</a>.</p>
+<h3 id="phases">phases</h3>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;phases&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;IntroduceElements&quot;</span><span class="ot">,</span> <span class="st">&quot;IntroduceDrawingTools&quot;</span><span class="ot">,</span> <span class="st">&quot;Quali&quot;</span><span class="ot">,</span> <span class="st">&quot;Competition&quot;</span><span class="ot">,</span> <span class="st">&quot;FinalScene&quot;</span><span class="ot">]</span> <span class="co">// Required</span></span></code></pre></div>
+<p>The player will go through these phases in the specified order. See
+<a href="./Overview.md#phases--scenes">Overview.md</a> for an
+explanation of all phases. Some Phases need additional configuration,
+these are marked in the following list:</p>
+<ul>
+<li>IntroduceElements</li>
+<li>IntroduceDrawingTools</li>
+<li><a href="#quali--competition">Quali</a></li>
+<li><a href="#quali--competition">Competition</a></li>
+<li><a href="#skill">Skill</a></li>
+<li><a href="#alternative">Alternative</a></li>
+<li>FinalScene</li>
+</ul>
+<h3 id="quali--competition">Quali / Competition</h3>
+<div class="sourceCode" id="cb36"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;Quali&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;levels&quot;</span><span class="fu">:</span> <span class="st">&quot;levels_quali.txt&quot;</span><span class="fu">,</span> <span class="co">// Required</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;shuffle&quot;</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;Competition&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;levels&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;levelList_One.txt&quot;</span><span class="ot">,</span> <span class="st">&quot;levelList_Two.txt&quot;</span><span class="ot">]</span><span class="fu">,</span> <span class="co">// Required</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;shuffle&quot;</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>Configure the levels and circuits shown in Quali or Competition
+phase, and optionally set a time limit. The options for Quali and
+Competition are the same.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"levels"</code></td>
+<td>Either a string or a list of strings containing the relative path to
+a level list file. See <a href="./LevelList.md">LevelList.md</a> for
+more details</td>
+</tr>
+<tr>
+<td><code>"shuffle"</code></td>
+<td><code>true</code> if the order of the contents of each individual
+level list shall be randomized, <code>false</code> otherwise.</td>
+</tr>
+<tr>
+<td><code>"timeLimit"</code></td>
+<td>Limit the time the player can take to complete this phase. The value
+is given in seconds, to configure a 10 minute time limit, set this value
+to <code>"timeLimit": 600</code>. <br> The player will receive a warning
+before the timer runs out. See <a href="#remindertime">Chapter
+reminderTime</a> on how to configure it.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="skill">Skill</h3>
+<div class="sourceCode" id="cb38"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;Skill&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;levels&quot;</span><span class="fu">:</span> <span class="st">&quot;levels_study2_low.txt&quot;</span><span class="fu">,</span> <span class="co">// Required</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;shuffle&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;groups&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;pleb&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;guru&quot;</span><span class="fu">:</span> <span class="dv">40</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span> <span class="co">// Required</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>After the Skill phase ends, the player will be assigned to one of the
+<code>groups</code> from the list, based on their performance.</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"levels"</code></td>
+<td>Either a string or a list of strings containing the relative path to
+a level list file. See <a href="./LevelList.md">LevelList.md</a> for
+more details</td>
+</tr>
+<tr>
+<td><code>"shuffle"</code></td>
+<td><code>true</code> if the order of the contents of each individual
+level list shall be randomized, <code>false</code> otherwise.</td>
+</tr>
+<tr>
+<td><code>"timeLimit"</code></td>
+<td>Limit the time the player can take to complete this phase. The value
+is given in seconds, to configure a 10 minute time limit, set this value
+to <code>"timeLimit": 600</code>. <br> The player will receive a warning
+before the timer runs out. See <a href="#remindertime">Chapter
+reminderTime</a> on how to configure it.</td>
+</tr>
+<tr>
+<td><code>"groups"</code></td>
+<td>An object containing <code>"{group}": {score}</code> pairs. The
+smallest score where the player score is &gt;= the configured score will
+be chosen.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="alternative">Alternative</h3>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;Alternative&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;levels&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span> <span class="co">// Required</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;shuffle&quot;</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>The config options for the Alternative task are basically the same as
+in <a href="#quali--competition">Quali/Competition</a> with the
+exception, that there are two new level file types: <code>iframe</code>
+and <code>url</code>. These allow you to show custom html based tasks,
+that will either be included in an HTML <code>&lt;iframe&gt;</code> tag
+or will be loaded by jQuery inside a <code>&lt;div&gt;</code>. See <a
+href="./AltTask.md">AltTask.md</a> for further details on how to design
+an alternative task.</p>
+<p>If no time limit is set for this phase, a skip level button will be
+shown in the bottom right corner. This will be hidden if a time limit is
+set.</p>
+<p>If the alternative task shall only show one level/slide, you may
+configure this directly without using the <a href="./LevelList.md">level
+list</a> aka. <code>"levels":</code>.</p>
+<div class="sourceCode" id="cb40"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;Alternative&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span> <span class="co">// Required</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;iframe&quot;</span><span class="fu">:</span> <span class="kw">false</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>The following table lists all possible config options:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"levels"</code></td>
+<td>Either a string or a list of strings containing the relative path to
+a level list file. See <a href="./LevelList.md">LevelList.md</a> for
+more details</td>
+</tr>
+<tr>
+<td><code>"shuffle"</code></td>
+<td><code>true</code> if the order of the contents of each individual
+level list shall be randomized, <code>false</code> otherwise.</td>
+</tr>
+<tr>
+<td><code>"timeLimit"</code></td>
+<td>Limit the time the player can take to complete this phase. The value
+is given in seconds, to configure a 10 minute time limit, set this value
+to <code>"timeLimit": 600</code>. <br> The player will receive a warning
+before the timer runs out. See <a href="#remindertime">Chapter
+reminderTime</a> on how to configure it.</td>
+</tr>
+<tr>
+<td><code>"url"</code></td>
+<td>(Mutually exclusive with <code>"levels"</code>) The url to a task
+that shall be shown on the slide. If you wanna show more than one task,
+use <code>"levels"</code>.</td>
+</tr>
+<tr>
+<td><code>"iframe"</code></td>
+<td>(Mutually exclusive with <code>"levels"</code>) True if the task
+shall be shown in an <code>&lt;iframe&gt;</code>, otherwise it will be
+loaded in a <code>&lt;div&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="hide">hide</h3>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode json5"><code class="sourceCode jsonl"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;hide&quot;</span><span class="fu">:</span> <span class="kw">false</span></span></code></pre></div>
+<p>Hide this group from the <a href="/index">/index</a> group index
+page. The group is not disabled, players with a link can still play
+it.</p>
+</body>
+</html>

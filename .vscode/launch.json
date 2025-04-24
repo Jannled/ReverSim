@@ -1,0 +1,75 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Python: Flask",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "flask",
+			"env": {
+				"FLASK_APP": "gameServer.py",
+				"FLASK_DEBUG": "1"
+			},
+			"args": [
+				"run",
+				"--no-debugger",
+				"--no-reload",
+				"-p 8000"
+			],
+			"jinja": true,
+			"justMyCode": true
+		},
+		{
+			"name": "Firefox Debugger",
+			"type": "firefox",
+			"request": "launch",
+			"reAttach": true,
+			"url": "http://localhost:8000/index",
+			"webRoot": "${workspaceFolder}/static",
+			"skipFiles": [
+				"static/src/externalLibraries/**"
+			],
+			"preferences": {
+				"browser.translations.automaticallyPopup": false,
+				"browser.translations.neverTranslateLanguages": "en",
+				"browser.search.suggest.enabled": false,
+				"browser.urlbar.suggest.searches": false
+			}
+		},
+		{
+			"name": "Level Screenshots",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "app.screenshotGenerator",
+			"justMyCode": true,
+			"console": "integratedTerminal",
+			"args": [
+				"${input:screenshotGeneratorPseudonym}"
+			]
+		},
+		{
+			"name": "Firefox & BurpProxy",
+			"type": "firefox",
+			"request": "launch",
+			"reAttach": true,
+			"url": "http://127.0.0.1:8000/",
+			"webRoot": "${workspaceFolder}/static",
+			"skipFiles": [
+				"static/src/externalLibraries/**"
+			],
+			"preferences": { // Burp Proxy
+				"network.proxy.http": "127.0.0.1",
+				"network.proxy.http_port": 8080,
+				"network.proxy.type": 1,
+				"network.proxy.allow_hijacking_localhost": true
+			}
+		}
+	],
+	"inputs": [
+		{
+			"id": "screenshotGeneratorPseudonym",
+			"description": "The pseudonym to generate the screenshots with. Create it by starting the game in a group with the level viewer.",
+			"type": "promptString"
+		},
+	]
+}

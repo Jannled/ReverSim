@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Documentation: Getting started</title>
+  <style>
+    html {
+      line-height: 1.4;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      background-color: #e6eceb;
+      padding: .2em .4em;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      background-color: #e6eceb;
+      padding: 1em;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  a:hover {
+  	color: #00445f;
+  }
+
+  code, pre {
+  	border-radius: 5px;
+  }
+  </style>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+
+</nav>
+<h1 id="getting-started-with-the-reversim-game">Getting Started with the
+ReverSim Game</h1>
+<p>In this quick start guide, you will learn how to install ReverSim and
+how to play it on your local instance for the first time. Afterwards, we
+will guide you through the level creation process and how you can
+configure the game to suit your needs.</p>
+<p>Due to the versatile configuration options, this guide only gives you
+a high-level overview and links to relevant parts of the documentation
+where it is required. When reading this guide for the first time, it is
+highly recommended to ignore most of the cross-references so you don't
+get lost during the setup process.</p>
+<p>This guide will only teach you how to set up the game server. <a
+href="StatisticsTool.md">Data analysis</a> is out of the scope for this
+quick start guide.</p>
+<p>The following four steps should get you up and running. If you are
+struggling, feel free to <a href="#your-feedback">contact us</a>:</p>
+<!-- TODO Maybe document OOB experience (delivered groups & levels) -->
+
+<ol type="1">
+<li><a href="#1-installation">Installation</a></li>
+<li><a href="#2-game-setup">Setting Up Your Groups</a></li>
+<li><a href="#3-level-creation">Creating Levels</a></li>
+<li><a href="#4-additional-config">Research Info, Translation,
+etc.</a></li>
+<li><a href="#your-feedback">Your Feedback</a></li>
+</ol>
+<h2 id="1-installation">1. Installation</h2>
+<p>There are three main methods for obtaining a running version of the
+game. Choose the one which suits your needs:</p>
+<ol type="1">
+<li><a href="#docker-installation">Docker Installation</a>: The easiest
+method to evaluate the game, if you are already familiar with Docker
+(Also the recommended way to go for production use).</li>
+<li><a href="#developing-with-vs-code">VS Code</a>: During development,
+the recommended variant is using Visual Studio Code, as this can
+automatically restart the web server upon changes and allows you to step
+through your code with the debugger.</li>
+<li><a href="#manual-installation">Manual Installation</a>: The way to
+go for a minimal installation. You just need Python and one package from
+Pip.</li>
+</ol>
+<h3 id="docker-installation">Docker Installation</h3>
+<ol type="1">
+<li>If you haven't already, you must install Docker first. If you are
+using Windows or macOS or if you prefer a graphical user interface,
+follow the installation instructions for <a
+href="https://docs.docker.com/get-docker/">Docker Desktop</a>. If you
+use Linux and just require the Docker commands, go with <a
+href="https://docs.docker.com/engine/install/">Docker Engine</a>.</li>
+<li>Open up a command prompt to download and launch the ReverSim
+container (alternatively, we also provide a <a
+href="#docker-compose">compose file</a>):</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#docker pull &quot;docker.io/library/reversim:latest&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">-p</span> 8000:8000 <span class="at">-v</span> reversim_playerdata:/usr/var/reversim-instance/statistics reversim:latest</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># -d --daemon   Run in the background</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># -p --publish  Forward the port of the web server</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -v --volume   Create a named volume for the player logs</span></span></code></pre></div>
+<ol start="3" type="1">
+<li>Open up your favorite web browser and you are ready to go. Just
+navigate to the IP address of your Docker machine, if this is your local
+computer, head over to <a
+href="http://127.0.0.1:8000/index">127.0.0.1:8000/index</a>.</li>
+</ol>
+<blockquote>
+<p>[!TIP]<br />
+The game server should be fully functional by now and you can proceed
+with <a href="#3-level-creation">"Level Creation"</a>. The following
+paragraphs only provide additional information on configuring the web
+server, especially for production.</p>
+</blockquote>
+<!--But keep in mind, that your player logs are currently only stored in an anonymous volume, which could get pruned by accident when the container is stopped.-->
+
+<h4 id="docker-compose">Docker Compose</h4>
+<p>There is a lot to configure for the Docker container. While you could
+add every option to the <code>docker run</code> command, it doesn't
+really help with readability. Therefore, we recommend using a
+Dockerfile.</p>
+<p>We ship an example <a
+href="/docker-compose.yml">docker-compose.yml</a> with this repository
+that you can simply use by calling:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> volume create reversim_playerdata</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">--detach</span> <span class="at">--force-recreate</span></span></code></pre></div>
+<p>Feel free to tweak this file to suit your needs. For example you can
+add resource limits to this container. See the <a
+href="https://docs.docker.com/compose/">Docker Compose Documentation</a>
+for further reference.</p>
+<h3 id="developing-with-vs-code">Developing with VS Code</h3>
+<ol type="1">
+<li>Make sure you have a recent installation of <a
+href="https://www.python.org/downloads/">Python3</a>, <a
+href="https://git-scm.com/">git</a> and <a
+href="https://code.visualstudio.com/download">Visual Studio
+Code</a>.</li>
+<li>Navigate to a folder that you would like to use as a workspace and
+clone the ReverSim repository:
+<code>git clone https://github.com/emsec/ReverSim.git</code></li>
+<li>Open the folder in Visual Studio Code</li>
+<li>Install the necessary Python dependencies with
+<code>pip install -r requirementsDev.txt</code>. It is recommended to
+create a <a href="#creating-a-python-environment">Python Virtual
+Environment</a>, especially when running on Linux/UNIX, to prevent
+conflict with system packages.</li>
+<li>Afterwards, you can start the server: In the left sidebar, open the
+<em>Run and Debug</em> (Ctrl + Shift + D) tab in VS Code, select the
+"Python: Flask" launch target and click launch (the green triangle)</li>
+<li>To view/play the game, you can either start the "<em>Firefox
+Debugger</em>" launch target if you have Firefox installed, or you can
+open a web browser and navigate to <a
+href="http://localhost:8000/index">localhost:8000/index</a> or <a
+href="http://localhost:8000/welcome">localhost:8000/welcome</a></li>
+</ol>
+<p>The Flask development server should restart automatically when you
+modify the Python files and remove the <code>--no-reload</code> flag in
+launch.json. Changes to the templates might need a manual server
+restart. If you make changes to the frontend, you just need to reload
+the page.</p>
+<blockquote>
+<p>[!WARNING]<br />
+<strong>Never</strong> connect the <a
+href="https://flask.palletsprojects.com/en/3.0.x/deploying/">Flask
+development server</a> you just launched to the open internet, as it is
+<strong>insecure</strong> by design! Use the <a
+href="#docker-installation">Docker</a> container or follow the <a
+href="#production-use">manual installation for production</a> procedure.
+But if you are just testing things with your team locally, you can now
+scroll to <a href="#3-level-creation">"Level Creation"</a>.</p>
+</blockquote>
+<h3 id="manual-installation">Manual Installation</h3>
+<ol type="1">
+<li>Install a recent version of Python3</li>
+<li>If you have git installed, use it to <a
+href="#cloning-the-git-repo">clone</a> the repository. But you can also
+download a ZIP archive from the <em>Releases</em> Page. Then point your
+command prompt into the folder was just created.</li>
+<li>If you are using Linux/UNIX, other system packages might also use
+Python. Therefore, creating a <a
+href="#creating-a-python-environment">Python Environment</a> is
+recommended.</li>
+<li>If you want to test things locally, using the built-in Flask web
+server is fine. Install and launch it by running the following two
+commands:</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirementsDev.txt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> flask <span class="at">--app</span> gameServer run <span class="at">-p</span> 8000</span></code></pre></div>
+<ol start="5" type="1">
+<li>Open the following URL in your browser: <a
+href="http://127.0.0.1:8000">127.0.0.1:8000</a></li>
+</ol>
+<blockquote>
+<p>[!WARNING]<br />
+<strong>Never</strong> connect the <a
+href="https://flask.palletsprojects.com/en/3.0.x/deploying/">Flask
+development server</a> you just launched to the open internet, as it is
+<strong>insecure</strong> by design! Use the <a
+href="#docker-installation">Docker</a> container or follow the <a
+href="#production-use">manual installation for production</a> procedure.
+But if you are just testing things with your team locally, you can
+scroll to <a href="#3-level-creation">"Level Creation"</a>.</p>
+</blockquote>
+<!--
+> ![TIP]
+> You should now be able to play the game by navigating to [127.0.0.1:8000]() (Change the IP address if you installed the server on a remote machine). You can now scroll to "Level Creation" to continue with the [next installation step](#level-creation). 
+> However, you might want to come back later to tweak some installation-specific settings.
+-->
+
+<h4 id="production-use">Production Use</h4>
+<p>The above installation will suffice for a quick test, but the Flask
+built-in web server is not meant to be used in production. There are
+several web servers out there that offer better security and
+performance. Due to the WSGI standard, you can interchange them easily
+and have a couple of <a
+href="https://flask.palletsprojects.com/en/3.0.x/deploying/#self-hosted-options">options
+to choose</a> from. We decided to go with uWSGI, which also powers the
+Docker container.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install dependencies</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">-r</span> requirements.txt</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the web server</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">uwsgi</span> <span class="at">--ini</span> conf/hre_game.ini</span></code></pre></div>
+<p>If you get stuck while configuring your server, you can always have a
+look at the default config under <a
+href="/instance/conf/gameConfig.json">instance/conf/gameConfig.json</a>.</p>
+<blockquote>
+<p>[!NOTE]<br />
+The compilation of uWSGI tends to fail on Windows, so you might need to
+search for <a
+href="https://flask.palletsprojects.com/en/3.0.x/deploying/#self-hosted-options">alternatives</a>
+to uWSGI if you are using a Windows machine as a server.</p>
+</blockquote>
+<h2 id="2-game-setup">2. Game setup</h2>
+<blockquote>
+<p>[!TIP]<br />
+Before you configure anything, test the game to make sure that your
+installation succeeded. Go to <a
+href="http://localhost:8000">localhost:8000</a></p>
+</blockquote>
+<p>You can host different study settings on a single server, showing
+different levels &amp; phases to different groups of players. This
+assignment can either happen:</p>
+<ol type="1">
+<li>Automatically: The player will be assigned to the group with the
+lowest player count.</li>
+<li>Manually: Either you give the players a dedicated link or let them
+choose their group with the group index page <a
+href="/index">YOUR_HOSTNAME:PORT/index</a> (the index page must be <a
+href="GameConfig.md#groupindex">enabled in the gameConfig</a>).</li>
+</ol>
+<p><em>But what exactly is a phase, I hear you ask?</em> <a
+href="#phase">Phases</a> are the fundamental building block of the game,
+and they will contain certain parts of the game, like an introduction,
+or often times a <a href="#3-level-creation">list of levels</a> with
+some additional game logic. The player will progress through the phases
+in a mostly linear fashion. However, there are some exceptions (Quali
+and Skill). Below is a flowchart showing the automatic assignment and
+progression of two players through two sample groups:</p>
+<pre class="mermaid"><code>flowchart LR
+    %% Welcome Page
+    A(/welcome) --&gt;|Group Assignment| group_a &amp; group_b
+
+    %% Group A
+    subgraph group_a
+    direction LR
+    
+    B(IntroduceElements) --&gt; C(IntroduceDrawingTools)
+
+    subgraph Quali
+        D(Info Screen) --&gt; E(Level1)
+        E --&gt; F(Level2)
+    end
+    C --&gt; Quali
+
+    subgraph Competition
+        G(Level3) --&gt; H(Level4)
+        H --&gt; I(Level5)
+        I --&gt; J(Level6)
+    end
+    Quali --&gt; Competition
+    Competition --&gt; K(FinalScene)
+    end
+
+    %% Group B
+    subgraph group_b
+    direction LR
+    
+    L(IntroduceElements) --&gt; M(IntroduceDrawingTools)
+
+    subgraph Quali2 [Quali]
+        N(Info Screen) --&gt; O(Level1)
+        O --&gt; P(Level2)
+    end
+    M --&gt; Quali2
+
+    subgraph Comp2 [Competition]
+        Q(AltLevel1) --&gt; R(AltLevel2)
+        R --&gt; S(AltLevel3)
+        S --&gt; T(AltLevel4)
+    end
+    Quali2 --&gt; Comp2
+    Comp2 --&gt; U(FinalScene)
+    end
+    
+    style group_b align:right
+
+    %%Quali --&gt;|maybe fail quali|B</code></pre>
+<p>The following table shows all scenes that you can use to build the
+game:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IntroduceElements</td>
+<td>Introduce all logic gates and circuit parts to the player</td>
+</tr>
+<tr>
+<td>IntroduceDrawingTools</td>
+<td>Ask the player to familiarize themselves with the drawing tools</td>
+</tr>
+<tr>
+<td>Quali</td>
+<td>The player needs to pass these levels, in order to proceed to the
+next phase. If there are too many mistakes, the player will be thrown
+back to <code>IntroduceElements</code></td>
+</tr>
+<tr>
+<td>Competition</td>
+<td>The main game phase where the player will play the study relevant
+levels</td>
+</tr>
+<tr>
+<td>Skill</td>
+<td>Switch to a different group after this phase depending on how well
+the player performed while solving the levels</td>
+</tr>
+<tr>
+<td>Alternative</td>
+<td>Present some <a href="AltTask.md">HTML-based task or info</a> to the
+player</td>
+</tr>
+<tr>
+<td>FinalScene</td>
+<td>Thank the player for participating and redirect to post-survey if <a
+href="GameConfig.md#urlpostsurvey">configured</a></td>
+</tr>
+</tbody>
+</table>
+<p>We will first focus on the basic game setup and how you can
+create</p>
+<p>To create your study settings, have a look at <a
+href="GameConfig.md">instance/conf/gameConfig.json</a>. This file is
+structured in three main sections, as illustrated in the below
+example:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode jsonc"><code class="sourceCode jsonl"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Global config options affecting the whole instance (below are some examples)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;assetPath&quot;</span><span class="fu">:</span> <span class="st">&quot;conf/assets&quot;</span><span class="fu">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;languages&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;en&quot;</span><span class="ot">,</span> <span class="st">&quot;de&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;Your Institution&quot;</span><span class="fu">,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;crashReportLevel&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;groupIndex&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;footer&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;researchInfo&quot;</span><span class="fu">:</span> <span class="st">&quot;assets/researchInfo/researchInfo.html&quot;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Gamerules are blocks of config entries applied to a group.</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Each group will have exactly one gamerule (you can use a gamerule</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// for multiple groups)</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;gamerules&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;rules_a&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;...&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">},</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;rules_b&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;...&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">}</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// And the groups themselves. </span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;groups&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;group_a&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;config&quot;</span><span class="fu">:</span> <span class="st">&quot;rules_a&quot;</span><span class="fu">,</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;...&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">},</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;group_b&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;config&quot;</span><span class="fu">:</span> <span class="st">&quot;rules_b&quot;</span><span class="fu">,</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>            <span class="dt">&quot;...&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<blockquote>
+<p>[!NOTE]<br />
+You can't use comments in the actual gameConfig.json file because they
+are unsupported by the JSON parser.</p>
+</blockquote>
+<h3 id="global-game-options">Global Game Options</h3>
+<p>In the following, the three main sections of the configuration file
+are described in detail. These settings apply to the entire instance of
+the game:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode jsonc"><code class="sourceCode jsonl"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;assetPath&quot;</span><span class="fu">:</span> <span class="st">&quot;conf/assets&quot;</span><span class="fu">,</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;languages&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;en&quot;</span><span class="ot">,</span> <span class="st">&quot;de&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;author&quot;</span><span class="fu">:</span> <span class="st">&quot;Your Institution&quot;</span><span class="fu">,</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;crashReportLevel&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;groupIndex&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">},</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;footer&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;researchInfo&quot;</span><span class="fu">:</span> <span class="st">&quot;assets/researchInfo/researchInfo.html&quot;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">},</span></span></code></pre></div>
+<ul>
+<li><code>assetPath</code>: The path for levels, researchInfo or
+anything else that you can customize. If you see
+<code>${assetPath}</code> somewhere in the documentation, you know that
+this will be replaced by the value you just configured. By default this
+points into the folder with our example levels etc.. You can add your
+own content here.</li>
+<li><code>languages</code>: The first entry in this list will be the
+default language. The other languages will be shown in the language
+switcher on the start screen. German and English are the only options
+out of the box. If you need more, you must <a
+href="Translating.md">translate</a> the game yourself.</li>
+<li><code>author</code>: The name of your institution. It will be set in
+the <code>&lt;head&gt;</code> and <a
+href="#footer-groupindex">footer</a> of the game.</li>
+<li><code>crashReportLevel</code>: <code>2</code> means browser-side
+exceptions and <code>console.error</code> calls will be sent to the
+server and are logged. <code>1</code> means only exceptions that escape
+into the browser context will be logged and <code>0</code> means no
+client error reporting. The logfiles will be saved at <a
+href=".">statistics/crash_report.log</a>.</li>
+<li><code>groupIndex</code>: The groupIndex page <a
+href="/index">/index</a> contains a link to start a game for every
+group.</li>
+<li><code>footer</code>: Links for the footer that are shown at the
+bottom of the screen during the game.</li>
+</ul>
+<p><code>languages</code>, <code>crashReportLevel</code> and
+<code>groupIndex</code> are the only keys that are really required, but
+you will probably want to fill out at least the ones from the example
+above. See the <a href="GameConfig.md#game-options">GameConfig
+Documentation</a> for a full list of game options.</p>
+<h3 id="gamerule">Gamerule</h3>
+<p>Gamerules contain settings that are relevant to all phases inside the
+group and can even be recycled for multiple groups. Settings that apply
+only to a single phase are configured in the <a href="#phase">phase
+block</a>.</p>
+<p>Most settings in the gamerule have default values that we deem
+reasonable. Therefore, your gamerule might just be a pair of empty
+brackets. Here we demonstrate how to <a
+href="GameConfig.md#urlpresurvey">add a survey</a> that will be shown
+before the game. For a full list of gamerules you can change, look at
+the <a href="GameConfig.md#gamerules">GameConfig documentation</a>.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode jsonc"><code class="sourceCode jsonl"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;rules_a&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;urlPreSurvey&quot;</span><span class="fu">:</span> <span class="st">&quot;/assets/testPresurvey.html?ui={ui}&amp;lang={lang}&quot;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h3 id="group">Group</h3>
+<p>After you have created your gamerules, you can assign them to one or
+more groups. The group will control the course of the study, aka the
+order in which the player traverses through the phases.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode jsonc"><code class="sourceCode jsonl"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&quot;group_a&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;ctr&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;config&quot;</span><span class="fu">:</span> <span class="st">&quot;rules_a&quot;</span><span class="fu">,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;phases&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;IntroduceElements&quot;</span><span class="ot">,</span> <span class="st">&quot;IntroduceDrawingTools&quot;</span><span class="ot">,</span> <span class="st">&quot;Quali&quot;</span><span class="ot">,</span> <span class="st">&quot;Competition&quot;</span><span class="ot">,</span> <span class="st">&quot;FinalScene&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Quali&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;shuffle&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;levels&quot;</span><span class="fu">:</span> <span class="st">&quot;levels_quali.txt&quot;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Competition&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;shuffle&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;levels&quot;</span><span class="fu">:</span> <span class="st">&quot;levels_study2_low.txt&quot;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">},</span></span></code></pre></div>
+<ul>
+<li><code>ctr</code>: Will be added to the counter of players that
+finished the game. Set this to a very high number (e.g. 9999), to
+prevent players from getting automatically assigned to that group</li>
+<li><code>config</code>: The name of the gamerule you created in the <a
+href="#gamerule">previous step</a></li>
+<li><code>phases</code>: A list of all phases the player must complete
+in order. See the table <a href="#2-game-setup">above</a> for a full
+list</li>
+<li><code>Quali</code> / <code>Competition</code>: See the <a
+href="#phase">next chapter</a></li>
+</ul>
+<h4 id="phase">Phase</h4>
+<p>You have now configured which phases are played in which order, but
+you will need to assign a <a href="#level-list">list of levels</a> to
+the phases containing levels.</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode jsonc"><code class="sourceCode jsonl"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;...&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">,</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;Quali&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;shuffle&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;levels&quot;</span><span class="fu">:</span> <span class="st">&quot;levels_quali.txt&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">},</span></span></code></pre></div>
+<p>When you turn on the shuffle option, the levels are sent to the
+player in a random order. Everything that is not of type
+<code>level</code> will stay in place.</p>
+<p>See the <a href="GameConfig.md#quali--competition">GameConfig
+documentation</a> for examples of every phase.</p>
+<h4 id="level-list">Level List</h4>
+<p>Level lists are just plain text files with one level file path per
+line. By grouping the levels in <a href="LevelList.md">level lists</a>,
+you don't clutter the gameConfig and you can reuse them for multiple
+groups. Below is an excerpt taken from the example Quali phase:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode yml"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span><span class="kw">:</span><span class="at"> qualificationPhase_Start.txt</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">level</span><span class="kw">:</span><span class="at"> alow_00000001</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">level</span><span class="kw">:</span><span class="at"> blow_00001000_v2</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">level</span><span class="kw">:</span><span class="at"> clow_11111101</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">special</span><span class="kw">:</span><span class="at"> retut/voluntaryTutorial.txt</span></span></code></pre></div>
+<p>The level lists are stored under <a
+href="LevelList.md">${assetPath}/levels/</a>. As shown in the example,
+you can add more to these lists beyond just levels. Have a look at the
+<a href="LevelList.md">level list guide</a> for further
+explanations.</p>
+<blockquote>
+<p>[!TIP]<br />
+We have provided some example levels, which you can add to your level
+list to test your configuration. You should make sure the game works
+before you create your <a href="#3-level-creation">own levels</a>.</p>
+</blockquote>
+<h2 id="3-level-creation">3. Level Creation</h2>
+<p>Levels are the central game element, containing the logic
+circuits/netlists the player has to solve. The game ships with a
+collection of levels that we have created, which you can use to build
+your first study. But yon can also create levels on your own using the
+<a href="./LevelEditor.md">level editor</a>. An in-depth explanation is
+given in the level editor <a
+href="./LevelEditor.md">documentation</a>.</p>
+<p>When you press save, the level will end up in your Downloads folder.
+Afterwards, you need to drop your levels inside the <a
+href="LevelList.md#file-paths">${assetPath}/levels/differentComplexityLevels/</a>
+folder (when using Docker, this is probably inside a <a
+href="https://docs.docker.com/storage/#good-use-cases-for-volumes">volume</a>,
+have a look at the docker command or <a href="#docker-compose">compose
+file</a>). You can use subfolders to organize the levels if you
+like.</p>
+<h2 id="4-additional-config">4. Additional Config</h2>
+<h3 id="research-info">Research Info</h3>
+<p>Before going live, you should provide information about your
+research. This will be linked at the bottom of the game if <a
+href="GameConfig.md#research">enabled in the config</a>. By default, the
+path to the research info is <a
+href="">${assetPath}/researchInfo/researchInfo.html</a> and can be any
+arbitrary HTML page. You can also <a
+href="GameConfig.md#research">change</a> this to an existing URL of your
+website etc.</p>
+<!--
+### Optional Config
+-->
+
+<h2 id="your-feedback">Your Feedback</h2>
+<p>We would love to hear from you if you plan to use our game.
+Regardless of whether you're using it for your bachelor thesis, for your
+postdoctoral research, or in a classroom setting. If you're struggling
+to set up the game, please don't hesitate to contact us and we'll be
+happy to help.<br />
+Just contact us using one of the methods below:</p>
+<ul>
+<li>reversim(at)mpi-sp.org ✉</li>
+<li><a href="https://github.com/emsec/ReverSim">GitHub Issue</a></li>
+</ul>
+<h2 id="annex">Annex</h2>
+<h3 id="cloning-the-git-repo">Cloning the Git Repo</h3>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recurse-submodules</span> https://github.com/emsec/ReverSim.git</span></code></pre></div>
+<p>This guide assumes that VS Code and all command prompts are pointed
+inside the folder created by this command (except when using the
+pre-built Docker image).</p>
+<h3 id="creating-a-python-environment">Creating a Python
+Environment</h3>
+<p>Make sure <code>venv</code> is installed and your command prompt is
+inside the ReverSim folder, then create a virtual environment with the
+following commands:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install venv</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span></code></pre></div>
+<p>The following steps differ from each other, depending on if you are
+using Windows or Linux as your operating system.</p>
+<p><strong>Windows:</strong> Activate this virtual environment by
+running the below commands in a PowerShell window inside the ReverSim
+folder:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode PowerShell"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You might need to change a policy to allow running custom scripts</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-ExecutionPolicy</span> <span class="op">-</span>ExecutionPolicy RemoteSigned <span class="op">-</span>Scope <span class="cf">Process</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the Python environment in the current PowerShell session</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="op">./.</span><span class="fu">venv</span><span class="op">/</span>Scripts<span class="op">/</span>Activate<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div>
+<p><strong>Linux/UNIX:</strong> run the below commands inside the
+ReverSim folder to activate the virtual environment:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># You might need to make the script executable before running</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x .venv/Scripts/activate</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Activate the Python environment in the current Bash session</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="ex">./.venv/Scripts/activate</span></span></code></pre></div>
+<h3 id="skipping-levels">Skipping Levels</h3>
+<p>You can skip the element introduction by pressing [W] on your
+Keyboard. A skip button will show up in the top right corner.</p>
+<p>And while in Quali, Competition or any other Phase with levels, you
+can use the command <code>cheat.skip()</code> from inside your browser
+console, to skip a level. (You can open the dev tools in Firefox by
+pressing [CTRL] + [Shift] + [I]) To view the solutions for a level, use
+the command <code>cheat.solve().correctSolutions</code>.</p>
+<p>If you have set a high cooldown for incorrect confirm clicks, you can
+clamp it for testing with the following setting:
+<code>gamerules.wrongSolutionCooldownLimit = 5</code></p>
+<h3 id="skipping-the-presurvey">Skipping the Presurvey</h3>
+<p>If you prefix your group with <code>debug</code> (e.g.
+<code>debugpaper</code> for the example config) the game will skip the
+presurvey and redirect you directly to the game.</p>
+<h3 id="managing-your-assets-in-a-separate-repository">Managing your
+assets in a separate repository</h3>
+<ul>
+<li>ENV: <code>REVERSIM_CONFIG="conf/gameConfig.json"</code></li>
+<li><code>assetPath</code></li>
+</ul>
+<p>==TODO==</p>
+<h3 id="common-issues">Common Issues</h3>
+<ul>
+<li>Maybe add NOTE that levels are always persisted in a volume</li>
+<li>Maybe mention that the port forward is done using <a
+href="https://docs.docker.com/network/packet-filtering-firewalls/">firewall
+NAT</a></li>
+</ul>
+<p>==TODO==</p>
+<h3 id="uwsgi-lifecycle">uWSGI Lifecycle</h3>
+<p>We are aware that the uWSGI repository is only in <a
+href="https://github.com/unbit/uwsgi/issues/2454">maintenance mode</a>.
+As long as security fixes and updates to new Python versions are coming
+in, we are not switching horses (or unicorns) yet.</p>
+</body>
+</html>

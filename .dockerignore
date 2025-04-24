@@ -1,0 +1,34 @@
+# Ignore Git specific files
+.git/
+**/.git/
+
+# Ignore VS Code stuff
+.vscode
+
+# OS specific files
+Thumbs.db
+.DS_Store
+._*
+
+# Ignore Python specific cache files
+*.pyc
+__pycache__
+env/
+venv/
+
+# Ignore private files
+conf/
+log_merging_config.json
+dockerComposeMPI.yml
+*.csv
+
+# Debugpy logs, WinMerge Backups etc.
+*.log
+*.bak
+
+# Ignore statistics folder
+statistics/
+
+# Maybe ignore unnecessary code	
+# app/statistics
+# app/tests

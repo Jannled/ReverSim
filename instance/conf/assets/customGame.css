@@ -1,0 +1,11 @@
+/* This override is required for the AltTask to function correctly */
+#altTask {
+	/* Have to resort to !important, because Phaser3 forcefully adds this css attribute with wrong value
+	https://phaser.discourse.group/t/dom-container-blocks-pointer-events/9261/2 */
+	pointer-events: none !important;
+}
+
+/* 
+ * If your AltTask needs custom css or if you wan't to add customize the few HTML elements this game has, 
+ * you can simply add your css blocks below.
+ */

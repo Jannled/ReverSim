@@ -1,0 +1,15 @@
+time§0
+element§1§VCC§2§300§430
+element§2§GND§2§800§430
+element§3§Splitter§2§380§430
+element§4§Splitter§2§880§430
+element§5§DangerSign§2§450§380
+element§6§DangerSign§2§450§480
+element§7§DangerSign§2§950§380
+element§8§DangerSign§2§950§480
+connection§1§3
+connection§2§4
+connection§3§5
+connection§3§6
+connection§4§7
+connection§4§8

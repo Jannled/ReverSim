@@ -1,0 +1,33 @@
+§Label:goalTitle
+§SIZE:100
+§COLOR:#f8b170
+§ALIGNMENT:center
+§X-POSITION:640
+§Y-POSITION:50
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:Goal of the game
+§DE:Ziel des Spiels
+
+
+§Label:goalText
+§SIZE:30
+§COLOR:#f8b170
+§X-POSITION:640
+§Y-POSITION:250
+§ALIGNMENT:left
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:
+1. Click the switches so that the bulbs are lit and all warning signals are inactive.
+
+2. Speed is as important as the right solution, so do not waste time.
+
+3. The drawing tool might be helpful, especially when levels become more complex.
+
+§DE:
+1. Betätigen Sie die Schalter, sodass die Glühbirnen leuchten und die Warnsignale inaktiv sind.
+
+2. Die Geschwindigkeit ist genauso wichtig, wie die richtige Lösung. Also verschwenden Sie keine Zeit.
+
+3. Besonders bei anspruchsvollen Leveln können die Zeichenwerkzeuge hilfreich sein.

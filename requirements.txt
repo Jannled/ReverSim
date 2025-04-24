@@ -1,0 +1,31 @@
+# -----------------------------------------------------------------------------
+#   Install required Python dependencies with pip
+# -----------------------------------------------------------------------------
+
+Flask>=3.1.0
+
+# NOTE: For production, use uWSGI as a server
+uWSGI>=2.0.28
+
+# NOTE: Tested version locked dependencies for Flask 3.1.0
+#blinker==1.9.0
+#click==8.1.8
+#itsdangerous==2.2.0
+#Jinja2==3.1.5
+#MarkupSafe==3.0.2
+#Werkzeug==3.1.3
+#colorama=0.4.6
+
+# NOTE: APIFlask is not used anymore
+
+# NOTE: uwsgitop delivers htop like statistics for uWSGI
+uwsgitop
+
+# Metrics
+prometheus-flask-exporter
+
+# Database support
+SQLAlchemy # ORM
+Flask-SQLAlchemy # Glue to use SQLAlchemy together with Flask
+alembic # Database migration
+Flask-Alembic

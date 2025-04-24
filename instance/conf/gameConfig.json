@@ -1,0 +1,82 @@
+{
+	"assetPath": "conf/assets",
+	"languages": ["en", "de"],
+	"author": "Your Institution",
+	"crashReportLevel": 2,
+	"groupIndex": {
+		"enabled": true,
+		"showDebug": false,
+		"footer": "{author} © {year}"
+	},
+	"footer": {
+		"researchInfo": "/assets/researchInfo/researchInfo.html"
+	},
+
+	"gamerules": {
+		"configEditor": {
+			"enableLogging": false,
+			"disclaimer": null,
+			"competitionShowSkipButton": "always"
+		},
+
+		"rulesPaper": {
+			"reminderTime": 30,
+			"disclaimer": "/assets/researchInfo/disclaimer_{lang}_beta.html",
+			"phaseDifficulty": {
+				"Quali": "MEDIUM",
+				"Competition": "ADVANCED",
+				"Skill": "MEDIUM"
+			},
+			"pause": {
+				"after": 1200,
+				"duration": 180,
+				"startEvent": "Competition"
+			},
+			"timeLimit": {
+				"after": 4500,
+				"startEvent": null
+			},
+			"wrongSolutionCooldown": 5,
+			"wrongSolutionCooldownLimit": 45,
+			"wrongSolutionMultiplier": 2,
+			"tutorialAllowSkip": "false",
+			"urlPreSurvey": "/assets/testPresurvey.html?ui={ui}&lang={lang}",
+			"urlPostSurvey": "/index",
+			"textPostSurveyNotice": "postSurveyDemo",
+			"allowRepetition": true
+		}
+	},
+
+	"groups": {
+		"paper": {
+			"ctr": 999999999,
+			"config": "rulesPaper",
+			"displayName": "ReverSim Paper",
+			"hide": false,
+			"phases": ["IntroduceElements", "IntroduceDrawingTools", "Quali", "Competition", "FinalScene"],
+			"Quali": {
+				"shuffle": false,
+				"levels": "levels_paper_quali.txt"
+			},
+			"Competition": {
+				"shuffle": true,
+				"levels": ["levels_paper_easy.txt", "levels_paper_medium.txt", "levels_paper_hard.txt", "levels_paper_camou.txt"]
+			}
+		},
+
+		"editor": {
+			"ctr": 9000,
+			"config": "configEditor",
+			"phases": ["LevelEditor"],
+			"displayName": "Level Editor"
+		},
+		
+		"viewer": {
+			"ctr": 999999999,
+			"config": "configEditor",
+			"phases": ["LevelViewer"],
+			"displayName": "Level Viewer",
+			"hide": true
+		}
+	}
+}

@@ -1,0 +1,7 @@
+time§0
+element§0§LightBulb§1§1050§300
+element§1§VCC§2§250§350
+element§2§Switch§2§600§350§false
+element§3§TextBox§1§603§242§EN:click the switch§DE:Klicke den Schalter
+connection§1§2
+connection§2§0

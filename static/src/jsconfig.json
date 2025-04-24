@@ -1,0 +1,12 @@
+// Visual Studio Code related stuff 
+// https://code.visualstudio.com/docs/languages/jsconfig
+{
+	"compilerOptions": {
+	  "module": "commonjs",
+	  "lib": ["ES2021", "DOM"],
+	  "target": "ES2021",
+	  "strict": false,
+	  "checkJs": true,
+	  "typeRoots": ["./typings"]
+	},
+}

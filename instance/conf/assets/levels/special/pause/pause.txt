@@ -1,0 +1,36 @@
+§Label:goalTitle
+§SIZE:100
+§COLOR:#f8b170
+§ALIGNMENT:center
+§X-POSITION:640
+§Y-POSITION:50
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:Pause
+§DE:Pause
+
+
+§Label:goalText
+§SIZE:30
+§COLOR:#f8b170
+§X-POSITION:640
+§Y-POSITION:175
+§ALIGNMENT:left
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:
+Please take a short break...
+
+§DE:
+Bitte nehmen Sie sich einen Moment Zeit, um sich zu entspannen
+
+§Label:time
+§SIZE:40
+§COLOR:#ffffff
+§X-POSITION:640
+§Y-POSITION:250
+§ALIGNMENT:left
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN: {XX:XX}
+§DE: {XX:XX}

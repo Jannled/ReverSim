@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Survey Test</title>
+	<link rel="icon" href="/res/elements/bulb_on.png" type="png" sizes="16x16">
+	<link rel="stylesheet" type="text/css" href="/src/CSS/index.css">
+	<link rel="stylesheet" type="text/css" href="/assets/customIndex.css">
+</head>
+<body>
+	<div id="content">
+		<header>
+			<h1>PreSurvey Testpage</h1>
+		</header>
+		<main>
+			<div class="buttonset">
+				<p>
+					This page demonstrates the mechanism of the presurvey. Normally you would display your own survey here. 
+					You can link to any arbitrary URL (e.g. your LimeSurvey instance), but make sure that your tool 
+					stores the pseudonym, because you will need to pass it when redirecting back to the game.
+					If the player comes from the start screen, you should also pass the lang attribute, so the game 
+					does not forget what language was selected on the start screen.
+				</p>
+				<p>
+					See the <a href="/doc/GameConfig.html#urlpresurvey">Documentation</a> for further details on how to configure this.
+				</p>
+
+				<h2>All query params:</h2>
+				<p id="params"></p>
+				<a href="#" id="redirectLink" class="button">Redirect back to game</a>
+			</div>
+		</main>
+	</div>
+
+	<script>
+		const urlParams = new URLSearchParams(window.location.search);
+		const a_redirectLink = document.getElementById('redirectLink');
+
+		let paramsList = ""
+		for(const p of urlParams)
+			paramsList += p[0] + ": " + p[1] + "\n";
+
+		const p_params = document.getElementById('params');
+		p_params.innerText = paramsList;
+
+		a_redirectLink.href = '/game?ui=' + urlParams.get('ui') + '&lang=' + urlParams.get('lang');
+	</script>
+</body>
+</html>

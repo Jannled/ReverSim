@@ -1,0 +1,39 @@
+§Label:qualiTitle
+§SIZE:100
+§COLOR:#f8b170
+§ALIGNMENT:center
+§X-POSITION:640
+§Y-POSITION:50
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:Qualification Phase
+§DE:Qualifikationsphase
+
+
+§Label:qualiText
+§SIZE:30
+§COLOR:#f8b170
+§X-POSITION:640
+§Y-POSITION:175
+§ALIGNMENT:left
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:
+
+If you succeed in the following {numLevels} levels, you will get to the game levels.
+
+§DE:
+
+Wenn Sie die folgenden {numLevels} Level erfolgreich lösen, gelangen Sie zu den Spiellevels.
+
+
+§Label:qualiGL
+§SIZE:60
+§COLOR:#f8b170
+§ALIGNMENT:center
+§X-POSITION:640
+§Y-POSITION:300
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:Good Luck!
+§DE:Viel Erfolg!

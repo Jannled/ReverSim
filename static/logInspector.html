@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HRE Game - Logfile Viewer</title>
+	<style>
+		/* Document root */
+		body {
+			margin: 0;
+			padding: 0;
+
+			
+			color: white;
+			background-color: #202020;
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		/* Container for the 3 Column layout */
+		.paneContainer {
+			display: flex;
+			flex-direction: row;
+			min-height: 100vh;
+
+			background-color: #3f4040;
+		}
+
+		/* Column inside .paneContainer */
+		.paneColum {
+			background-color: #2f3030;
+
+			border-left: 1px solid #505050;
+		}
+
+		/* Entry inside .paneColumn */
+		.card {
+			word-wrap: normal;
+			overflow: hidden;
+
+			padding: 12px;
+		}
+
+		/* Elements inside .card, most notably the second row for the player cards */
+		.card div {
+			display: flex;
+			justify-content: space-between;
+			padding: 3px;
+			color: gray;
+
+			overflow: hidden;
+			text-overflow: ellipsis; /* TODO show dots */
+			white-space: nowrap;
+		}
+
+		/* The first element inside a card shall have a brighter font color */
+		.card div:first-child {
+			color: aliceblue;
+		}
+
+		/* Style the participants pseudonym in a monospace font */
+		#participantsPane .card div:first-child {
+			font-family: 'Consolas', Courier, monospace;
+		}
+
+		/* Highlight card on hover */
+		.card:hover {
+			background-color: #00445F;
+		}
+	</style>
+</head>
+<body>
+	<div class="paneContainer">
+		<div class="paneColum" id="participantsPane" style="width: 15%;">
+			<div class="card">
+				<div>d183a3fe1be3a2cf843f050d8bfb5455f4131327dfe898efee6804b2eb91aad0</div>
+				<div>
+					<span>29.04.22</span><span>expert</span><span>5</span>
+				</div>
+			</div>
+		</div>
+		<div class="paneColum" id="levelsPane" style="width: 10%;">
+			<div class="card"><div>Quali - Level 1</div><div>expert/bla</div></div>
+			<div class="card"><div>Quali - Level 2</div><div>expert/bla</div></div>
+			<div class="card"><div>Quali - Level 3</div><div>expert/bla</div></div>
+			<div class="card"><div>Competition - Level 1</div><div>expert/alow011</div></div>
+			<div class="card"><div>Competition - Level 2</div><div>expert/alow011</div></div>
+			<div class="card"><div>Competition - Level 3</div><div>expert/alow011</div></div>
+			<div class="card"><div>Competition - Level 4</div><div>expert/alow011</div></div>
+			<div class="card"><div>Competition - Level 5</div><div>expert/alow011</div></div>
+			<div class="card"><div>Competition - Level 6</div><div>expert/alow011</div></div>
+			<div class="card"><div>Competition - Level 7</div><div>expert/alow011</div></div>
+			<div class="card"><div>Competition - Level 8</div><div>expert/alow011</div></div>
+		</div>
+		<div>
+			<img src="" width="1280" height="720" alt="Screenshot of the game">
+		</div>
+	</div>
+</body>
+</html>

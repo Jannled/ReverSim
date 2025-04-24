@@ -1,0 +1,44 @@
+
+§Label:Title
+§SIZE:100
+§COLOR:#f8b170
+§ALIGNMENT:center
+§X-POSITION:640
+§Y-POSITION:50
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:Game Level
+§DE:Das Spiel 
+
+
+
+§Label:Text
+§SIZE:30
+§COLOR:#f8b170
+§X-POSITION:640
+§Y-POSITION:200
+§ALIGNMENT:left
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:
+Congratulations, you have successfully completed the qualification phase. 
+Now the real game begins. Prove your skills in the following {numLevels} levels. 
+
+Be careful: The simulation will no longer show you if wires are transporting current!
+§DE:
+Herzlichen Glückwunsch, Sie haben die Qualifikationsphase erfolgreich gelöst. 
+Nun beginnt das eigentliche Spiel. Beweisen Sie Ihr Können in den folgenden {numLevels} Levels. 
+
+Aber passen Sie auf: Ab jetzt zeigt die Simulation nicht mehr, ob die Kabel Strom transportieren!
+
+
+§Label:qualiGL
+§SIZE:60
+§COLOR:#f8b170
+§ALIGNMENT:center
+§X-POSITION:640
+§Y-POSITION:400
+§X-ORIGIN:0.5
+§Y-ORIGIN:0
+§EN:Good Luck!
+§DE:Viel Erfolg!

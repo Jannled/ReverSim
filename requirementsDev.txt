@@ -1,0 +1,31 @@
+# -----------------------------------------------------------------------------
+#   Install required Python dependencies with pip
+# -----------------------------------------------------------------------------
+
+# --- Game dependencies
+Flask
+prometheus-flask-exporter
+
+# --- Database support
+SQLAlchemy # ORM
+Flask-SQLAlchemy # Glue to use SQLAlchemy together with Flask
+alembic
+Flask-Alembic
+
+# --- Useful stuff for visualization
+scipy
+pandas
+matplotlib
+pyyaml
+
+# ER Diagrams
+eralchemy
+eralchemy[graphviz]
+
+# Jupyter
+ipykernel
+ipympl
+
+# --- Thumbnail generation
+# Don't forget to run `playwright install` afterwards!
+playwright

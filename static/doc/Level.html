@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Documentation: Level Format</title>
+  <style>
+    html {
+      line-height: 1.4;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      background-color: #e6eceb;
+      padding: .2em .4em;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      background-color: #e6eceb;
+      padding: 1em;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style>
+  a:hover {
+  	color: #00445f;
+  }
+
+  code, pre {
+  	border-radius: 5px;
+  }
+  </style>
+</head>
+<body>
+<h1 id="documentation-hre-game-level-format">Documentation HRE game
+level format</h1>
+<p>The levels for the Hardware Reverse Engineering game are stored in a
+custom format. Each line represents one <a href="#element">logic
+element</a>, <a href="#connections">a connection</a> or a <a
+href="#config-options">level option</a>.</p>
+<p>The files are UTF-8 encoded, if you wan't to change the encoding, you
+have to alter the <code>LEVEL_ENCODING</code> variables inside <a
+href="/app/config.py">app/config.py</a> and <a
+href="/static/src/game.js">static/src/game.js</a>. However the <a
+href="/README.md#hre-browser-game">level editor</a> will always produce
+UTF-8 files due to a limitation in the Blob API.</p>
+<p>The level file name should either end with .txt or you can also omit
+the file ending entirely. The full filename is used internally, but in
+places like the logfiles the names are unified by removing the
+<code>.txt</code> suffix. We discourage you from creating level files
+whose file names are only distinguished by their casing or file
+ending.</p>
+<hr />
+<h2 id="config-options">Config options</h2>
+<h3 id="time">time</h3>
+<p><code>time§0</code></p>
+<p>The maximum time in seconds, the player is expected to need for this
+level. After the time runs out, a skip button will be shown. This is
+done at a per level basis, to reflect the different solving times levels
+with varying complexity will have. This feature is currently not
+available in the level editor and has to be edited in the file
+manually.</p>
+<hr />
+<h2 id="element">element</h2>
+<p><code>element§{id}§{type}§{rotation}§{xpos}§{ypos}</code></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Possible values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{id}</code></td>
+<td>A <strong>unique</strong> number starting from 0</td>
+</tr>
+<tr>
+<td><code>{type}</code></td>
+<td>See the list below for all possible values</td>
+</tr>
+<tr>
+<td><code>{rotation}</code></td>
+<td>A number from 0 to 3, each increment of 1 will rotate the element
+90°</td>
+</tr>
+<tr>
+<td><code>{xpos}</code></td>
+<td>A level coordinate ranging from 0 (left border) to level width
+(1250)</td>
+</tr>
+<tr>
+<td><code>{ypos}</code></td>
+<td>A level coordinate ranging from 0 (top border) to level height
+(700)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Possible values for <code>{type}</code>:</strong></p>
+<ul>
+<li><a href="#vcc">VCC</a></li>
+<li><a href="#gnd">GND</a></li>
+<li><a href="#inverter">Inverter</a></li>
+<li><a href="#andgate">AndGate</a></li>
+<li><a href="#orgate">OrGate</a></li>
+<li><a href="#splitter">Splitter</a></li>
+<li><a href="#switch">Switch</a></li>
+<li><a href="#dangersign">DangerSign</a></li>
+<li><a href="#lightbulb">LightBulb</a></li>
+<li><a href="#textbox">TextBox</a></li>
+<li><a href="#covertgate">CovertGate</a></li>
+<li>(<a href="#image">Image</a>)</li>
+</ul>
+<h3 id="vcc">VCC</h3>
+<p><code>element§{id}§VCC§{rotation}§{xpos}§{ypos}</code></p>
+<img width="42" height="42" src="res/elements/battery.png" align="right" alt="VCC Icon">
+
+<p>One of the Input Elements. All wires and elements that are directly
+connected will receive a logical 1/HIGH on the input. This element has
+no input but an unlimited number of outputs.</p>
+<h3 id="gnd">GND</h3>
+<p><code>element§{id}§GND§{rotation}§{xpos}§{ypos}</code></p>
+<img width="42" height="42" src="res/elements/battery_empty.png" align="right" alt="GND Icon">
+
+<p>One of the Input Elements. All wires and elements that are directly
+connected will receive a logical 0/LOW on the input. This element has no
+input but an unlimited number of outputs.</p>
+<p>Please note that VCC and GND do not behave in a physically correct
+way, where current would flow between VCC and GND. In fact if you try to
+connect VCC and GND with a wire, the circuit will throw an error. The
+naming and icons with the full and empty battery are meant to
+communicate HIGH and LOW to the layman, but might leave some experts
+head scratching.</p>
+<h3 id="inverter">Inverter</h3>
+<p><code>element§{id}§Inverter§{rotation}§{xpos}§{ypos}</code></p>
+<img width="42" height="42" src="res/elements/inverter.png" align="right" alt="Inverter Gate Icon">
+
+<p>One of the Logic gates. This gate has one input and will output the
+inverse of the input to all wires/elements connected to the output
+(output is LOW when Input is HIGH and vice versa).</p>
+<h3 id="andgate">AndGate</h3>
+<p><code>element§{id}§AndGate§{rotation}§{xpos}§{ypos}</code></p>
+<img width="42" height="42" src="res/elements/and.png" align="right" alt="And Gate Icon">
+
+<p>One of the Logic gates. This gate has multiple inputs and will only
+send HIGH to all wires/elements connected to the output, if all inputs
+are HIGH, otherwise all outputs will be low.</p>
+<h3 id="orgate">OrGate</h3>
+<p><code>element§{id}§OrGate§{rotation}§{xpos}§{ypos}</code></p>
+<img width="42" height="42" src="res/elements/or.png" align="right" alt="Or Gate Icon">
+
+<p>One of the Logic gates. This gate has multiple inputs and will send
+HIGH to all wires/elements connected to the output, if at least one of
+the inputs is HIGH, the output will only be low if none of the inputs is
+HIGH.</p>
+<h3 id="splitter">Splitter</h3>
+<p><code>element§{id}§Splitter§{rotation}§{xpos}§{ypos}</code></p>
+<img width="42" height="42" src="res/elements/splitter.png" align="right" alt="Splitter Icon">
+
+<p>While you can connect multiple wires to the output of basically any
+element, it is not recommended for visual clarity. Instead use splitters
+to connect the output of an element to multiple inputs. You can also use
+this element to guide the autorouter, when only one wire is connected to
+the output, the splitter will be hidden ingame.</p>
+<p>This element will transparently feed the signal received on the only
+input to all wires/elements connected to the output.</p>
+<h3 id="switch">Switch</h3>
+<p><code>element§{id}§Switch§{rotation}§{xpos}§{ypos}§{closed}</code></p>
+<img width="42" height="42" src="res/elements/switch_off.png" align="right" alt="Switch Icon">
+
+<p>The only way for the player to interact with the circuit. This
+element has only one input and will send HIGH to all connected
+wires/elements, if this input is HIGH and the switch is closed. If the
+switch is open or the input is LOW, all outputs will also be LOW.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Possible values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{closed}</code></td>
+<td><code>true</code> if the switch is closed, <code>false</code>
+otherwise. TODO Third option is <code>random</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>^element§([0-9]*)§Switch§[0-9]§[0-9]*§[0-9]*§random</code></p>
+<h3 id="dangersign">DangerSign</h3>
+<p><code>element§{id}§DangerSign§{rotation}§{xpos}§{ypos}</code></p>
+<img width="42" height="42" src="res/elements/shocksign_gray.png" align="right" alt="Danger Sign Icon">
+
+<p>One of two objectives in the game. This element only has one input
+and no outputs. The player has to interact with the switches to pull its
+input LOW in order to solve the level.</p>
+<h3 id="lightbulb">LightBulb</h3>
+<p><code>element§{id}§LightBulb§{rotation}§{xpos}§{ypos}</code></p>
+<img width="42" height="42" src="res/elements/bulb_off.png" align="right" alt="Light Bulb Icon">
+
+<p>One of two objectives in the game. This element only has one input
+and no outputs. The player has to interact with the switches to pull its
+input HIGH in order to solve the level. <br> If the input of all
+LightBulbs is HIGH and the input of all DangerSigns is LOW, the level is
+solved.</p>
+<h3 id="textbox">TextBox</h3>
+<p><code>element§{id}§TextBox§{rotation}§{xpos}§{ypos}§{line1}§{line2}§{line...}</code></p>
+<img width="42" height="42" src="res/images/text.png" align="right" alt="Text Icon">
+
+<p>Show some text to the player. There might be a way to use
+languageDict labels, but this feature is not understood/used yet. The
+text will be centered around the given level coordinates, but is left
+justified.<br />
+You can specify a line break by using the <code>§</code> character.</p>
+<p>This element is only visually present and has no inputs/outputs.
+Connecting a <a href="#connections">wire</a> to it will throw an
+error!</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Possible values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{line1}</code></td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>{line2}</code></td>
+<td>Another line of Text (Optional)</td>
+</tr>
+<tr>
+<td><code>{line...}</code></td>
+<td>Another line of Text (Optional)</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<h3 id="covertgate">CovertGate</h3>
+<p><code>element§{id}§CovertGate§{rotation}§{xpos}§{ypos}§{visualGate}§{actualGate}</code></p>
+<img width="42" height="42" src="res/elements/questionMark.png" align="right" alt="Covert Gate Icon">
+
+<p>Obfuscated gates are additional hurdles for the player, they come in
+two different flavors:</p>
+<ul>
+<li><strong>Covert Gate</strong>: While they look like a multi input
+gate (and/or), only one of their inputs is actually connected and the
+gate behaves like a wire/inverter. The other inputs are dummy
+inputs.</li>
+<li><strong>Camouflaged Gate</strong>: The actual gate type is unknown
+the the person who is trying to reverse engineer the circuit.</li>
+</ul>
+<p>The <code>{visualGate}</code> parameter will control the look of the
+gate (icon), but the actual behavior is controlled by
+<code>{actualGate}</code>. <a href="#andgate">AndGate</a>, <a
+href="#orgate">OrGate</a> and <a href="#inverter">Inverter</a> are
+explained above, identity means the gate basically behaves like a
+wire/<a href="#splitter">splitter</a>.</p>
+<p>When <code>{actualGate}</code> is set to <code>inverter</code> or
+<code>identity</code> (aka covert gate), every <a
+href="#connection">connection</a> will become a dummy wire, meaning they
+are only visually present and have no influence on the input state of
+this gate. You have to connect one <a
+href="#effectivecovertgateconnection">effectiveCovertGateConnection</a>
+that will determine the input state (HIGH/LOW). The
+effectiveCovertGateConnection will also be rendered like a normal
+wire.</p>
+<p><strong>Please note</strong>: While the level editor might allow you
+to select combinations of values that are not listed in the following
+table, they won't depict reality and might lead to undefined behavior in
+the logic engine of the game. (Right now the logic engine only really
+cares about which one of the four <code>actualGate</code> values is
+selected and Phaser will display whatever image label is defined in
+<code>visualGate</code>. However these are implementation details and
+might change in the future)</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Covert Gate (values)</th>
+<th>Camouflaged Gate (values)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{visualGate}</code></td>
+<td><code>and</code>, <code>or</code></td>
+<td><code>camouflaged</code></td>
+</tr>
+<tr>
+<td><code>{actualGate}</code></td>
+<td><code>inverter</code>, <code>identity</code></td>
+<td><code>and</code>, <code>or</code></td>
+</tr>
+<tr>
+<td>Dummy inputs?</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<h3 id="image">Image</h3>
+<p>Not implemented yet</p>
+<hr />
+<h2 id="connections">connections</h2>
+<h3 id="connection">connection</h3>
+<p><code>connection§{elementID_1}§{elementID_2}§{elementID_...}</code></p>
+<p>These represent the wires that carry the signal/state from the output
+of one element to the input of at least one other element. Creating a
+loop will throw an error in the LevelEditor and crash the game in other
+scenes.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Possible values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{elementID_1}</code></td>
+<td>The id of any element whose output will determine the input state
+(HIGH/LOW) of the connected elements</td>
+</tr>
+<tr>
+<td><code>{elementID_2}</code></td>
+<td>Connect to gate id</td>
+</tr>
+<tr>
+<td><code>{elementID_...}</code></td>
+<td>Additionally connect to gate id (Optional)</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="effectivecovertgateconnection">effectiveCovertGateConnection</h3>
+<p><code>effectiveCovertGateConnection§{id of actual input}§{id of covertGate}</code></p>
+<p>Special case of wire that is needed for <a
+href="#covertgate">CovertGate</a>s with an actual gate type of inverter
+or identity. This is the only situation where this kind of wire is
+needed and there needs to be exactly one covertWire connected to this
+kind of gate.</p>
+<p>When you connect this to an actualGate of type AND or OR, right now
+it will behave like a normal wire. Connecting a covertWire to anything
+that is not <a href="#covertgate">CovertGate</a> will throw an
+error.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Possible values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{id of actual input}</code></td>
+<td>The id of any element (logic gate, splitter, switch etc.)</td>
+</tr>
+<tr>
+<td><code>{id of covertGate}</code></td>
+<td>The id of a covertGate with <code>{actualGate}</code> set to
+<code>inverter</code> or <code>identity</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="keywords" content="MPI-SP, Logfile" />
+  <meta name="description" content="Documentation for the Logfile format" />
+  <title>Documentation: HRE Logfile Format</title>
+  <style>
+    html {
+      line-height: 1.4;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      background-color: #e6eceb;
+      padding: .2em .4em;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      background-color: #e6eceb;
+      padding: 1em;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style>
+  a:hover {
+  	color: #00445f;
+  }
+
+  code, pre {
+  	border-radius: 5px;
+  }
+  </style>
+</head>
+<body>
+<h1 id="documentation-logfile">Documentation Logfile</h1>
+<p>For every participant of this study, a logfile is created under
+<code>/statistics/LogFiles/logFile_{pseudonym}.txt</code>. They
+sequentially log all interactions and visual updates on the frontend, be
+it a switch click, a pop up, drawing or a new level request.
+Additionally a screenshot will be created whenever the participant uses
+the the drawing tool. The images are stored under
+<code>/statistics/canvasPics/{pseudonym}/{phase}/{?level}/{i}.png</code></p>
+<p>We also provide a tool to convert the log from this time series based
+format to a CSV file where you can select different metrics. See the <a
+href="./LogParser.md">Log Parser documentation</a> for additional
+details.</p>
+<h2 id="general-structure">General structure</h2>
+<p>The client communicates with the server via the JsonRPC api. The
+server will then transform the received events into the following
+format:</p>
+<ul>
+<li>The events are separated by a blank line (an empty line in between
+aka two line breaks).</li>
+<li>A single event is a list of key-value pairs, the key value pairs are
+separated by a single line break.</li>
+<li>All keys (except for <code>Time</code>) start with a paragraph
+symbol (<code>§</code>), the values are separated by a colon followed by
+a spacebar (<code>: </code>).</li>
+<li>An event will at least contain the <code>Time</code> and the
+<code>§Event</code>-Type. Depending on the type of the event additional
+key-value pairs will follow with additional data.</li>
+</ul>
+<p>Below is a general example to understand the format, throughout the
+documentation we will provide you with examples for every single
+event.</p>
+<pre><code>Time: {Unix Time}
+§Event: {EventName}
+§{Key}: {Value}
+{...}</code></pre>
+<p>The <code>{Unix Time}</code> value is a UNIX timestamp in
+milliseconds (the logfile parser will also understand the
+<code>HH:MM:SS AM/PM</code> format for legacy reasons, but newer
+logfiles should only contain UNIX timestamps).</p>
+<p>In current logfiles most of the timestamps are client time, meaning
+the browser of the participant will send the timestamp at which the
+event occurred. However there are some exceptions:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#event-created-logfile">Created Logfile</a></td>
+<td>server time</td>
+</tr>
+<tr>
+<td><a href="#event-skillassessment">SkillAssessment</a></td>
+<td>server time</td>
+</tr>
+<tr>
+<td><a href="#event-redirect">Redirect</a></td>
+<td>server time</td>
+</tr>
+<tr>
+<td><a href="#event-group-assignment">Group Assignment</a></td>
+<td>server time on first assignment, client time in SkillAssessment</td>
+</tr>
+<tr>
+<td><a href="#event-game-over">Game Over</a></td>
+<td>server time</td>
+</tr>
+<tr>
+<td><a href="#alternative-task">AltTask</a></td>
+<td>Depends on <a href="./AltTask.md">your implementation</a></td>
+</tr>
+</tbody>
+</table>
+<p>The game is divided into <a
+href="#phase-related-events">Phases/Scenes</a>, with some Phases
+additionally containing <a
+href="#levels-infos-tasks--tutorials">Levels</a>. The events themselves
+don't contain information about the current Scene/Level etc. they belong
+to, therefore they are very sensitive to their ordering! Every event
+that comes after e.g. a level change is assumed to belong to that level.
+The server will go a long way to ensure the events are written in the
+correct order (all time stamps should be ascending).</p>
+<h2 id="global-events">Global Events</h2>
+<p>The events in <a href="#global-events">this section</a> don't belong
+to any Scene/Phase or Slide/Level.</p>
+<h3 id="event-created-logfile">Event: Created Logfile</h3>
+<p>The very first event in the logfile. Will contain the server
+<code>§Version</code> and the short git hash of the local clone of the
+git repository (<code>§GitHashS</code> might be blank e.g. in the Docker
+container). Additionally the <code>§Pseudonym</code> of the player is
+stored, in case the file gets renamed.</p>
+<pre><code>Time: 1691682280836
+§Event: Created Logfile
+§Version: 1.7.0
+§Pseudonym: 4159ce0385a420655513222706991fa7
+§GitHashS: 24c5684</code></pre>
+<h3 id="event-group-assignment">Event: Group Assignment</h3>
+<p>Usually the second event in the log. <code>§Group</code> denotes to
+which group the player was assigned, the group can either be selected
+manually or the player is auto assigned to the group with the smallest
+finish count.<br />
+Groups starting with <code>debug</code> will skip the Presurvey if one
+is configured.</p>
+<p>This event might occur again if a <a
+href="#event-skillassessment">Skill Phase</a> is <a
+href="./GameConfig.md">configured</a>.</p>
+<pre><code>Time: 1686586233116
+§Event: Group Assignment
+§Group: debuglow</code></pre>
+<h3 id="event-redirect">Event: Redirect</h3>
+<p>The player can be redirected to a different website for a survey etc.
+Two redirects can be <a
+href="./GameConfig.md#urlpresurvey">configured</a> an will produce an
+entry in the log once the player</p>
+<ul>
+<li>preSurvey: Usually the third event in the log and shown to the
+player immediately after the player clicks the play button. If no
+preSurvey is configured, the <code>§Redirect</code> field contains the
+relative url to the game.</li>
+<li>postSurvey: If enabled a button in the FinalScene will redirect the
+player to the <code>§Redirect</code> url once clicked.</li>
+</ul>
+<pre><code>Time: 1691682280836
+§Event: Redirect
+§Destination: /game?group=debugLow&amp;onsite=1&amp;lang=de&amp;ui=4159ce0385a420655513222706991fa7</code></pre>
+<h3 id="event-timesync">Event: TimeSync</h3>
+<p>The server stores a difference between the client time and the server
+time at which the event was received. If this difference deviates too
+much in a JsonRPC call, this event is logged. This can be due to ping
+problems or the client reconfiguring their time during the game (evil).
+This event should appear at least once when the client and server
+communicate for the first time.<br />
+The client time at which the event was send is logged in
+<code>§Time</code> and the server time at which the event was received
+is stored in <code>§Server</code>.</p>
+<pre><code>Time: 1691682499383
+§Event: TimeSync
+§Server: 1691682499389</code></pre>
+<h3 id="event-online-after-disconnection">Event: Online after
+disconnection</h3>
+<p>This message indicates that the client and server where unable to
+communicate for the number of seconds specified in
+<code>§Duration</code>, but the communication could now be established
+again. Some of the possible reasons are, that the player has left the
+page for the preSurvey, but this can also indicate network issues.</p>
+<pre><code>Time: 1691682500191
+§Event: Online after disconnection 
+§Duration[s]: 219.359</code></pre>
+<h3 id="event-game-over">Event: Game over</h3>
+<p>Logged when the group counter is incremented after the the player
+finished the game.</p>
+<pre><code>Time: 13:52:30
+§Event: Game Over</code></pre>
+<h2 id="phase-related-events">Phase related Events</h2>
+<p>As mentioned in the introduction, the player will progress through
+different phases (sometimes also referred to as scenes). The following
+subsections deal with the events that mark the beginning of these
+phases.</p>
+<table>
+<thead>
+<tr>
+<th>Phase / Scene</th>
+<th>Description</th>
+<th>Drawing</th>
+<th>Slides</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PreloadScene</td>
+<td>Logged whenever the player is reloading the page, but never shown to
+the user</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>GameIntro</td>
+<td>Got replaced by the <a href="/welcome">/welcome</a> page, but can
+still be used</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>IntroduceElements</td>
+<td>Introduce all logic gates and circuit parts to the player</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>IntroduceDrawingTools</td>
+<td>Ask the player to draw something</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>Quali</td>
+<td>Check if the player has understood the element introduction before
+moving on</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Competition</td>
+<td>The main game phase where the player will play the study relevant
+levels</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>SkillScene</td>
+<td>Evaluate the performance of the player and assign them to a
+different group afterwards</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Alternative</td>
+<td>Present some html based task or info to the player</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>FinalScene</td>
+<td>Thank the player for participating and redirect to post survey if
+configured</td>
+<td>no</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<h3 id="event-change-in-scene">Event: change in Scene</h3>
+<pre><code>Time: 1691682499383
+§Event: change in Scene
+§Scene: IntroduceElements</code></pre>
+<p>There is a special kind of scene, which is logged whenever the
+website is loaded. The screen is black while the game loads the
+necessary resources.<br />
+When starting the game for the first time, this event will be
+immediately followed by the <a href="#event-change-in-scene">change in
+Scene</a> and <a href="#event-loaded-phase">loaded Scene</a> events,
+with one of the scenes from the table above. If the player is reloading
+the page, the <a href="#event-change-in-scene">change in Scene</a> event
+is missing. If a slide is active, the <a
+href="#event-new-levelinfoetc">new Slide</a> event will also be missing,
+but the <a href="#event-loaded">loaded Slide</a> event is logged.</p>
+<pre><code>Time: 1691682499383
+§Event: change in Scene 
+§Scene: PreloadScene</code></pre>
+<h3 id="event-loaded-phase">Event: Loaded Phase</h3>
+<pre><code>Time: 1691682499412
+§Event: Loaded Phase 
+§Phase: IntroduceElements</code></pre>
+<h3 id="event-skillassessment">Event: SkillAssessment</h3>
+<pre><code>Time: 1659073427000
+§Event: SkillAssessment
+§Score: 40</code></pre>
+<h2 id="levels-infos-tasks--tutorials">Levels, Infos, Tasks &amp;
+Tutorials</h2>
+<p>The Quali, Competition, SkillAssessment and AltTask Phase are further
+divided into slides. These will be shown one after another. After the
+last slide was shown and solved (if applicable), the player will
+continue to the next phase. During the transition of slides or phases
+the screen will fade to black.</p>
+<p>The following table shows you the four slide types which are
+differentiated in the logfile:</p>
+<table>
+<thead>
+<tr>
+<th>Slide type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Info</td>
+<td>Just a blank slide with some text and a continue button</td>
+</tr>
+<tr>
+<td>Level</td>
+<td>A circuit is shown which needs to be solved</td>
+</tr>
+<tr>
+<td>AltTask</td>
+<td>A html based task is shown to the user</td>
+</tr>
+<tr>
+<td>Tutorial</td>
+<td>The Camouflage / Covert gate is introduced</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="./Overview.md#levels-info-screens-etc">Overview.md</a>
+if you need further details.</p>
+<p>The events are roughly in the following order:</p>
+<ol type="1">
+<li><a href="#event-new-levelinfoetc">new Info/Level</a> is logged as
+soon as the client requests the next slide. The screen should be black
+right now.</li>
+<li>If a <a href="#popups">PopUp</a> is shown at the beginning of the
+Level it is created now while the screen is dark</li>
+<li><a href="#event-loaded">Loaded Info/Level</a> is logged after the
+level was downloaded and the screen has faded to the new level. This is
+the time at which the player sees the slide/level and can start playing
+it.</li>
+<li>If the slide type is not Info, several events from <a
+href="#levels-infos-tasks--tutorials">this section</a>, <a
+href="#popups">PopUps</a> and <a href="#drawing-tools">Drawing Tools</a>
+will follow while the player is solving the task.</li>
+<li>The slide will end with a <a href="#event-click-next">click on the
+next button</a>.</li>
+</ol>
+<h3 id="event-new-levelinfoetc">Event: new Level/Info/etc.</h3>
+<p>Called when the level is requested from the server. The screen
+remains black while the client is preparing the slide<br />
+Possible values for <code>§Event</code> are
+<code>new {slide type}</code>, with <code>{slide type}</code> being one
+of the values from the <a href="#levels-infos-tasks--tutorials">table
+above</a>.<br />
+<code>§Filename</code> will be the slide path relative to</p>
+<pre><code>Time: 1655136313760
+§Event: new Level
+§Filename: alow_00000001</code></pre>
+<h3 id="event-loaded">Event: Loaded</h3>
+<p>Called when the level is shown client side. This might be delayed
+because of a popup. <br> Values for <code>§Type</code> are either
+<code>Level</code>, <code>Info</code> or <code>Tutorial</code>.</p>
+<pre><code>Time: 1655136313903
+§Event: Loaded
+§Type: Level</code></pre>
+<h3 id="event-switch-click">Event: Switch Click</h3>
+<p>When occurring inside Element/Drawing Tools Introduction or inside an
+info screen:</p>
+<pre><code>Time: 15:12:22
+§Event: Click
+§Object: Switch
+§Solving State: 1</code></pre>
+<p>When occurring inside GameScene / Actual Game<br />
+If a certain type of logic element is missing, it will not print an
+empty list but instead disappear from the log (And yes Inverter is
+misspelled)</p>
+<pre><code>Time: 18:36:04
+§Event: Click
+§Object: Switch
+§Switch ID: 4, Level Solved: 1
+§Switch_States [ID, click state, outputstate]: [3, false, 0][4, true, 1][5, 0, 0]
+§Bulb_States [ID, output state]: [6, 1]
+§DangerSign_States [ID, output state]: [8, 0]
+§Inverter_States [ID, output state]: [9, true]
+§And-Gate_States [ID, output state]: [10, 1]
+§Or-Gate_States [ID, output state]: [7, 0]</code></pre>
+<h3 id="event-confirm-click">Event: Confirm Click</h3>
+<pre><code>Time: 18:36:05
+§Event: Click
+§Object: ConfirmButton
+§Level Solved: 1
+§Switch_States [ID, click state, outputstate]: [3, false, 0][4, true, 1][5, 0, 0]
+§Bulb_States [ID, output state]: [6, 1]
+§Inverter_States [ID, output state]: [9, true]
+§And-Gate_States [ID, output state]: [10, 1]
+§Or-Gate_States [ID, output state]: [7, 0]</code></pre>
+<h3 id="event-simulate">Event: Simulate</h3>
+<pre><code></code></pre>
+<h3 id="event-click-next">Event: Click Next</h3>
+<p>Load the next level/scene. Logged when the user presses next after
+the Drawing/Element Introduction, Final Scene, Camouflage Intro and
+since v1.6.3 also after each level.</p>
+<pre><code>Time: 
+§Event: Click
+§Object: Continue Button</code></pre>
+<h3 id="event-pass--fail-quali">Event: Pass / Fail Quali</h3>
+<p>In the Quali phase, an additional event will be logged after the
+level was solved successfully (after the confirm click and before the
+level solved popup).</p>
+<pre><code>Time: 11:12:13
+§Event: Passing First Quali Level</code></pre>
+<p>But if the player fails the qualification, meaning he has too many
+switches or confirm clicks, this message will be logged instead and the
+player is send back to element introduction.</p>
+<pre><code>Time: 11:12:13
+§Event: Failing Second Quali Level</code></pre>
+<h2 id="popups">PopUps</h2>
+<h3 id="event-popup-displayed">Event: PopUp Displayed</h3>
+<pre><code>Time: 15:14:23
+§Event: Pop-Up displayed
+§Content: Explaining Confirm Button</code></pre>
+<pre><code>Time: 11:12:13
+§Event: Pop-Up displayed
+§Content: Introducing Skip-Level Button</code></pre>
+<p>Level solved popup:</p>
+<pre><code>Time: 15:15:41
+§Event: Pop-Up displayed
+§Content: Feedback about Clicks
+§Nmbr Switch Clicks: 2
+§Optimum Switch Clicks: 2
+§Nmbr Confirm Clicks: 1</code></pre>
+<pre><code>Time: 11:12:13 PM
+§Event: Pop-Up displayed
+§Content: Invitation to paint</code></pre>
+<pre><code>Time: 11:12:13
+§Event: Pop-Up displayed
+§Content: Seconds remaining
+§Seconds remaining: 30</code></pre>
+<pre><code>Time: 11:12:13 AM
+§Event: Pop-Up displayed
+§Content: Timer End
+§Seconds remaining: 0</code></pre>
+<h2 id="drawing-tools">Drawing Tools</h2>
+<p>Every time the player releases the pen or interacts with the drawing
+toolbar on the left side, one of the following events will be created.
+Additionally, a screenshot is stored every time the player lifts the pen
+or uses the delete button.</p>
+<p>See the table in the <a href="#phase-related-events">Phase
+section</a> to know when the drawing tools can be used.</p>
+<h3 id="event-click-brush">Event: Click Brush</h3>
+<p>The value for <code>§Color</code> can be <code>Red</code>,
+<code>Green</code> and <code>Blue</code></p>
+<pre><code>Time: 
+§Event: Click
+§Object: Brush
+§Color: Red</code></pre>
+<h3 id="event-click-eraserdelete-button">Event: Click Eraser/Delete
+Button</h3>
+<p>The value for <code>§Object</code> can either be <code>Eraser</code>
+or <code>Delete Button</code></p>
+<pre><code>Time: 15:13:54
+§Event: Click
+§Object: Eraser</code></pre>
+<h3 id="event-used-pen">Event: Used Pen</h3>
+<pre><code>Time: 15:13:54
+§Event: Used Pen 
+§Color: 16777215</code></pre>
+<h3 id="event-used-drawing-tool">Event: Used drawing tool</h3>
+<p>The value for <code>§Tool</code> can either be <code>eraser</code> or
+<code>delete button</code></p>
+<pre><code>Time: 15:13:54
+§Event: Used drawing tool
+§Tool: delete button</code></pre>
+<h2 id="alternative-task">Alternative Task</h2>
+<h2 id="examples">Examples</h2>
+<p>Quali Pass event order</p>
+<pre><code>Time: 1652651537703
+§Event: Pop-Up displayed
+§Content: Feedback about Clicks
+§Nmbr Switch Clicks: 3
+§Optimum Switch Clicks: 3
+§Nmbr Confirm Clicks: 1
+
+Time: 1652651537704
+§Event: Passing first Quali Level
+
+Time: 1652651538216
+§Event: Click
+§Object: Pop-Up Button
+§Consequence Event: Pop-Up closed
+
+Time: 1652651538655
+§Event: Click
+§Object: Hook
+§Switch_States [ID, click state, outputstate]: [3, true, 1][4, true, 1][5, true, 1]
+§Bulb_States [ID, output state]: [6, 1]
+§And-Gate_States [ID, output state]: [7, 1][8, 1]</code></pre>
+<p>Quali Fail event order</p>
+<pre><code>Time: 1652651523905
+§Event: Pop-Up displayed
+§Content: Feedback about Clicks
+§Nmbr Switch Clicks: 4
+§Optimum Switch Clicks: 1
+§Nmbr Confirm Clicks: 1
+
+Time: 1652651523906
+§Event: Failing second Quali Level
+
+Time: 1652651524689
+§Event: Click
+§Object: Hook
+§Switch_States [ID, click state, outputstate]: [3, 0, 0][4, 0, 0][5, false, 0]
+§Bulb_States [ID, output state]: [6, 0]
+§Inverter_States [ID, output state]: [9, true]
+§And-Gate_States [ID, output state]: [10, 0]
+§Or-Gate_States [ID, output state]: [7, 0]
+
+Time: 1652651524689
+§Event: change in Scene
+§Scene: IntroduceElements</code></pre>
+</body>
+</html>

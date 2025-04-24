@@ -1,0 +1,4 @@
+level: high/Level1_random
+level: high/Level5_fixed_random
+level: high/r2d7_fixed_improved_random
+level: high/F12_random

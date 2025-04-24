@@ -1,0 +1,64 @@
+# Set the prefix for all containers/volumes. Otherwise the parent foldername will be used
+name: reversim
+
+# The volumes store all data that shall be persisted between container restarts or that
+# have to be tweaked externally.
+volumes: 
+  # Location for the database, player event logging, screenshots etc.
+  # Set to external to make it harder to delete this volume by accident, however you will
+  # need to manually create the volume with the command: 
+  # docker volume create reversim_playerdata
+  playerdata:
+    name: reversim_playerdata
+    external: true
+  
+  # Holds Flask, uWSGI and the game-config and all assets that are needed by the game
+  gameConfig:
+
+  # If enabled in reversim_uwsgi.ini, uWSGI will log the server logs into text files
+  # instead of stdout. This way you do not loose the logs when you restart 
+  # the Docker container
+  #uwsgi_logs:
+
+# All containers that belong to this compose file
+services:
+  # the container will be named reversim_game when launched
+  game:
+    # adjust this, if you wan't to pull a different version/tag of the game
+    image: reversim:latest
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000" # outside:inside container
+    
+    # mount your volumes here
+    volumes:
+      - playerdata:/usr/var/reversim-instance/statistics
+      - gameConfig:/usr/var/reversim-instance/conf:ro
+      #- uwsgi_logs:/var/log/uwsgi
+
+    # add resource limits. You may want to tweak this for your deployment
+    deploy:
+      resources:
+        # prevent malfunction of this container from affecting the host
+        limits:
+          # 4 threads may run simultaneously, the rest is queued
+          cpus: '4'
+          # the OOM killer will be invoked when this limit is hit (leads to container restart)
+          memory: 4G
+          # no fork bombs
+          pids: 24
+        # guarantee that this container will have sufficient resources regardless of
+        # what other containers on this host are doing
+        reservations:
+          # 2 cores are exclusively available for this container
+          cpus: '2'
+          # 250M are preallocated to this container
+          memory: 250M
+      restart_policy:
+        # restart if the container's entrypoint command exits with nonzero status code
+        condition: on-failure
+        # when the container crashes, wait 10s before attempting restart
+        delay: 10s
+        # after 3 unsuccessful restart attempts, assume the container is unable to start and give up
+        max_attempts: 3

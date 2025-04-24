@@ -1,0 +1,7 @@
+time§0
+element§0§VCC§2§200§550
+element§1§Switch§2§350§550§false
+element§2§LightBulb§1§1050§500
+element§3§TextBox§0§550§200§Welcome to the Level editor of ReverSim§ - Place your inputs, outputs and logic gates§ - Connect them in wiring mode (green wire in the left toolbar)§     - First select the FROM element, then the TO element!§ - Click on elements to change their properties or delete them (when in select mode)§ - Open, save and play your level§§If you need any help, take a look at the documentation (link in bottom bar)§§To start with an empty level, use the "Delete All" Button below.
+connection§0§1
+connection§1§2

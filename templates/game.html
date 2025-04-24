@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+
+	<script>
+		var lang = '{{lang}}'.toUpperCase();
+		const user = '{{username}}';
+		const group = '{{group}}';
+		const gamerules = {{gamerules}}; // CONFIG The new config / gamerules
+		const game_hash = "{{game_hash}}";
+	</script>
+	
+	<meta name="description" content="A game to study the human factors in hardware reverse engineering.">
+	<meta name="keywords" content="HRE, hardware, reverse, engineering, study, game, ReverSim, {% if author|length %}{{author}}, {% endif %}security, privacy">
+	{% if author|length %}
+	<meta name="author" content="{{author}}">
+	{% endif %}
+	<title>Hardware Reverse Engineering game</title>
+	<link rel="icon" href="/res/elements/bulb_on.png" type="png" sizes="16x16">
+	<link rel="stylesheet" type="text/css" href="/src/CSS/style.css">
+
+	<!-- CSS-Sources: new fonts -->
+	<link rel="stylesheet" type="text/css" href="/src/CSS/customFont.css">
+	<!-- CSS-Sources: alternative tasks and other user css -->
+	<link rel="stylesheet" type="text/css" href="/assets/customGame.css">
+
+	<!-- JS-Sources: External Libraries -->
+	<script type="text/javascript" src="/src/externalLibraries/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="/src/externalLibraries/phaser.min.js"></script>
+
+	<!-- JS Sources: Utilities -->
+	<script type="text/javascript" src="src/util/GameUtils.js"></script>
+	<script type="text/javascript" src="src/util/Cookie.js"></script>
+	<script type="text/javascript" src="src/util/Request.js"></script>
+	<script type="text/javascript" src="src/util/JsonRPC.js"></script>
+
+	<!-- JS-Sources: Level Sources -->
+	<script type="text/javascript" src="src/levelCreation/LogicElementManager.js"></script>
+	<script type="text/javascript" src="src/levelCreation/Circuit.js"></script>
+	<script type="text/javascript" src="src/levelCreation/Level.js"></script>
+
+	<!-- JS-Sources: UI Sources -->
+	<script type="text/javascript" src="src/UI/RectButton.js"></script>
+	<script type="text/javascript" src="src/UI/popUps/PopUp.js"></script>
+	<script type="text/javascript" src="src/UI/popUps/Alert.js"></script>
+
+	<!-- JS-Sources: extras -->
+	<script type="text/javascript" src="src/extras/Lightning.js"></script>
+	<script type="text/javascript" src="src/extras/CanvasDrawing.js"></script>
+	<script type="text/javascript" src="src/extras/AniLib.js"></script>
+	<script type="text/javascript" src="src/extras/LevelOverlay.js"></script>
+	<script type="text/javascript" src="src/extras/ErrorSignal.js"></script>
+	<script type="text/javascript" src="src/extras/ToolSelector.js"></script>
+	<script type="text/javascript" src="src/extras/ButtonBar.js"></script>
+
+	<!-- JS-Sources: add text -->
+	<script type="text/javascript" src="src/addText/AddText.js"></script>
+
+	<!-- JS-Sources: Create Logs -->
+	<script type="text/javascript" src="src/createLogs/LogData.js"></script>
+
+	<!-- JS-Sources: Logic Element Sources -->
+	<script type="text/javascript" src="src/elements/LogicElement.js"></script>
+	<script type="text/javascript" src="src/elements/AndGate.js"></script>
+	<script type="text/javascript" src="src/elements/Inverter.js"></script>
+	<script type="text/javascript" src="src/elements/DangerSign.js"></script>
+	<script type="text/javascript" src="src/elements/LightBulb.js"></script>
+	<script type="text/javascript" src="src/elements/OrGate.js"></script>
+	<script type="text/javascript" src="src/elements/Splitter.js"></script>
+	<script type="text/javascript" src="src/elements/Switch.js"></script>
+	<script type="text/javascript" src="src/elements/VCC.js"></script>
+	<script type="text/javascript" src="src/elements/GND.js"></script>
+	<script type="text/javascript" src="src/elements/CovertGate.js"></script>
+	<script type="text/javascript" src="src/elements/TextBox.js"></script>
+
+	<!-- JS-Sources: Netlist Sources -->
+	<script type="text/javascript" src="src/wireLayout/Layouter.js"></script>
+	<script type="text/javascript" src="src/wireLayout/Wire.js"></script>
+	<script type="text/javascript" src="src/wireLayout/Point.js"></script>
+	<script type="text/javascript" src="src/wireLayout/LineDrawer.js"></script>
+
+	<!-- JS-Sources: Scene Sources -->
+	<script type="text/javascript" src="src/scenes/BaseScene.js"></script>
+	<script type="text/javascript" src="src/scenes/GameScene.js"></script>
+	<script type="text/javascript" src="src/scenes/ConnectionLostScene.js"></script>
+	<script type="text/javascript" src="src/scenes/PreloadScene.js"></script>
+	<script type="text/javascript" src="src/scenes/CompetitionScene.js"></script>
+	<script type="text/javascript" src="src/scenes/FinalScene.js"></script>
+	<script type="text/javascript" src="src/scenes/FinalSceneNPS.js"></script>
+	<script type="text/javascript" src="src/scenes/QualiScene.js"></script>
+	<script type="text/javascript" src="src/scenes/IntroduceElements.js"></script>
+	<script type="text/javascript" src="src/scenes/LanguageScene.js"></script>
+	<script type="text/javascript" src="src/scenes/GameIntroScene.js"></script>
+	<script type="text/javascript" src="src/scenes/GameIntroSceneND.js"></script>
+	<script type="text/javascript" src="src/scenes/IntroduceDrawingTools.js"></script>
+	<script type="text/javascript" src="src/scenes/SkillScene.js"></script>
+	<script type="text/javascript" src="src/scenes/AlternativeTask.js"></script>
+
+	<!-- JS-Sources: Level Editor Source-->
+	<script type="text/javascript" src="src/LevelEditor/LevelLine.js"></script>
+	<script type="text/javascript" src="src/LevelEditor/LevelConnection.js"></script>
+	<script type="text/javascript" src="src/LevelEditor/LevelElement.js"></script>
+	<script type="text/javascript" src="src/LevelEditor/LevelFile.js"></script>
+	<script type="text/javascript" src="src/LevelEditor/LevelViewScene.js"></script>
+	<script type="text/javascript" src="src/LevelEditor/LevelEditor.js"></script>
+	<script type="text/javascript" src="src/LevelEditor/PropertiesPanel.js"></script>
+	<script type="text/javascript" src="src/LevelEditor/LevelValidator.js"></script>
+
+	<!-- JS-Sources: Main game.js Source-->
+	<script type="text/javascript" src="src/game.js"></script>
+
+	<!-- JS-Sources: Info Panel Sources -->
+	<script type="text/javascript" src="src/infoPanel/InfoPanel.js"></script>
+	<script type="text/javascript" src="src/infoPanel/IntroduceObfuscatedGates.js"></script>
+	<script type="text/javascript" src="src/infoPanel/IntroduceCamouflageOptionOne.js"></script>
+	<script type="text/javascript" src="src/infoPanel/IntroduceCamouflageOptionThree.js"></script>
+	<script type="text/javascript" src="src/infoPanel/VoluntaryTutorial.js"></script>
+	<script type="text/javascript" src="src/infoPanel/Pause.js"></script>
+
+	<!-- JS-Sources: Information Display Sources -->
+	<script type="text/javascript" src="src/infoBar/InformationBar.js"></script>
+
+</head>
+	<body>
+		<noscript>JavaScript needs to be enabled in order to play ReverSim!</noscript>
+		<!-- create div to load custom fonts-->
+		<div style="font-family:hre_text_font; position: absolute; left:-1000px; visibility:hidden;">.</div>
+        <div style="font-family:hre_title_font; position: absolute; left:-1000px; visibility:hidden;">.</div>
+		<div id='phaser-reversim'></div>
+
+		{% if crashReporterEnabled %}
+		<script>
+			// #######################################
+			// #   ReverSim Crash Reporter Section   #
+			// #######################################
+
+			let CRASH_REPORTER_ENABLED = {{crashReportLevel}};
+			let errorCount = 0;
+
+			/**
+			* Send a crash report to the server containing the pseudonym, message, source file and stack trace.
+			* @param {string} message 
+			* @param {string} origin 
+			* @param {string} trace 
+			*/
+			function sendErrorLog(message, origin, trace)
+			{
+				try
+				{
+					var xhr = new XMLHttpRequest();
+					xhr.onreadystatechange = function ()
+					{
+						if(this.readyState == 4 && this.status == 200)
+						{
+							console.log(xhr.responseText);
+						}
+					};
+					xhr.open("POST", "crashReport", true);
+					xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					xhr.send(
+						"ui=" + encodeURIComponent(pseudonym) +
+						"&group=" + encodeURIComponent(group) +
+						"&message=" + encodeURIComponent(message) +
+						"&origin=" + encodeURIComponent(origin) +
+						"&trace=" + encodeURIComponent(trace)
+					);
+				}
+				catch(e)
+				{
+					console.warn("Panic! Unable to send error log to server");
+				}
+			}
+
+			// Catch all exceptions that escape into the browser
+			window.onerror = (event, source, line, column, error) =>
+			{
+				sendErrorLog(error.message, source + ':' + line + (column > 2000 ? ':' + column : ''), error.stack);
+				return false;
+			};
+
+			{% if crashReportLevel > 1 %}
+			// Hook into the Browser console.error reporting
+			const consoleErrorLogger = console.error
+			let recursionBreaker = 0;
+
+			console.error = (...args) =>
+			{
+				recursionBreaker += 1;
+				if(recursionBreaker > 7)
+				{
+					alert("The crash reporter crashed, yikes");
+					return; // Panic we have a problem here
+				}
+
+				sendErrorLog(args[0], "console.error", "");
+				consoleErrorLogger.apply(console, args);
+				recursionBreaker = 0;
+			};
+			{% endif %}
+		</script>
+		{% endif %}
+	</body>
+</html>

@@ -1,0 +1,3 @@
+text: competitionPhase_Start.txt
+level: low/Level1_random
+level: low/Level4_random

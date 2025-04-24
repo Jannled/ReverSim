@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Documentation: Overview</title>
+  <style>
+    html {
+      line-height: 1.4;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      background-color: #e6eceb;
+      padding: .2em .4em;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      background-color: #e6eceb;
+      padding: 1em;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style>
+  a:hover {
+  	color: #00445f;
+  }
+
+  code, pre {
+  	border-radius: 5px;
+  }
+  </style>
+</head>
+<body>
+<h1 id="overview-about-the-hre-game">Overview about the HRE game</h1>
+<p>This documentation shall describe the core aspects of the game</p>
+<h2 id="phases--scenes">Phases / Scenes</h2>
+<p>The name phase and scene are used interchangeably throughout the
+documentation, but mean the same thing. The word phase was first used in
+internal communication, but the word scene has also established since
+every phase is implemented as a <code>Scene</code> in Phaser3.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>I.</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PreloadScene</td>
+<td>✗</td>
+<td>Never really shown to the player, the very fist scene the game runs
+which will load all resources and request the current scene from the
+server.</td>
+</tr>
+<tr>
+<td>BaseScene</td>
+<td>✗</td>
+<td>This Scene extends from the Phaser3 Scene class and serves as the
+Base class for all other scenes</td>
+</tr>
+<tr>
+<td>GameScene</td>
+<td>✗</td>
+<td>This Scene will show tasks to the player and allows for a countdown
+to be configured. Base Scene for Quali, Competition and Alternative</td>
+</tr>
+<tr>
+<td>LevelEditor</td>
+<td>~</td>
+<td>The <a href="./LevelEditor.md">level editor</a>. Should only be used
+with the <a href="./LevelEditor.md#configuration">provided
+config</a>.</td>
+</tr>
+<tr>
+<td>LevelViewer</td>
+<td>~</td>
+<td>The level viewer, mainly used by the <a href="">screenshot tool</a>.
+Should only be used with the <a
+href="./LevelEditor.md#configuration">provided config</a> and not in
+normal gameplay.</td>
+</tr>
+<tr>
+<td>GameIntro</td>
+<td>✓</td>
+<td>First scene shown to the player. Will show a play button and the
+language switcher. I strongly recommend to use the new <a
+href="/welcome">/welcome</a> endpoint instead of this scene, to prevent
+automatic crawlers from creating logfiles</td>
+</tr>
+<tr>
+<td>IntroduceElements</td>
+<td>✓</td>
+<td>Introduce all logic gates and circuit parts to the player</td>
+</tr>
+<tr>
+<td>IntroduceDrawingTools</td>
+<td>✓</td>
+<td>Ask the player to familiarize themselves with the drawing tools</td>
+</tr>
+<tr>
+<td>Quali</td>
+<td>✓</td>
+<td>The player need to pass these levels, in order to proceed to the
+next phase. If there are too many mistakes, the player will be thrown
+back to <code>IntroduceElements</code></td>
+</tr>
+<tr>
+<td>Competition</td>
+<td>✓</td>
+<td>The main game phase where the player will play the study relevant
+levels</td>
+</tr>
+<tr>
+<td>SkillScene</td>
+<td>✓</td>
+<td>Switch to a different group which depends on how well the player
+performed during this phase</td>
+</tr>
+<tr>
+<td>Alternative</td>
+<td>✓</td>
+<td>Present some html based task or info to the player</td>
+</tr>
+<tr>
+<td>FinalScene</td>
+<td>✓</td>
+<td>Thank the player for participating and redirect to post survey if
+configured</td>
+</tr>
+</tbody>
+</table>
+<p>A checkmark (✓) in the column "I." denotes, that this class can be
+used in <a href="./GameConfig.md">gameConfig.json</a>. Otherwise it is
+only for internal purposes.</p>
+<h2 id="levels-info-screens-etc">Levels, Info screens, etc.</h2>
+<p>The names in the logfile will differ from the internal representation
+used by the Back- and Frontend. This table will help to translate
+between the different representations:</p>
+<table>
+<thead>
+<tr>
+<th><a href="./Logfile.md">Logfile</a></th>
+<th>Internal</th>
+<th><a href="./LevelList.md">LevelList</a></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Info</td>
+<td>info</td>
+<td>text</td>
+<td>A slide containing text only</td>
+</tr>
+<tr>
+<td>Level</td>
+<td>level</td>
+<td>level</td>
+<td>A slide containing a circuit to solve</td>
+</tr>
+<tr>
+<td>AltTask</td>
+<td>url</td>
+<td>url</td>
+<td>A slide with an alternative task, written in HTML/Javascript</td>
+</tr>
+<tr>
+<td>AltTask</td>
+<td>iframe</td>
+<td>iframe</td>
+<td>A slide with an alternative task, embedded in an iframe tag</td>
+</tr>
+<tr>
+<td>Tutorial</td>
+<td>tutorial</td>
+<td>tutorial</td>
+<td>Intro Camouflage and Intro Covert, automatically shown if configured
+inside <code>gameConfig.json</code></td>
+</tr>
+<tr>
+<td>LocalLevel</td>
+<td>localLevel</td>
+<td></td>
+<td>Used by the level editor, to bypass the request to the server for a
+level</td>
+</tr>
+<tr>
+<td>Special</td>
+<td>special</td>
+<td>special</td>
+<td>An info screen with additional functionality. (e.g. voluntary
+tutorial, break)</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

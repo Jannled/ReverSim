@@ -1,0 +1,66 @@
+# Using an official Python Debian image as a baseline
+# https://hub.docker.com/_/python
+# https://www.debian.org/releases/
+#
+# NOTE: Not supporting Windows because uWSGI requires additional steps for Windows installation
+# NOTE: Also when using the slim variant, some more dependencies need to be installed (uWSGI compiles with gcc)
+FROM python:3.13-slim
+
+ARG GAME_GIT_HASH
+ENV GAME_GIT_HASH=$GAME_GIT_HASH
+ARG GAME_GIT_HASH_SHORT
+ENV GAME_GIT_HASH_SHORT=$GAME_GIT_HASH_SHORT
+
+# Labels (I know MAINTAINER is deprecated, but there is no standardized replacement???)
+MAINTAINER Max Planck Institute for Security and Privacy
+LABEL maintainer="Max Planck Institute for Security and Privacy"
+LABEL version="2.0.3"
+LABEL description="Ready to deploy Docker container to use ReverSim for research."
+
+# When using the slim variant, a toolchain is needed to compile uWSGI
+# Yeet the apt-cache afterwards, since it is no longer needed
+RUN apt-get update && apt-get install -y gcc nano htop && rm -rf /var/lib/apt/lists/*
+
+# Create a non root user for enhanced security
+RUN groupadd -r uwsgi && useradd -r -g uwsgi uwsgi
+
+# Change workdir to folder where the game will be installed (affects COPY, RUN etc.)
+WORKDIR /usr/src/hregame
+
+# Install all Python libs that are required (installing under the root user, since the other user has no home)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Set the ownership and permissions for the application files, switch to this user for the rest of the script
+RUN chown -R uwsgi:uwsgi /usr/src/hregame && mkdir /var/log/uwsgi && chown -R uwsgi:uwsgi /var/log/uwsgi
+USER uwsgi
+
+# Copy the game code
+COPY app app/
+COPY static static/
+COPY templates templates/
+COPY migrations migrations/
+COPY gameServer.py gameServer.py
+COPY --chmod=755 docker-entrypoint.sh docker-entrypoint.sh
+
+# Copy the examples config & assets folder and make it the default one
+ENV REVERSIM_INSTANCE="/usr/var/reversim-instance"
+WORKDIR /usr/var/reversim-instance
+COPY examples/conf conf
+COPY instance/conf conf
+
+# Create empty statistics folders
+WORKDIR /usr/var/reversim-instance/statistics/LogFiles
+WORKDIR /usr/var/reversim-instance/statistics/canvasPics
+WORKDIR /usr/src/hregame
+
+# Specify mount points for the statistics folder, game config, levels, researchInfo & disclaimer
+VOLUME /usr/var/reversim-instance/statistics
+VOLUME /usr/var/reversim-instance/conf
+VOLUME /var/log/uwsgi
+
+# Exposes the port that uWSGI is listening to (as configured in hre_game.ini)
+EXPOSE 8000
+
+# Run the uWSGI server when the container launches
+CMD ["/usr/src/hregame/docker-entrypoint.sh"]

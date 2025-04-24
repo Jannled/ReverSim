@@ -1,0 +1,3 @@
+text: difficulty_info.txt
+level: camouflaged/Level1_camou_random
+level: camouflaged/Level7_camou_random

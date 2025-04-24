@@ -1,0 +1,8 @@
+time§0
+element§0§VCC§2§200§450
+element§1§Switch§2§350§450§true
+element§3§DangerSign§1§1050§400
+element§2§Inverter§2§550§450
+connection§0§1
+connection§1§2
+connection§2§3

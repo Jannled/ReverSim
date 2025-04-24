@@ -1,17 +1,31 @@
 # ReverSim
+[![Demo: beta.hrestudy.com](https://img.shields.io/badge/Demo-beta.hrestudy.com-green)](https://beta.hrestudy.com) 
+[![Paper: ACM Digital Library](https://img.shields.io/badge/Paper-ACM_Digital_Library-blue)](https://doi.org/10.1145/3706598.3714160) 
 
 ReverSim is an open-source environment for the browser, originally developed at the 
 [Max Planck Institute for Security and Privacy (MPI-SP)](https://www.mpi-sp.org/)
 to study human aspects in hardware reverse engineering.
 
-> [!IMPORTANT]  
-> Full source code and Docker images will be made available in this repository in the next days.
+![Screenshot of ReverSim, showing a logic circuit with the annotations a player made during reverse engineering](doc/res/Screenshot.png)
 
-## Live Demo
-You can try the most recent development version of ReverSim on our [live demo website](https://beta.hrestudy.com/index).
+## Getting Started
+You can try out ReverSim on our public demo instance at [beta.hrestudy.com](https://beta.hrestudy.com/index) 
+
+To customize the sequence of tasks, change game rules, or to collect data for your own research, you will have to install the game on your own hardware.\
+We provide three ways to install and run the ReverSim server: 
+
+1. With [Docker](https://www.docker.com/) (preferred for production use): `docker run -it ghcr.io/emsec/reversim:latest`
+2. With the [VS Code](https://code.visualstudio.com/) Python debugger (for testing only)
+3. From the command prompt (alternative)
+
+You can find out more in our [getting started guide](doc/GettingStarted.md).
+
+For information on how to use the level editor, see [doc/LevelEditor.md](doc/LevelEditor.md).
 
 ## Academic Research
-If you use ReverSim in an academic context, please cite our paper as follows:
+If you would like to use ReverSim for academic research, please feel free to get in touch with us – we are happy to assist with setup!
+
+In your publication, please cite our paper as follows:
 ```latex
 @inproceedings{2025:Becker:ReverSim,
 	title        = {{ReverSim:} {A} Game-Based Environment to Study Human Aspects in Hardware Reverse Engineering},

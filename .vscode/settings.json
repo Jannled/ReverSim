@@ -1,0 +1,250 @@
+{
+    // JavaSript formatting
+    "javascript.format.placeOpenBraceOnNewLineForFunctions": true,
+    "javascript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+    "javascript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
+
+    // TypeScript formatting
+    "typescript.format.placeOpenBraceOnNewLineForFunctions": true,
+    "typescript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+    "typescript.format.insertSpaceAfterKeywordsInControlFlowStatements": false,
+
+	// JS/TS Server Enable Debugging
+	//"typescript.tsserver.log": "verbose",
+
+	// Check the entire workspace instead of only open files. Might kill your RAM
+	// https://stackoverflow.com/a/61234950
+	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
+
+    // Editor formatting
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false,
+
+	// Pylance / Pyright
+	"python.analysis.typeCheckingMode": "strict",
+	"python.analysis.diagnosticMode": "workspace",
+	"python.analysis.diagnosticSeverityOverrides": {
+		"reportUnusedVariable": "information",
+		"reportUnnecessaryIsInstance": "warning",
+		"reportUntypedFunctionDecorator": "warning",
+		"reportUnknownMemberType": "warning",
+		"reportUnusedImport": "warning",
+		"reportUnusedFunction": "warning",
+		"reportUnusedClass": "warning",
+		"reportUnnecessaryCast": "information"
+	},
+
+	// Javascript
+	// Configured in jsconfig.json "js/ts.implicitProjectConfig.checkJs": true
+	"typescript.format.semicolons": "insert",
+
+	// Syntax highlighting for Jinja templates
+	"files.associations": {
+		"**/templates/*.html": "jinja",
+		"**/logFile_*.txt": "log"
+	},
+
+	// Try to guess the Encoding of the games level files and languageDict
+	"files.autoGuessEncoding": false,
+
+	// Open CSV files with the excel viewer addon. See `extensions.json`
+	"workbench.editorAssociations": {
+		"file:/**/*.csv": "jupyter-data-wrangler"
+	},
+
+	// Display formatting aid
+	"editor.rulers": [90, 120],
+	"editor.wordWrapColumn": 120,
+
+	"[git-commit]": {
+		"editor.rulers": [50]
+	},
+
+	"[markdown]": {
+		"editor.rulers": [72, 94, 120], // Pandoc wraps at 72 internally by default, Obsidian at 94 in Code Blocks
+		"editor.wordWrap": "bounded",
+		"editor.wordWrapColumn": 120
+	},
+
+	// Defaults for Overtype (the EINFG key in german)
+	"overtype.perEditor": false,
+	"overtype.paste": true,
+
+	// GitLens features (disable AI)
+	"gitlens.ai.generateCommitMessage.enabled": false,
+	"gitlens.ai.model": "vscode", // Use a VS Code extension as the ai provider
+	"gitlens.ai.vscode.model": null, 
+	"gitlens.ai.openai.url": "127.0.0.1",
+	"gitlens.views.commits.showBranchComparison": "working",
+
+	// VS Code settings
+	"terminal.integrated.stickyScroll.enabled": true,
+	"python.createEnvironment.trigger": "prompt",
+	"search.useIgnoreFiles": false,
+
+	// Dictionary for the spelling correction
+	"cSpell.words": [
+		"alttask",
+		"ATTRIBS",
+		"autocommit",
+		"Automagically",
+		"autorouter",
+		"backref",
+		"blake",
+		"bugtracker",
+		"Bugtracker",
+		"camou",
+		"Camou",
+		"chrono",
+		"clow",
+		"colorama",
+		"Cooldown",
+		"cpus",
+		"DBAPI",
+		"debugpaper",
+		"debugpy",
+		"Dispays",
+		"distro",
+		"downleft",
+		"downscaled",
+		"Drawingtool",
+		"DRAWTOOLS",
+		"Durstenfeld",
+		"emsec",
+		"Entwickler",
+		"eralchemy",
+		"ESCORE",
+		"figsize",
+		"Filehandles",
+		"funcs",
+		"gamelogic",
+		"Gamemode",
+		"gameobjectdown",
+		"gameout",
+		"gameover",
+		"gameplay",
+		"gamerule",
+		"gamerules",
+		"getpid",
+		"gnds",
+		"graphviz",
+		"handdrawn",
+		"hardmode",
+		"highscore",
+		"Hitbox",
+		"howpublished",
+		"hregame",
+		"hreserver",
+		"hrestudy",
+		"htmlsafe",
+		"iframe",
+		"imgdata",
+		"imgstring",
+		"impressum",
+		"ingame",
+		"INPROGRESS",
+		"instanciated",
+		"Institut",
+		"ipykernel",
+		"ipympl",
+		"ISDEBUGGROUP",
+		"itsdangerous",
+		"kaniko",
+		"keepends",
+		"kolloqskill",
+		"Layouter",
+		"levelname",
+		"limesurvey",
+		"linestretch",
+		"localtime",
+		"logfile",
+		"logfiles",
+		"logto",
+		"markupsafe",
+		"matplotlib",
+		"millis",
+		"MITM",
+		"monobackgroundcolor",
+		"Multiport",
+		"netlist",
+		"netlists",
+		"nmbr",
+		"Nmbr",
+		"noopener",
+		"noreferrer",
+		"NOTREACHED",
+		"NOTSTARTED",
+		"nullable",
+		"orm",
+		"outputstate",
+		"pagetitle",
+		"Pandoc",
+		"pathsep",
+		"permuatate",
+		"pids",
+		"playerdata",
+		"poolclass",
+		"Postsurvey",
+		"presurvey",
+		"Privatsphäre",
+		"prometheus",
+		"proxied",
+		"Proxied",
+		"psdnm",
+		"pycache",
+		"pygraphviz",
+		"pysqlite",
+		"pyyaml",
+		"quali",
+		"Quali",
+		"rcons",
+		"reconstructor",
+		"retut",
+		"reversim",
+		"SAVEPOINT",
+		"scandir",
+		"scipy",
+		"scorevalues",
+		"sessionmaker",
+		"shocksign",
+		"Sicherheit",
+		"skullsign",
+		"splitted",
+		"sqlalchemy",
+		"sqlite",
+		"subfolders",
+		"Teilnehmer",
+		"thinkaloud",
+		"timesync",
+		"TIMESYNC",
+		"tweens",
+		"tzdata",
+		"upleft",
+		"upscaled",
+		"usecase",
+		"uwsgi",
+		"uwsgitop",
+		"vccs",
+		"venv",
+		"webbrowser",
+		"werkzeug",
+		"workdir",
+		"wsgi",
+		"xpos",
+		"Yeet",
+		"ylabel",
+		"yoyo",
+		"ypos",
+		"zoneinfo"
+	],
+	"sqltools.useNodeRuntime": true,
+	"sqltools.connections": [
+		{
+			"previewLimit": 50,
+			"driver": "SQLite",
+			"name": "ReverSim",
+			"database": "./instance/reversim.db"
+		}
+	]
+}
