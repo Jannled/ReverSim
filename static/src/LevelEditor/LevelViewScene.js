@@ -97,8 +97,8 @@ class LevelViewScene extends BaseScene
 
 	/**
 	 * Display the supplied level data
-	 * @param {string} levelName 
-	 * @param {string} data 
+	 * @param {string} levelName The name of the loaded level used for display or when saving again
+	 * @param {string} data The text content of the level file
 	 */
 	loadLevel(levelName, data)
 	{

@@ -117,7 +117,7 @@ class Phase(db.Model, TimerMixin):
 
 		# Special case: Level Editor
 		elif self.name == PhaseType.Editor:
-			self.appendLevel(Level('localLevel', ''))
+			self.appendLevel(Level('localLevel', 'level_editor_play'))
 
 		# Proceed as usual with the level loading
 		else:

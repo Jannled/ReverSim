@@ -16,7 +16,10 @@
 		"configEditor": {
 			"enableLogging": false,
 			"disclaimer": null,
-			"competitionShowSkipButton": "always"
+			"competitionShowSkipButton": "always",
+			"phaseDifficulty": {
+				"Competition": "EASY"
+			}
 		},
 
 		"rulesPaper": {

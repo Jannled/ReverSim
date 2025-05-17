@@ -38,9 +38,7 @@ class LevelEditor extends LevelViewScene
 	{
 		// Register input listeners
 		this.input.keyboard.on('keydown-' + 'ESC', () => {
-			const firstElement = this.toolbar.interactiveObjects[0];
-			this.toolbar.repositionRect(firstElement);
-			this.changeMode(LEVEL_EDITOR_MODE.SELECT);
+			this.resetEditorMode();
 		});
 
 		this.input.keyboard.on('keydown-' + 'R', this.rotateActiveComponent);
@@ -583,7 +581,7 @@ class LevelEditor extends LevelViewScene
 	onLevelPlay()
 	{
 		// Enter select mode, since after returning from the level the ui will be reset
-		this.changeMode(LEVEL_EDITOR_MODE.SELECT);
+		this.resetEditorMode();
 
 		console.log("Testing level");
 		AniLib.darkenScreen(this, () => {
@@ -652,6 +650,27 @@ class LevelEditor extends LevelViewScene
 		}
 		else
 			this.loadLevel(newLevelName, LevelFile.createEmpty());
+	}
+
+	//@Override
+	loadLevel(levelName, data)
+	{
+		// Switch to select mode after loading a level, since
+		// there might be no wires afterwards
+		this.resetEditorMode();
+
+		// Call super method
+		super.loadLevel(levelName, data);
+	}
+
+	/**
+	 * Reset the level editor mode to the default `LEVEL_EDITOR_MODE.SELECT`
+	 */
+	resetEditorMode()
+	{
+		this.changeMode(LEVEL_EDITOR_MODE.SELECT);
+		const firstElement = this.toolbar.interactiveObjects[0];
+		this.toolbar.repositionRect(firstElement);
 	}
 
 	/**
