@@ -39,6 +39,7 @@ class DefaultFlaskSettings:
 	"""
 	# Limit the upload file size
 	MAX_CONTENT_LENGTH = 2 * 1024 * 1024 # 2MB max content length
+	MAX_FORM_MEMORY_SIZE = MAX_CONTENT_LENGTH
 	SQLALCHEMY_DATABASE_URI = "sqlite+pysqlite:///statistics/reversim.db" # instance/statistics/reversim.db
 	SQLALCHEMY_ECHO = False
 	SQLALCHEMY_ENGINE_OPTIONS = {
