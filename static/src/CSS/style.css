@@ -140,3 +140,82 @@ div, header, main, aside, footer {
 	margin: 20px 0;
 	border-radius: 3px;
 }
+
+/* Level Editor */
+.levelElementProperties {
+	overflow: auto;
+}
+
+.levelElementProperties label {
+	text-decoration-thickness: 2px;
+	text-decoration-color: red;
+	display: block;
+	margin-top: 7px;
+}
+
+.levelElementProperties input, .levelElementProperties select {
+	background-color: #333333;
+	color: white;
+	padding: 10px;
+	border-radius: 10px;
+	border: none;
+	font-weight: bold;
+	display: block;
+}
+
+.levelElementProperties input:hover, .levelElementProperties select:hover {
+	background-color: #5576a5;
+}
+
+.levelElementProperties hr {
+	margin: 10px 0px;
+	border-bottom: 2px solid gray;
+}
+
+.levelElementProperties h2 {
+	border-bottom: 2px solid gray;
+	padding-bottom: 5px;
+}
+
+.levelElementProperties textarea {
+	white-space: pre;
+	overflow-wrap: normal;
+	overflow-x: scroll;
+	width: 300px;
+	height: 120px;
+}
+/* END Level Editor */
+
+/* Level Editor: Rotation Widget */
+label.rotationWidget{
+	display: inline;
+}
+
+.rotationWidget img {
+	background-color: #333333;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 10px;
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+	display: inline;
+}
+
+input[type="radio"]:hover + .rotationWidget img {
+	background-color: #5576a5;
+}
+
+input[type="radio"]:disabled + .rotationWidget img {
+	background-color: #333333;
+}
+
+input[type="radio"]:checked + .rotationWidget img {
+	background-color: #0076a5;
+}
+
+.levelElementProperties input[type="radio"] {
+	/* Hide the ugly default ui, the user will interact via the label */
+	display: none;
+}
+/* END Rotation Widget */

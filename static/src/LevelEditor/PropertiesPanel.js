@@ -6,19 +6,10 @@ class PropertiesPanel
 	 */
 	constructor(scene)
 	{
-		//let header = document.createElement('h2');
-		//header.style.marginTop = "0";
-		//header.innerText = "Properties";
-
 		this.propertiesList = document.createElement('div');
-
-		this.propertiesPanel = document.createElement('div');
-		this.propertiesPanelGameObject = scene.add.dom((config.width) / 4, (config.height) / 4, this.propertiesPanel);
-		this.propertiesPanel.classList.add('popUp');
+		this.propertiesPanelGameObject = scene.add.dom((config.width) / 4, (config.height) / 4, this.propertiesList);
+		this.propertiesList.classList.add('popUp', 'levelElementProperties');
 		this.propertiesPanelGameObject.setInteractive();
-
-		//this.propertiesPanel.appendChild(header);
-		this.propertiesPanel.appendChild(this.propertiesList);
 
 		// NOTE Workaround Phaser3 disable the global click listener to make the popup work as expected
 		if(window)
@@ -60,7 +51,7 @@ class PropertiesPanel
 
 		// Hide the container (Phaser3 overrides the `display` setting)
 		this.propertiesPanelGameObject.setVisible(false);
-		this.propertiesPanel.style.display = "none";
+		this.propertiesList.style.display = "none";
 	}
 
 	addHeader(text)
@@ -81,13 +72,15 @@ class PropertiesPanel
 	 */
 	addNumber(name, callback, defaultVal = 0, step = 50, max = Number.MAX_SAFE_INTEGER)
 	{
-		let input = this.addString(name, callback, String(defaultVal))
+		let input = this.addString(name, callback, String(defaultVal));
 		input.type = "number";
 		input.min = "0";
 		input.step = String(step);
 		input.value = String(defaultVal);
 		if(max <= Number.MAX_SAFE_INTEGER)
 			input.max = String(max);
+
+		return input;
 	}
 
 	/**
@@ -102,6 +95,8 @@ class PropertiesPanel
 		input.type = "checkbox";
 		input.checked = defaultVal;
 		input.onchange = (e) => callback(input.checked, name);
+
+		return input;
 	}
 
 	/**
@@ -128,12 +123,6 @@ class PropertiesPanel
 		this._setupText(input, name, val);
 		input.onchange = (e) => callback(input.value.replaceAll('\n', '§'), name);
 		input.onkeyup = (e) => callback(input.value.replaceAll('\n', '§'), name);
-		
-		input.style.whiteSpace = "pre";
-		input.style.overflowWrap = "normal";
-		input.style.overflowX = "scroll";
-		input.style.width = "300px";
-		input.style.height = "200px";
 
 		return input;
 	}
@@ -152,7 +141,6 @@ class PropertiesPanel
 		inputElement.name = name;
 		inputElement.value = value;
 		inputElement.style.display = "block";
-		inputElement.style.marginBottom = "5px";
 
 		this.propertiesList.appendChild(label);
 		this.propertiesList.appendChild(inputElement);
@@ -203,10 +191,76 @@ class PropertiesPanel
 
 		// Add callback and CSS to dropdown and add it to parent container
 		dropdown.onchange = (e) => callback(dropdown.value, name);
-		dropdown.style.display = "block";
-		dropdown.style.marginBottom = "5px";
 		this.propertiesList.appendChild(dropdown);
 		return dropdown;
+	}
+
+	/**
+	 * A widget to modify the rotation of a circuit element
+	 * @param {string} name Used to craft the html element id
+	 * @param {function} propChangedCallback Called when the property needs updating
+	 * @param {LevelElement} levelElement The current rotation of the element
+	 */
+	addRotationWidget(name, propChangedCallback, levelElement)
+	{
+		const rotationSteps = 4;
+		const disabled = ["TextBox", "Splitter"].includes(levelElement.type);
+		const defaultLevelRot = LevelElement.getDefaultRotation(levelElement.type);
+		const defaultIconRot = LevelElement.getDefaultIconRotation(levelElement.type);
+		const defaultRotation = (defaultIconRot - defaultLevelRot) % rotationSteps;
+		let rotation = levelElement.rotation;
+
+		// Create a description and a container div
+		const label = this.addLabel(name);
+		let dContainer = document.createElement('div');
+		dContainer.id = label.htmlFor;
+		if(disabled)
+			label.style.textDecorationLine = 'line-through';
+
+		// Get DOM element from Phaser TextureManager
+		const texture = this.scene.textures.get(levelElement.getComponentIcon());
+		const domTexture = texture.getSourceImage(0);
+
+		// Fall back to a number switcher, in case Phaser returns funky things
+		if(!(domTexture instanceof Node))
+		{
+			console.error("Failed to get circuit element image. Falling back to old rotation widget");
+			return this.addNumber("rotation", propChangedCallback, rotation, 1, rotationSteps - 1);
+		}
+
+		// Add all four rotation options
+		for(let i=0; i<rotationSteps; i++)
+		{
+			const imageRotation = (360/rotationSteps) * ((i + defaultRotation) % rotationSteps);
+
+			// Create a radio button to use as the rotation switcher
+			let radioButton = document.createElement('input')
+			radioButton.type = 'radio';
+			radioButton.id = 'prop_rot_' + i;
+			radioButton.name = 'rotation_switcher';
+			radioButton.onchange = (e) => propChangedCallback(i, name);
+			radioButton.checked = i == rotation; // Check the button that matches the current rotation
+			radioButton.disabled = disabled;
+			
+			// Create the image label for the radio button
+			let buttonLabel = document.createElement('label');
+			buttonLabel.htmlFor = radioButton.id;
+			buttonLabel.classList.add('rotationWidget');
+
+			// Get the actual image from Phase and rotate it
+			let gateImage = domTexture.cloneNode();
+			// @ts-ignore
+			gateImage.style = 'transform: rotate(' + imageRotation + 'deg);';
+			buttonLabel.appendChild(gateImage);
+
+			// Add radio button to container div
+			dContainer.append(radioButton, buttonLabel);
+		}
+
+		// Add the container div to the popup
+		this.propertiesList.appendChild(dContainer);
+
+		return dContainer;
 	}
 
 	/**
@@ -241,7 +295,8 @@ class PropertiesPanel
 		
 		if(element instanceof LevelElement)
 		{
-			this.addNumber("rotation", propChangedCallback, element.rotation, 1, 3);
+			// Use a rotation widget instead of the usual number widget (required param)
+			this.addRotationWidget("rotation", propChangedCallback, element);
 
 			// If there are no additional params for this element type, we are done here
 			if(!Array.isArray(LevelElement.elementTypes[element.type].params))

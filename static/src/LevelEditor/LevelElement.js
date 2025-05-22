@@ -54,12 +54,15 @@ class LevelElement extends LevelLine
 	}
 
 	/**
-	 * Get the image handle for a level element
-	 * @returns 
+	 * Get the default image handle for a level element. 
+	 * 
+	 * The element might have multiple representations and effects, depending on its state.
+	 * These are not taken into account by this method!
+	 * @returns The Phaser resource handle for this image
 	 */
 	getComponentIcon()
 	{
-		LevelElement.getComponentIcon(this.type);
+		return LevelElement.getComponentIcon(this.type);
 	}
 
 	getPosition()
@@ -128,6 +131,14 @@ class LevelElement extends LevelLine
 	}
 
 	/**
+	 * Get the default rotation for this element in the level file so that:
+	 * 
+	 * - Text fields are upright
+	 * - The gates are oriented, so that the signal flows from left to right
+	 * - The input port if the output gates is at the bottom
+	 * 
+	 * Note that these are historically grown to not be 0 for the default rotation and to
+	 * differ from the 90° steps the image icon has to be rotated.
 	 * 
 	 * @param {string} elementType One of `LevelElement.elementTypes`
 	 * @returns 
@@ -135,6 +146,25 @@ class LevelElement extends LevelLine
 	static getDefaultRotation(elementType)
 	{
 		return LevelElement.elementTypes[elementType]['rot'];
+	}
+
+	/**
+	 * Get the amount of 90° steps the level element icon has to be rotated to match the level file.
+	 * 
+	 * Note that these will be different from the rotation stored in the level file.
+	 * @param {string} elementType One of `LevelElement.elementTypes`
+	 * @returns 
+	 */
+	static getDefaultIconRotation(elementType)
+	{
+		try {
+			const iconRot = LevelElement.elementTypes[elementType]['iconRot'];
+			if(typeof iconRot != "number")
+				return 0;
+			return iconRot;
+		} catch(e) {
+			return 0;
+		}
 	}
 
 	static getDefaultParams(elementType)
@@ -187,23 +217,28 @@ class LevelElement extends LevelLine
 LevelElement.elementTypes = {
 	"VCC": {
 		"icon": "battery",
-		"rot": 2
+		"rot": 2,
+		"iconRot": 1
 	},
 	"GND": {
 		"icon": "battery_empty",
-		"rot": 2
+		"rot": 2,
+		"iconRot": 1
 	},
 	"Inverter": {
 		"icon": "inverter",
-		"rot": 2
+		"rot": 2,
+		"iconRot": 1
 	},
 	"AndGate": {
 		"icon": "and",
-		"rot": 2
+		"rot": 2,
+		"iconRot": 1
 	},
 	"OrGate": {
 		"icon": "or",
-		"rot": 2
+		"rot": 2,
+		"iconRot": 1
 	},
 	"Splitter": {
 		"icon": "splitter",
@@ -230,7 +265,8 @@ LevelElement.elementTypes = {
 			["visualGate", "enum", ["camouflaged", "and", "or", "inverter", "splitter"]],
 			["actualGate", "enum", ["and", "or", "inverter", "identity"]],
 		],
-		"rot": 2
+		"rot": 2,
+		"iconRot": 1
 	},
 	"TextBox": {
 		"icon": "text",

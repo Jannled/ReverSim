@@ -541,6 +541,8 @@ class LevelEditor extends LevelViewScene
 			this.updateCircuit();
 		});
 
+		this.propertiesPanel.propertiesList.appendChild(document.createElement('hr'));
+
 		// Add delete button
 		this.propertiesPanel.addButton("Delete", () => {
 			this.releaseElement();
