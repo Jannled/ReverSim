@@ -11,7 +11,7 @@ class ToolSelector extends Phaser.GameObjects.GameObject
 		this.interactiveObjects = [];
 
 		this.xOffset = 80;
-		this.initalYOffset = 100;
+		this.initialYOffset = 100;
 		this.yOffset = 80;
 		this.nmbrImage = 1;
 
@@ -21,9 +21,9 @@ class ToolSelector extends Phaser.GameObjects.GameObject
 	createObjects()
 	{
 		const x = this.xOffset;
-		const y = this.initalYOffset;
+		const y = this.initialYOffset;
 		const width = 65;
-		const height = this.interactiveObjects[this.interactiveObjects.length-1].y + this.yOffset - this.initalYOffset;
+		const height = this.interactiveObjects[this.interactiveObjects.length-1].y + this.yOffset - this.initialYOffset;
 
 		// create rectangle around all tool
 		this.rectAroundTools = this.scene.add.rectangle(x, y, width, height, 0x111111);
@@ -45,7 +45,7 @@ class ToolSelector extends Phaser.GameObjects.GameObject
 	 */
 	appendButton(textureName, onClick, scaleX=0.6, scaleY=0.6)
 	{
-		let button = this.scene.add.image(this.xOffset, this.initalYOffset + this.yOffset * this.nmbrImage++, textureName)
+		let button = this.scene.add.image(this.xOffset, this.initialYOffset + this.yOffset * this.nmbrImage++, textureName)
 			.setInteractive()
 			.setData('picSrc', textureName).setScale(scaleX, scaleY).setDepth(20);
 

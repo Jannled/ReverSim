@@ -81,7 +81,7 @@
 	// VS Code settings
 	"terminal.integrated.stickyScroll.enabled": true,
 	"python.createEnvironment.trigger": "prompt",
-	"search.useIgnoreFiles": false,
+	"search.useIgnoreFiles": true,
 
 	// Dictionary for the spelling correction
 	"cSpell.words": [

@@ -100,7 +100,7 @@ class PreloadScene extends BaseScene
 					// If the player already is at the end of the game, don't care if we invalidate old sessions
 					// Currently the client cannot detect if the time has run out, because the server will send the 
 					// old scene. TODO Maybe fix this
-					if(['FinalScene', 'FinalSceneNPS', 'finished', 'End of game'].includes(data['scene']))
+					if(PreloadScene.NO_SESSION_WARNING.includes(data['scene']))
 						this.actuallyStartGame();
 					else
 						this.resetSessionPopup();
@@ -172,3 +172,8 @@ class PreloadScene extends BaseScene
 }
 
 PreloadScene.gameStarted = false;
+
+/** Disable the "do you really wanna invalidate your old session" warning for these scenes */
+PreloadScene.NO_SESSION_WARNING = [
+	'FinalScene', 'FinalSceneNPS', 'finished', 'End of game', 'LevelEditor', 'LevelViewer'
+];

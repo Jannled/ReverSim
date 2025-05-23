@@ -848,10 +848,6 @@ class Participant(db.Model, SanityVersion):
 		"""Called in the PreloadScene to determine if the game is already running or if this is the first session"""
 		self.logger.writeToLog(EventType.StartSession, '', timeStamp)
 
-		# Don't show the "a session is already running" screen in the LevelViewer
-		if len(self.phases) > 0 and self.getPhaseName() == PhaseType.Viewer:
-			self.packetIndex = 0
-
 		state = {
 			'scene': self.getPhaseName() if self.startedGame else 'not started',
 			'firstSession': 'yes' if self.packetIndex == 0 else 'no',

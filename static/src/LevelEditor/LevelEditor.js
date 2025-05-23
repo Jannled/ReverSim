@@ -17,6 +17,7 @@ class LevelEditor extends LevelViewScene
 		// Contains the last selected element
 		this.selectedElement = null;
 		this.selectedWireHighlight = null;
+		this.elementTypeToPlace = null;
 
 		// Contains the object which was under the cursor on pointer down (if any). Will become null after pointer up.
 		this.draggedElement = null; // ad
@@ -52,7 +53,7 @@ class LevelEditor extends LevelViewScene
 		// Create toolbar
 		this.toolbar = new ToolSelector(this);
 		this.toolbar.xOffset = 30;
-		this.toolbar.initalYOffset = 10;
+		this.toolbar.initialYOffset = 10;
 		this.toolbar.yOffset = 45;
 		this.toolbar.appendButton('arrow_upleft', () => {
 			this.changeMode(LEVEL_EDITOR_MODE.SELECT)
@@ -64,9 +65,10 @@ class LevelEditor extends LevelViewScene
 		// Append placable components
 		for(let component in LevelElement.elementTypes)
 		{
+			// Callback when a toolbar button gets pressed
 			this.toolbar.appendButton(LevelElement.getComponentIcon(component), () => {
+				this.elementTypeToPlace = component;
 				this.changeMode(LEVEL_EDITOR_MODE.PLACE);
-				let c = this.createComponent(component);
 			});
 		}
 		this.toolbar.createObjects();
@@ -125,11 +127,12 @@ class LevelEditor extends LevelViewScene
 		switch(this.activeMode)
 		{
 			case LEVEL_EDITOR_MODE.SELECT:
+			case LEVEL_EDITOR_MODE.PLACE:
 				this.releaseElement();
 				this.selectElement(this.draggedElement);
 				break;
 		}
-
+		
 		super.onPointerDown(pointer, localX, localY, gameObjects);
 	}
 
@@ -147,34 +150,38 @@ class LevelEditor extends LevelViewScene
 		switch(this.activeMode)
 		{
 			case LEVEL_EDITOR_MODE.SELECT:
-				if(this.draggedElement instanceof LevelElement)
-				{
-					const levelPos = LevelEditor.screenToLevelCoords(pointer.x, pointer.y);
-					const gridPos = LevelEditor.snapToGrid(levelPos.xPos, levelPos.yPos);
-					const screenPos = LevelEditor.levelToScreenCoords(gridPos.xPos, gridPos.yPos);
-					const goj = this.getGuiElementByComponentId(this.draggedElement);
-
-					try {
-						goj.setAlpha(0.3);
-						goj.getActiveImage().setPosition(screenPos.x, screenPos.y);
-					}
-					catch(e) {
-						console.error(e);
-					}
-				}
+			case LEVEL_EDITOR_MODE.PLACE:
+				const levelPos = LevelEditor.screenToLevelCoords(pointer.x, pointer.y);
+				const gridPos = LevelEditor.snapToGrid(levelPos.xPos, levelPos.yPos);
+				this.moveGateIcon(this.draggedElement, levelPos.xPos, levelPos.yPos, 0.3);
 				break;
 		}
-		
 	}
 
 	// @Override
 	onPointerUp(pointer, localX, localY, gameObjects)
 	{
-		let offset = LevelEditor.screenToLevelCoords(pointer.x, pointer.y, this.marginFac);
-		let releasedElement = this.levelFile.getByPosition(offset.xPos, offset.yPos, LevelEditor.elementSelectDistance);
+		const offset = LevelEditor.screenToLevelCoords(pointer.x, pointer.y, this.marginFac);
+		const gridPos = LevelEditor.snapToGrid(offset.xPos, offset.yPos);
+		let releasedElement = this.levelFile.getByPosition(gridPos.xPos, gridPos.yPos, LevelEditor.elementSelectDistance);
 
 		switch(this.activeMode)
 		{
+			// Check if we can place a component, otherwise fall through to SELECT mode
+			case LEVEL_EDITOR_MODE.PLACE:
+				// If the player clicked outside of the Grid fall through to SELECT Mode
+				if(this.input.hitTestPointer(pointer).includes(this.grid) && this.draggedElement == null)
+				{
+					// If the player clicked an empty spot place the component, otherwise fall through
+					if(this.levelFile.getByPosition(gridPos.xPos, gridPos.yPos) == null)
+					{
+						// After an element was placed, create a new one
+						this.selectedElement = this.createComponent(this.elementTypeToPlace);
+						this.placeActiveComponent(gridPos.xPos, gridPos.yPos, true);
+						break;
+					}
+				}
+
 			case LEVEL_EDITOR_MODE.SELECT:
 				// If the element was dragged, move it to the new position
 				if(this.draggedElement != releasedElement)
@@ -189,26 +196,21 @@ class LevelEditor extends LevelViewScene
 					this.showPropertiesPanel(this.selectedElement, pointer.x, pointer.y);
 
 				// Reset transparency, if the element was dragged
-				if(this.draggedElement != null)
+				// Also make sure the position is consistent with the level state
+				if(this.draggedElement instanceof LevelElement)
 				{
 					try {
-						this.getGuiElementByComponentId(this.draggedElement).setAlpha(1.0);
-					} 
+						this.moveGateIcon(
+							this.draggedElement,
+							this.draggedElement.xPos, this.draggedElement.yPos,
+							1.0
+						);
+					}
 					catch(e) {
 						console.error(e);
 					}
 				}
 				
-				break;
-
-			case LEVEL_EDITOR_MODE.PLACE:
-				if(this.input.hitTestPointer(pointer).includes(this.grid))
-				{
-					// After an element was placed, create a new one
-					const selectedType = this.selectedElement.type;
-					this.placeActiveComponent(offset.xPos, offset.yPos, true);
-					this.createComponent(selectedType);
-				}
 				break;
 
 			case LEVEL_EDITOR_MODE.CONNECT:
@@ -333,8 +335,14 @@ class LevelEditor extends LevelViewScene
 	releaseElement()
 	{
 		try {
+			// Unselect the currently selected element (this might be none or not added to the circuit)
 			if(this.selectedElement instanceof LevelElement)
-				this.getGuiElementByComponentId(this.selectedElement).setHighlighted(false);
+			{
+				const e = this.getGuiElementByComponentId(this.selectedElement)
+
+				if(e != null)
+					e.setHighlighted(false);
+			}
 		}
 		catch(e) {
 			console.log(e);
@@ -351,7 +359,7 @@ class LevelEditor extends LevelViewScene
 	// @Override
 	updateCircuit()
 	{
-		this.errorMessage.setText("");
+		this.errorMessage.setText(""); // Clear the error message
 		this.errorHighlight.setVisible(false);
 
 		this.clearComponentAnchors();
@@ -360,22 +368,22 @@ class LevelEditor extends LevelViewScene
 	}
 
 	/**
-	 * 
+	 * Factory to create a LevelElement with an automatic id and its default parameters
+	 * initialized. You can then adjust position or other params as needed.
 	 * @param {string} type One of `LevelElement.elementTypes`
 	 */
 	createComponent(type)
 	{
-		this.selectedElement = new LevelElement(
-			type, this.levelFile.nextElementID(), -1, 50, 50, 
+		return new LevelElement(
+			type, this.levelFile.nextElementID(), -1, 0, 0, 
 			LevelElement.getDefaultParams(type)
 		);
-		return this.selectedElement;
 	}
 
 	/**
 	 * 
-	 * @param {number} xpos X-Position of the element in screen coordinates
-	 * @param {number} ypos Y-Position of the element in screen coordinates
+	 * @param {number} xpos X-Position of the element in level coordinates
+	 * @param {number} ypos Y-Position of the element in level coordinates
 	 * @returns 
 	 */
 	placeActiveComponent(xpos, ypos, createNew = true)
@@ -383,7 +391,7 @@ class LevelEditor extends LevelViewScene
 		if(!(this.selectedElement instanceof LevelElement))
 			return;
 
-		try 
+		try
 		{
 			this.moveActiveComponent(xpos, ypos);
 
@@ -392,17 +400,19 @@ class LevelEditor extends LevelViewScene
 			else
 				this.levelFile.writeFile();
 		}
-		catch
+		catch(e)
 		{
-			console.log("Unable to release element, position might be blocked");
+			console.log("Unable to release element: " + e);
 		}
 
-		this.releaseElement();
 		this.updateCircuit();
+		this.releaseElement();
 	}
 
 	/**
-	 * Move component around the grid
+	 * Move component around the grid, altering the loaded level state.
+	 * 
+	 * A redraw is needed to show the changes, see `this.updateCircuit()`.
 	 * @param {number} xPos X-Position of the element in level coordinates
 	 * @param {number} yPos Y-Position of the element in level coordinates
 	 */
@@ -410,7 +420,7 @@ class LevelEditor extends LevelViewScene
 	{
 		const newPos = LevelEditor.snapToGrid(xPos, yPos);
 
-		if(this.levelFile.getByPosition(xPos, yPos) != null)
+		if(this.levelFile.getByPosition(newPos.xPos, newPos.yPos) != null)
 			throw new Error("Positions overlap");
 
 		this.selectedElement.xPos = newPos.xPos;
@@ -421,6 +431,36 @@ class LevelEditor extends LevelViewScene
 	{
 		if(this.selectedElement instanceof LevelElement)
 			this.selectedElement.rotate();
+	}
+
+	/**
+	 * Move an icon visually without altering the level file
+	 * Mainly used by `onPointerMove()` to give visual feedback where the gate will be placed.
+	 * 
+	 * @param {LevelElement} draggedElement The LevelElement which icon we wanna move visually
+	 * @param {number} levelX Position of the gate in screen coordinates
+	 * @param {number} levelY Position of the gate in screen coordinates
+	 * @param {number} [alpha=0.3] Transparency of the icon
+	 * @returns The screen coordinates of the gate snapped onto the grid
+	 */
+	moveGateIcon(draggedElement, levelX, levelY, alpha = 0.3)
+	{
+		if(! (draggedElement instanceof LevelElement))
+			return;
+
+		const gridPos = LevelEditor.snapToGrid(levelX, levelY);
+		const screenPos = LevelEditor.levelToScreenCoords(gridPos.xPos, gridPos.yPos);
+		const goj = this.getGuiElementByComponentId(draggedElement);
+
+		try {
+			goj.setAlpha(alpha);
+			goj.getActiveImage().setPosition(screenPos.x, screenPos.y);
+		}
+		catch(e) {
+			console.error(e);
+		}
+
+		return screenPos;
 	}
 
 	enterWireMode()
@@ -476,8 +516,8 @@ class LevelEditor extends LevelViewScene
 	}
 
 	/**
-	 * The first call will select the first component to hook up, the second call will then connect it 
-	 * to the currently selected element.
+	 * The first call will select the first component to hook up, the second call will 
+	 * then connect it to the currently selected element.
 	 * Pass null to release the previously selected element.
 	 * @param {LevelElement} levelElement 
 	 */
