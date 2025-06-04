@@ -19,7 +19,7 @@
     // Editor formatting
     "editor.tabSize": 4,
     "editor.insertSpaces": false,
-    "editor.detectIndentation": false,
+    "editor.detectIndentation": true,
 
 	// Pylance / Pyright
 	"python.analysis.typeCheckingMode": "strict",
@@ -220,6 +220,7 @@
 		"TIMESYNC",
 		"tweens",
 		"tzdata",
+		"unforgeable",
 		"upleft",
 		"upscaled",
 		"usecase",

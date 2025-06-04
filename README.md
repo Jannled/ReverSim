@@ -14,7 +14,7 @@ You can try out ReverSim on our public demo instance at [beta.hrestudy.com](http
 To customize the sequence of tasks, change game rules, or to collect data for your own research, you will have to install the game on your own hardware.\
 We provide three ways to install and run the ReverSim server: 
 
-1. With [Docker](https://www.docker.com/) (preferred for production use): `docker run -it ghcr.io/emsec/reversim:latest`
+1. With [Docker](https://www.docker.com/) (preferred for production use): `docker run -it -p 8000:8000 ghcr.io/emsec/reversim:latest`
 2. With the [VS Code](https://code.visualstudio.com/) Python debugger (for testing only)
 3. From the command prompt (alternative)
 
