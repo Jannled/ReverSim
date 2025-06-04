@@ -36,12 +36,13 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       # This step uses [docker/metadata-action](https://github.com/docker/metadata-action#about) to extract tags and labels that will be applied to the specified image. The `id` "meta" allows the output of this step to be referenced in a subsequent step. The `images` value provides the base name for the tags and labels.
+      # It will automatically create the latest Docker tag, if a git tag is found: https://github.com/docker/metadata-action?tab=readme-ov-file#latest-tag
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      
+
       # This step gets the short git commit hash
       # https://dev.to/hectorleiva/github-actions-and-creating-a-short-sha-hash-8b7
       - name: Set short git commit SHA
@@ -64,14 +65,6 @@ jobs:
           build-args: |
             GAME_GIT_HASH=${{ github.sha }}
             GAME_GIT_HASH_SHORT=${{ env.COMMIT_SHORT_SHA }}
-      
-      # This step points the latest tag to the most recent git tag created that starts with "v"
-      - name: Update latest tag
-        if: startsWith(github.ref, 'refs/tags/')
-        run: |
-          docker pull ${{ github.repository }}:${{ github.ref_name }}
-          docker tag ${{ github.repository }}:${{ github.ref_name }} ${{ github.repository }}:latest
-          docker push ${{ github.repository }}:latest
 
       # This step generates an artifact attestation for the image, which is an unforgeable statement about where and how it was built. It increases supply chain security for people who consume the image. For more information, see [Using artifact attestations to establish provenance for builds](/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
       - name: Generate artifact attestation
