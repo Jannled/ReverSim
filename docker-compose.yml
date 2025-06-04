@@ -25,7 +25,7 @@ services:
   # the container will be named reversim_game when launched
   game:
     # adjust this, if you wan't to pull a different version/tag of the game
-    image: reversim:latest
+    image: ghcr.io/emsec/reversim:latest
     restart: unless-stopped
 
     ports:
