@@ -5,6 +5,7 @@ name: Create and publish a Docker image
 on:
   push:
     branches: ['main', 'dev']
+    tags: ['*']
 
 # Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
@@ -66,7 +67,7 @@ jobs:
       
       # This step points the latest tag to the most recent git tag created that starts with "v"
       - name: Update latest tag
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
           docker pull ${{ github.repository }}:${{ github.ref_name }}
           docker tag ${{ github.repository }}:${{ github.ref_name }} ${{ github.repository }}:latest
