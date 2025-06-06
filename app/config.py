@@ -297,7 +297,7 @@ def getGroupsDisabledErrorLogging() -> list[str]:
 		return __configStorage['crashReportBlacklist']
 	else:
 		return [
-			name for name, conf in __configStorage['groups'].items() if conf['config']['enableLogging'] == False
+			name for name, conf in __configStorage['groups'].items() if not conf['config']['enableLogging']
 		]
 
 
