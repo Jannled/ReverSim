@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
 
     ports:
-      - "8000:8000" # outside:inside container
+      - "8042:8000" # outside:inside container
     
     # mount your volumes here
     volumes:
